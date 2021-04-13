@@ -22,8 +22,12 @@
 <body>
 
 <header>
-    <h1><img src="{{ asset('img/logo.png') }}" alt="Sortir.com" id="logo_sortir"></h1>
-    {% include('inc/nav.html.twig') %}
+    <div id="logo">
+        <img src="{{ asset('img/logo.png') }}" alt="Sortir.com" id="logo_sortir">
+    </div>
+    <div id="navbar">
+        {% include('inc/nav.html.twig') %}
+    </div>
 </header>
 
 <main>

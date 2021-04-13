@@ -1,5 +1,6 @@
 html {
     color: #333133
+    /* INCLURE UNE FONT-FAMILY */
 }
 
 /* Pour laisser une marge de base de chaque côté de nos pages */
@@ -8,11 +9,43 @@ body {
     margin-right: 100px;
 }
 
-
-#logo_sortir {
-    width: 12%;
+header {
+    display: flex;
+    flex-direction: row;
+    height: 175px;
 }
 
+#logo {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 30%;
+}
+
+#logo_sortir {
+    width: 200px;
+}
+
+#navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 70%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#navbar ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+#navbar a {
+    margin-left: 40px;
+    font-size : 1.6em;
+    color : midnightblue;
+    text-decoration: none;
+}
 
 input {
     display: block;
