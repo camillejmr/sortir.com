@@ -10,21 +10,25 @@
     <link rel="icon" href="{{ asset('img/logo.png') }}">
 
     {% block stylesheets %}
-        {#{{ encore_entry_link_tags('app') }}#}
+        {# {{ encore_entry_link_tags('app') }} #}
     {% endblock %}
 
     {% block javascripts %}
-        {#{{ encore_entry_script_tags('app') }}#}
+        {# {{ encore_entry_script_tags('app') }} #}
     {% endblock %}
-    <title>{% block title %}Sortir{% endblock %}</title></head>
+    <title>{% block title %}Sortir.com{% endblock %}</title></head>
+</head>
+
 <body>
-{% include('inc/nav.html.twig') %}
+
+<header>
+    <h1><img src="{{ asset('img/logo.png') }}" alt="Sortir.com" id="logo_sortir"></h1>
+    {% include('inc/nav.html.twig') %}
+</header>
+
+<main>
+    {% block body %}{% endblock %}
+</main>
+
 </body>
-
-
-    </head>
-    <body>
-    <header>{% include('inc/nav.html.twig') %}</header>
-        {% block body %}{% endblock %}
-    </body>
 </html>

@@ -4,7 +4,16 @@
 namespace App\Controller;
 
 
-class MainController
-{
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
+class MainController extends AbstractController
+{
+    /**
+     * @Route("/accueil", name="main_home")
+     */
+    public function home()
+    {
+        return $this->render('main/home.html.twig');
+    }
 }
