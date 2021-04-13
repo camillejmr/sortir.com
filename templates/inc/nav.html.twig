@@ -1,10 +1,15 @@
+{# Les la navbar apparait dès la connexion de l'utilisateur #}
+{% if app.user %}
 <nav>
     <ul>
-        {# TODO: Faire affichage conditionnel des liens #}
-        <li><a href="{{ '#' }}" title="Villes">Villes</a></li>
-        <li><a href="{{ '#' }}" title="Campus">Campus</a></li>
+        {# Liens "villes" et "campus" accessibles uniquement par un Admin #}
+        {% if is_granted("ROLE_ADMIN") %}
+            <li><a href="{{ '#' }}" title="Villes">Villes</a></li>
+            <li><a href="{{ '#' }}" title="Campus">Campus</a></li>
+        {% endif %}
         <li><a href="{{ path('main_home') }}" title="Accueil">Accueil</a></li>
         <li><a href="{{ '#' }}" title="Mon profil">Mon profil</a></li>
         <li><a href="{{ '#' }}" title="Accueil">Se déconnecter</a></li>
     </ul>
 </nav>
+{% endif %}
