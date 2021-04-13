@@ -40,7 +40,7 @@ class Participant implements UserInterface
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=330)
+     * @ORM\Column(type="string", length=30)
      */
     private $prenom;
 
