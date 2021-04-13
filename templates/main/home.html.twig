@@ -3,7 +3,16 @@
 {% block title %}{{ parent() }} | Accueil{% endblock %}
 
 {% block body %}
-    <h2>Filtrer les sorties</h2>
+    <div id="infos">
+        <div>Date du jour : {{ "now" | date("d/m/Y") }}</div>
+        <div>Participant : Josiane K.</div> {# A TESTER : {{ app.user.prenom }} {{ app.user.nom|slice(0, 1) }}. #}
+    </div>
+    <div id="filtrer_sorties">
+        <h2>Filtrer les sorties</h2>
+        {# METTRE UN FORMULAIRE DE RECHERCHE #}
+
+    </div>
+
 {% endblock %}
 
 

@@ -82,3 +82,18 @@ button {
     padding: 10px 15px;
     margin: 0 auto 10px auto;
 }
+
+#infos {
+    width: 15%;
+    float: right;
+    margin-top: -60px;
+    font-size: 1.3em;
+    line-height: 30px;
+}
+
+#filtrer_sorties {
+    margin-top: 50px;
+
+}
+
+
