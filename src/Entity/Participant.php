@@ -54,6 +54,11 @@ class Participant implements UserInterface
      */
     private $mail;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $actif;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -179,6 +184,18 @@ class Participant implements UserInterface
     public function setMail(string $mail): self
     {
         $this->mail = $mail;
+
+        return $this;
+    }
+
+    public function getActif(): ?bool
+    {
+        return $this->actif;
+    }
+
+    public function setActif(bool $actif): self
+    {
+        $this->actif = $actif;
 
         return $this;
     }
