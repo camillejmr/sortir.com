@@ -7,12 +7,16 @@
         <div>Date du jour : {{ "now" | date("d/m/Y") }}</div>
         <div>Participant : Josiane K.</div> {# A TESTER : {{ app.user.prenom }} {{ app.user.nom|slice(0, 1) }}. #}
     </div>
-    <div id="filtrer_sorties">
+    <div id="rechercher_sorties">
         <h2>Filtrer les sorties</h2>
-        {# METTRE UN FORMULAIRE DE RECHERCHE #}
+        {# FORMULAIRE DE RECHERCHE (en inclusion pour + de propreté) #}
+        {% include 'inc/rechercheSorties.html.twig' %}
 
+        {# RESULTATS RECHERCHE #}
+        {% for sortie in sorties %}
+        {% endfor %}
     </div>
-
 {% endblock %}
+
 
 
