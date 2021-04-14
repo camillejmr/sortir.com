@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
+ * @UniqueEntity(fields={"pseudo"}, message="Ce pseudo est déjà utilisé")
  */
 class Participant implements UserInterface
 {
