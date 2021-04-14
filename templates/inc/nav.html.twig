@@ -9,9 +9,9 @@
             <li><a href="{{ '#' }}" title="Campus">Campus</a></li>
         i{#  <li><a href="{{ '#' }}" title="Inscription">Inscription</a></li> #}
         {% endif %}
-        <li><a href="{{ path('main_home') }}" title="Accueil">Accueil</a></li>
+        <li><a href="{{ path('main_home')}}" title="Accueil">Accueil</a></li>
         <li><a href="{{ '#' }}" title="Mon profil">Mon profil</a></li>
-        <li><a href="{{ '#' }}" title="Accueil">Se déconnecter</a></li>
+        <li><a href="{{ path('app_logout') }}" title="Accueil">Se déconnecter</a></li>
     </ul>
 </nav>
 {% endif %}

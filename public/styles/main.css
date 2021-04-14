@@ -9,6 +9,10 @@ body {
     margin-right: 100px;
 }
 
+a {
+    text-decoration: none
+}
+
 header {
     display: flex;
     flex-direction: row;
@@ -42,12 +46,12 @@ header {
 
 #navbar a {
     margin-left: 40px;
-    font-size : 1.6em;
-    color : midnightblue;
+    font-size: 1.6em;
+    color: midnightblue;
     text-decoration: none;
 }
 
-input {
+input, select {
     display: block;
     box-sizing: border-box;
     border: 1px solid #af8f61;
