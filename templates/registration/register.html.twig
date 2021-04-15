@@ -8,9 +8,9 @@
     {% endfor %}
 
     <h2>Inscrire un élève</h2>
-
+<div class="formulaire">
     {{ form_start(registrationForm) }}
     {{ form_widget(registrationForm) }}
     <button type="submit" class="btn">Inscrire l'élève</button>
-    {{ form_end(registrationForm) }}
+    {{ form_end(registrationForm) }}</div>
 {% endblock %}
