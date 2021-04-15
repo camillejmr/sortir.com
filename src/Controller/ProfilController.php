@@ -3,8 +3,10 @@
 
 namespace App\Controller;
 
-
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+
+
 
 class ProfilController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 
@@ -15,6 +17,7 @@ class ProfilController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstra
 {
    public function profil() {
 
+       $this->getDoctrine()->getRepository();
 
        return $this->render('Profil/profil.html.twig');
 
