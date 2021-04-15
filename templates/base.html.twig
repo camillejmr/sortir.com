@@ -37,8 +37,15 @@ creme :#dfddd0
     <div id="navbar">
         {% include('inc/nav.html.twig') %}
     </div>
-</header>
 
+</header>
+<div>{% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}</div>
 <main>
     {% block body %}{% endblock %}
 </main>
