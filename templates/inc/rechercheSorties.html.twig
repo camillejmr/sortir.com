@@ -1,6 +1,13 @@
-{{ form_start(form) }}
+<div id="left_searchForm">
+    {{ form_start(form) }}
 
-{{ form_widget(form) }}
+{# {{ form_row(form.campus) }} #}
+    {{ form_row(form.champRecherche) }}
+    {{ form_row(form.dateMin) }} {{ form_row(form.dateMax) }}
+</div>
+
+
+
 
 <button type="submit" id="rechercher">Rechercher</button>
 {{ form_end(form) }}

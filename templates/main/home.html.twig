@@ -7,14 +7,14 @@
         <div>Date du jour : {{ "now" | date("d/m/Y") }}</div>
         <div>Participant : {{ app.user.prenom }} {{ app.user.nom|slice(0, 1) }}.</div>
     </div>
-    <div id="rechercher_sorties">
+
+    <div id="rechercher_sorties"> {# TODO voir si cette div sert #}
         <h2>Filtrer les sorties</h2>
         {# FORMULAIRE DE RECHERCHE (en inclusion pour + de propreté) #}
         {% include 'inc/rechercheSorties.html.twig' %}
 
         {# RESULTATS RECHERCHE #}
         {% include 'inc/resultatsSorties.html.twig' %}
-
     </div>
 {% endblock %}
 
