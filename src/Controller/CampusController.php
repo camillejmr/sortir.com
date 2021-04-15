@@ -25,6 +25,6 @@ class CampusController extends AbstractController
             $entityManager->persist($campus);
             $entityManager->flush();
         }
-        return $this->render('campus/createCampus.html.twig', ['campusForm' => $campusForm->createView()]);
+        return $this->render('campus/createCampus.html.twig', ['campusForm' => $campusForm-> createView()]);
     }
 }

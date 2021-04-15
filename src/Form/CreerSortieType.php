@@ -24,7 +24,7 @@ class CreerSortieType extends AbstractType
             ->add('nom', TextType::class, [
                 'label' => 'Nom de la sortie'
             ])
-            ->add('dateHeureDebut', DateTime::class, [
+            ->add('dateHeureDebut', DateType::class, [
                 'label' => 'Date et heure de la sortie',
                 'required' => false,
                 'widget' => 'single_text',
@@ -53,19 +53,26 @@ class CreerSortieType extends AbstractType
                 'required' => false
             ])
 
-            ->add('ville', EntityType::class, ['class' => Ville::class,'choice_label'=>'nomVille'
+
+            ->add('id', ChoiceType::class, [
+                'label' => 'Ville'
             ])
 
-            ->add('lieu', EntityType::class, ['class' => Lieu::class,'choice_label'=>'nomLieu'
 
+            /*->add('ville', EntityType::class, ['class' => Ville::class,'choice_label'=>'Ville'
+            ])
+            */
+
+            ->add('lieux', ChoiceType::class, [
+                'label' => 'lieu'
             ])
 
-            ->add('latitude', EntityType::class, ['class' =>Lieu::Class,
+            /*->add('latitude', EntityType::class, ['class' =>Lieu::Class,
                 'label' => 'latitude'
             ])
             ->add('longitude', IntegerType::class, [
                 'label' => 'longitude'
-            ])
+            ])*/
         ;
     }
 
