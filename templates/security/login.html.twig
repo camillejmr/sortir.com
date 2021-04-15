@@ -3,36 +3,41 @@
 {% block title %}{{ parent() }} | Connexion{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <h1>Connexion</h1>
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+
+        <div class="formulaire">
+            <label for="inputPseudo">Identifiant</label>
+            <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" required
+                   autofocus>
+            <label for="inputPassword">Mot de passe</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}">
         </div>
-    {% endif %}
-
-    <label for="inputPseudo">Identifiant</label>
-    <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" required autofocus>
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-
-        <div class="checkbox mb-3">
+        <div id="remember_me">
             <label>
-                <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                <input type="checkbox" id="chk" name="_remember_me"> Se souvenir de moi
             </label>
         </div>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Connexion
-    </button>
-    <a href="{{ path('app_forgot_password_request') }}"title="Mot de passe oublié">Mot de passe oublié ?</a>
-</form>
+        <button class="button" type="submit">
+            Connexion
+        </button>
+        <div id="forgot_pwd">
+            <a href="{{ path('app_forgot_password_request') }}" title="Mot de passe oublié">Mot de passe oublié ?</a>
+        </div>
+
+    </form>
+
 {% endblock %}
