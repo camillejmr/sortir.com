@@ -17,28 +17,46 @@ input, h1, p {text-align:center;}
 
 
 <div class="wrapper">
+
     {{ form_start(profilForm) }}
     <label for="{{field_name(profilForm.pseudo)}}">Pseudo</label>
-    <input type="text" id="{{field_name(profilForm.pseudo)}}" value="Karlito">
+    <input type="text" id="{{field_name(profilForm.pseudo)}}" value="{{ app.user.pseudo }}">
 
     <label for="{{field_name(profilForm.nom)}}">Nom</label>
-    <input type="text" id="{{field_name(profilForm.nom)}}" value="Karl">
+    <input type="text" id="{{field_name(profilForm.nom)}}" value="{{ app.user.nom }}">
 
     <label for="{{field_name(profilForm.prenom)}}">Prenom</label>
-    <input type="text" id="{{field_name(profilForm.prenom)}}" value="Lito">
+    <input type="text" id="{{field_name(profilForm.prenom)}}" value="{{ app.user.prenom }}">
 
     <label for="{{field_name(profilForm.telephone)}}">Telphone</label>
-    <input type="text" id="{{field_name(profilForm.telephone)}}" value="4584952">
+    <input type="text" id="{{field_name(profilForm.telephone)}}" value="{{ app.user.telephone }}">
 
     <label for="{{field_name(profilForm.mail)}}">Mail</label>
-    <input type="text" id="{{field_name(profilForm.mail)}}" value="karl44@hotmail.com">
+    <input type="text" id="{{field_name(profilForm.mail)}}" value="{{ app.user.mail }}">
 
-    <label for="{{field_name(profilForm.sorties)}}">Sorties</label>
-    <input type="text" id="{{field_name(profilForm.mail)}}" value="Chateau des ducs de Bretagne">
+    <label for="{{field_name(profilForm.password)}}">Password</label>
+    <input type="text" id="{{field_name(profilForm.password)}}" value="{{ app.user.password }}">
+
+    <label for="{{field_name(profilForm.password)}}">Confirmation Password</label>
+    <input type="text" id="{{field_name(profilForm.password)}}" value="{{ app.user.password }}">
+
+
+      {# CHECKER PROBLEME OUTPUT DES SORTIES et CAMPUS #}
+
+    {#  <label for="{{field_name(profilForm.sorties)}}">Sorties</label>
+    <textarea id="{{field_name(profilForm.mail)}}" value="{{ app.user.sorties }}">#}
+
+    {{ form_end(profilForm) }}
+
+
 
     <button type="submit" class="btn">Enregistrer</button>
     <button type="submit" class="btn">Modifier</button>
-    {{ form_end(profilForm) }}
+
+
+
+
+
 </div>
 
 
