@@ -150,6 +150,64 @@ button:hover {
     line-height: 30px;
 }
 
+/* RECHERCHE DE SORTIES */
+#rechercher_sorties {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    margin-bottom: 20px;
+}
+
+#left_searchForm {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#right_searchForm {
+    grid-column: 2;
+    grid-row: 1;
+    margin-bottom: auto;
+    margin-top: 100px;
+}
+
+#btn_rechercher {
+    grid-column: 3;
+    grid-row: 1;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#left_searchForm label {
+    margin-left: 0;
+}
+
+#left_searchForm select, input {
+    display: block;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-bottom : 20px;
+    width : 300px;
+    height: 35px;
+    font-size: 0.9em;
+    border: 1px solid #af8f61;
+    border-radius: 10px;
+}
+
+#left_searchForm form {
+    margin-top: 50px;
+}
+
+#right_searchForm div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#right_searchForm input {
+    height: 15px;
+    margin-bottom: 40px;
+    margin-left: -100px;
+
+}
 /* TABLEAU DE RESULTATS DES SORTIES */
 table {
     border-collapse: collapse;
@@ -162,7 +220,7 @@ td, th /* Mettre une bordure sur les td ET les th */
 {
     border: 1px solid black;
     line-height: 30px;
-    width: 150px;
+    width: 200px;
 }
 
 th {
