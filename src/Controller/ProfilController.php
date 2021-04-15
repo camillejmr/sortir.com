@@ -4,6 +4,8 @@
 namespace App\Controller;
 
 
+use Symfony\Component\Routing\Annotation\Route;
+
 class ProfilController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 
 

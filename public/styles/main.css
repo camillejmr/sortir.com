@@ -12,7 +12,7 @@ body {
 a {
     text-decoration: none
 }
-
+li:hover{}
 header {
     display: flex;
     flex-direction: row;
