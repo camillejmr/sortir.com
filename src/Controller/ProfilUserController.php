@@ -16,6 +16,7 @@ class ProfilUserController extends AbstractController
     public function Profil(): Response
     {
 
+
         //TODO aller chercher participants en BDD pour affichage
 
         $user = new Participant();

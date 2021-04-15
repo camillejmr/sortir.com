@@ -13,6 +13,7 @@ class ProfilFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        
         $builder
             ->add('pseudo')
             ->add('prenom')
