@@ -24,6 +24,12 @@ h2 {
     margin-top: 100px
 }
 
+h3 {
+    font-size: 2em;
+    color: #1c3956;
+    margin-top: 50px;
+}
+
 a {
     text-decoration: none
 }
@@ -91,7 +97,6 @@ header {
 
 form {
     margin-top: 120px
-
 }
 
 label {
@@ -100,7 +105,7 @@ label {
     width: 400px;
     margin: auto;
     padding-bottom: 5px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: #333133;
 }
 
@@ -126,7 +131,7 @@ button {
     padding: 10px 15px;
     margin: 0 auto 10px auto;
     font-family: 'Raleway', sans-serif;
-    font-size: 1.3em;
+    font-size: 1.1em;
 }
 
 button:hover {
@@ -143,10 +148,10 @@ button:hover {
 
 
 #infos {
-    width: 15%;
+    width: 20%;
     float: right;
     margin-top: -60px;
-    font-size: 1.3em;
+    font-size: 1.2em;
     line-height: 30px;
 }
 
@@ -156,6 +161,7 @@ button:hover {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
     margin-bottom: 20px;
+    margin-top: -30px;
 }
 
 #left_searchForm {
@@ -188,7 +194,7 @@ button:hover {
     margin-bottom : 20px;
     width : 300px;
     height: 35px;
-    font-size: 0.9em;
+    font-size: 0.8em;
     border: 1px solid #af8f61;
     border-radius: 10px;
 }
