@@ -7,15 +7,15 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
     <h2>Réinitialiser le mot de passe</h2>
-    <div>
+    <div class="formulaire">
 
           <p id="resetPassword">  Pour réinitialiser votre mot de passe, merci de saisir votre adresse email.</p>
 
-    </div>
+
     {{ form_start(requestForm) }}
         {{ form_row(requestForm.mail) }}
 
-
+    </div>
         <button class="btn btn-primary">Réinitialiser mon mot de passe</button>
     {{ form_end(requestForm) }}
 {% endblock %}
