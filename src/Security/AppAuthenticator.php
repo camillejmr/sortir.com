@@ -71,7 +71,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Pseudo could not be found.');
+            throw new CustomUserMessageAuthenticationException('Ce pseudo n\'existe pas.');
         }
 
         return $user;
@@ -79,6 +79,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
 
     public function checkCredentials($credentials, UserInterface $user)
     {
+
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
@@ -95,6 +96,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
+        $this->addFlash('success', 'Vous êtes connecté(e).');
 
         return new RedirectResponse($this->urlGenerator->generate('main_home'));
     }
