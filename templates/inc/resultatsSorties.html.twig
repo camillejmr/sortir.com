@@ -1,0 +1,27 @@
+<div id="tab_resultats">
+    {% for sortie in sorties %}
+        <table>
+            <tr>
+                <th>Nom de la sortie</th>
+                <th>Date de la sortie</th>
+                <th>Clôture</th>
+                <th>Inscrits/places</th>
+                <th>Etat</th>
+                <th>Inscrit</th>
+                <th>Organisateur</th>
+                <th>Actions</th>
+            </tr>
+
+            <tr>
+                <td>{{ sortie.nom}}</td>
+                <td>{{ sortie.dateHeureDebut | date('d/m/Y H:i')}}</td>
+                <td>{{ sortie.dateLimiteInscription |date('d/m/Y') }}</td>
+                <td>{{ sortie.participants | length}}/{{ sortie.nombreInscriptionsMax }}</td>
+                <td>{{ sortie.etats.libelle}}</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    {% endfor %}
+</div>
+
