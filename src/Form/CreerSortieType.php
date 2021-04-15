@@ -30,7 +30,7 @@ class CreerSortieType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => [
                     'placeholder' => 'dd/mm/yyyy'
-            ])
+            ]])
 
             ->add('dateLimiteInscription', DateType::class, [
                 'label' => 'Date limite d inscription',
@@ -38,7 +38,7 @@ class CreerSortieType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => [
                     'placeholder' => 'dd/mm/yyyy'
-            ])
+            ]])
 
             ->add('nombreInscriptionsMax', IntegerType::class, [
                 'label' => 'Nombre de places'
@@ -60,7 +60,7 @@ class CreerSortieType extends AbstractType
 
             ])
 
-            ->add('latitude', EntityType::class, ['class' =>Lieu::Class, '',
+            ->add('latitude', EntityType::class, ['class' =>Lieu::Class,
                 'label' => 'latitude'
             ])
             ->add('longitude', IntegerType::class, [
