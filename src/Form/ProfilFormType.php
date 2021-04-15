@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Campus;
 use App\Entity\Participant;
+use http\Client\Curl\User;
 use phpDocumentor\Reflection\Type;
 use phpDocumentor\Reflection\Types\String_;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -19,20 +20,26 @@ class ProfilFormType extends AbstractType
     {
         
         $builder
-            ->add('pseudo')
-            ->add('prenom')
-            ->add('nom')
-            ->add('telephone')
-            ->add('mail')
+            ->add('Pseudo',null, ['attr'=>array('required'=>true, 'value'=> Participant::getPseudo()),
+            ])
+            ->add('Prenom',null, ['attr'=>array('required'=>true, 'value'=>'Test'),
+            ])
+            ->add('Nom',null, ['attr'=>array('required'=>true, 'value'=>'Test'),
+            ])
+            ->add('mail',null, ['attr'=>array('required'=>true, 'value'=>'Test'),
+            ])
+
+            ->add('Telephone',null, ['attr'=>array('required'=>true, 'value'=>'Test'),
+            ])
 
             ->add('password', PasswordType::class, [
                     'label' => 'Mot de passe',
              'empty_data' => ''
             ])
 
-      /*  ->add('Campus', EntityType::class, ['class' => Campus::class, 'choice_label'=>'nomCampus'])*/
+      ->add('Campus', EntityType::class, ['class' => Campus::class, 'choice_label'=>'nomCampus'])
 
-           ->add('sorties')
+
 
 
             // UPLOAD PHOTO
