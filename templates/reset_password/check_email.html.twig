@@ -3,10 +3,10 @@
 {% block title %}Password Reset Email Sent{% endblock %}
 
 {% block body %}
-    <p>
+    <p id="checkmail">
         Un lien pour réinitialiser le mot de passe vous a été envoyé. Ce lien expire dans une heure.
-
-        </p>
-    <p>Si vous n'avez pas reçu l'email, merci de consulter vos spams.
-        <a href="{{ path('app_forgot_password_request') }}">Cliquer ici pour recevoir un nouveau lien</a> <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+        <br>
+        <br>
+    Si vous n'avez pas reçu l'email, merci de consulter vos spams.
+        <a href="{{ path('app_forgot_password_request') }}">Cliquer ici pour recevoir un nouveau lien</a></p>
 {% endblock %}

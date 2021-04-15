@@ -10,7 +10,7 @@ body {
 }
 
 h2 {
-    font-size : 40px;
+    font-size: 40px;
     color: #af8f61;
     text-align: center;
     margin-top: 100px
@@ -19,7 +19,6 @@ h2 {
 a {
     text-decoration: none
 }
-
 
 
 header {
@@ -37,9 +36,18 @@ header {
 #logo_sortir {
     width: 200px;
 }
-#resetPassword{margin-top: 120px}
+
+#checkmail {
+    margin-top: 150px
+}
+
+#resetPassword {
+    margin-top: 120px
+}
+
 #navbar {
-    font-size:11px;
+    font-size: 11px;
+    color: #1c3956;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -56,7 +64,7 @@ header {
 
 #navbar a {
     margin-left: 40px;
-    color :#1c3956;
+    color: #1c3956;
     font-size: 1.6em;
     text-decoration: none;
 }
@@ -112,7 +120,8 @@ table {
     margin-right: auto;
 }
 
-td, th /* Mettre une bordure sur les td ET les th */ {
+td, th /* Mettre une bordure sur les td ET les th */
+{
     border: 1px solid black;
     line-height: 30px;
     width: 150px;
@@ -123,10 +132,10 @@ th {
 }
 
 table tr:nth-child(odd) {
-    background-color: rgba(28,57,86,0.4);
+    background-color: rgba(28, 57, 86, 0.4);
 }
 
 tr:nth-child(even) {
-    background-color: rgba(28,57,86,0.2);
+    background-color: rgba(28, 57, 86, 0.2);
 }
 
