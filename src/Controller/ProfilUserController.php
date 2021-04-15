@@ -16,6 +16,6 @@ class ProfilUserController extends AbstractController
 
         //TODO aller chercher participants en BDD pour affichage
 
-        return $this->render('ProfilUser.html.twig');
+        return $this->render('profil_user/ProfilUser.html.twig');
     }
 }

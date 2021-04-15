@@ -13,15 +13,15 @@ class ProfilFormType extends AbstractType
     {
         $builder
             ->add('pseudo')
-            ->add('roles')
-            ->add('password')
-            ->add('nom')
             ->add('prenom')
+            ->add('nom')
             ->add('telephone')
             ->add('mail')
-            ->add('actif')
+            >add('password')
+            ->add('password')
             ->add('campus')
             ->add('sorties')
+            // UPLOAD PHOTO
         ;
     }
 
