@@ -3,11 +3,9 @@
 {% block title %}Mon Profil{% endblock %}
 
 {% block body %}
-<style>
 
-</style>
 
-<div class="">
+
 
     <h1>Mon Profil</h1>
 
@@ -15,13 +13,28 @@
 
        {#  {{ form (profilForm) }} #}
 
-       {{ form_start(profilForm) }}
-      {{ form_widget(profilForm) }}
+
+<div class="">
+
+    <label for="{{field_name(profilForm.pseudo)}}">Pseudo</label>
+    <input type="text" id="{{field_name(profilForm.pseudo)}}" value="Karlito">
+
+    <label for="{{field_name(profilForm.nom)}}">Nom</label>
+    <input type="text" id="{{field_name(profilForm.nom)}}" value="Karl">
+
+    <label for="{{field_name(profilForm.prenom)}}">Prenom</label>
+    <input type="text" id="{{field_name(profilForm.prenom)}}" value="Lito">
+
+    <label for="{{field_name(profilForm.telephone)}}">Telphone</label>
+    <input type="text" id="{{field_name(profilForm.telephone)}}" value="4584952">
+
+    <label for="{{field_name(profilForm.mail)}}">Mail</label>
+    <input type="text" id="{{field_name(profilForm.mail)}}" value="karl44@hotmail.com">
 
     <button type="submit" class="btn">Enregistrer</button>
     <button type="submit" class="btn">Modifier</button>
 
-    {{ form_end(profilForm) }}
-
 </div>
+
+
 {% endblock %}
