@@ -24,10 +24,13 @@ class ProfilFormType extends AbstractType
             ->add('mail')
              ->add('password')
 
-           ->add('Campus', EntityType::class, ['class' => Campus::class, 'choice_label'=>'nomCampus'])
+        /* ->add('Campus', EntityType::class, ['class' => Campus::class, 'choice_label'=>'nomCampus'])*/
 
-            ->add('sorties')
+          /*  ->add('sorties')*/
+
+
             // UPLOAD PHOTO
+
         ;
     }
 
