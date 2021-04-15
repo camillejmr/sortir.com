@@ -3,25 +3,81 @@
 {% block title %}Mon Profil{% endblock %}
 
 {% block body %}
-<style>
 
-</style>
+<style> label {text-align: center; display:block; margin-left:auto;margin-right:auto;}
+input, h1, p {text-align:center;}
+.wrapper {display:block; margin-top:-100px;}</style>
 
-<div class="">
 
     <h1>Mon Profil</h1>
 
-    Bienvenue sur votre page profil:
+    <p>Bienvenue sur votre page profil:</p>
 
-       {#  {{ form (profilForm) }} #}
 
-       {{ form_start(profilForm) }}
-      {{ form_widget(profilForm) }}
+
+
+<div class="wrapper">
+
+    {{ form_start(profilForm) }}
+
+    <label for="{{field_name(profilForm.pseudo)}}">Pseudo</label>
+    <input type="text" id="{{field_name(profilForm.pseudo)}}" value="{{ app.user.pseudo }}">
+
+    <label for="{{field_name(profilForm.nom)}}">Nom</label>
+    <input type="text" id="{{field_name(profilForm.nom)}}" value="{{ app.user.nom }}">
+
+    <label for="{{field_name(profilForm.prenom)}}">Prenom</label>
+    <input type="text" id="{{field_name(profilForm.prenom)}}" value="{{ app.user.prenom }}">
+
+    <label for="{{field_name(profilForm.telephone)}}">Telphone</label>
+    <input type="text" id="{{field_name(profilForm.telephone)}}" value="{{ app.user.telephone }}">
+
+    <label for="{{field_name(profilForm.mail)}}">Mail</label>
+    <input type="text" id="{{field_name(profilForm.mail)}}" value="{{ app.user.mail }}">
+
+    <label for="{{field_name(profilForm.password)}}">Password</label>
+    <input type="text" id="{{field_name(profilForm.password)}}" value="{{ app.user.password }}">
+
+    <label for="{{field_name(profilForm.password)}}">Confirmation Password</label>
+    <input type="text" id="{{field_name(profilForm.password)}}" value="{{ app.user.password }}">
+
+
+    <label for="profil_form_campus">Campus</label>
+    <select id="profil_form_Campus" name="profil_form[Campus]">
+        <option value="1">SAINT HERBLAIN</option>
+        <option value="2">CHARTRES DE BRETAGNE</option>
+        <option value="3">LA ROCHE SUR YON</option></select>
+
+    <label for="profil_form_sorties">Sortie</label>
+    <select id="profil_form_sorties" name="profil_form[sorties][]" multiple="multiple"></select>
+
+    <label for="">Photo</label>
+    <input type="file" id="" value="">
+
+    {# CHECKER POURQUOI PROBLEME OUTPUT DES SORTIES et CAMPUS #}
+    {#
+     <label for="{{form_row(profilForm.sorties)}}">Sorties</label>
+    <textarea id="{{form_row(profilForm.sortie)}}" value="{{ app.user.sorties }}">
+
+    <label for="{{field_name(profilForm.campus)}}">Campus</label>
+    <select id="{{field_name(profilForm.campus)}}" value="{{ app.user.campus }}"></select>
+
+    #}
+
 
     <button type="submit" class="btn">Enregistrer</button>
     <button type="submit" class="btn">Modifier</button>
 
     {{ form_end(profilForm) }}
 
+
+
+
+
+
+
+
 </div>
+
+
 {% endblock %}

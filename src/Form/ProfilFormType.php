@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\Participant;
 use phpDocumentor\Reflection\Type;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,11 +22,15 @@ class ProfilFormType extends AbstractType
             ->add('nom')
             ->add('telephone')
             ->add('mail')
-          /*  >add('password')
-            ->add('password')
-            ->add('campus')  PROBLEME AVEC PASSWORD ET CAMPUS POUR AFFICHAGE CHECKER */
-            ->add('sorties')
+             ->add('password')
+
+        /* ->add('Campus', EntityType::class, ['class' => Campus::class, 'choice_label'=>'nomCampus'])*/
+
+          /*  ->add('sorties')*/
+
+
             // UPLOAD PHOTO
+
         ;
     }
 
