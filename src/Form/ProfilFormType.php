@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Participant;
+use phpDocumentor\Reflection\Type;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,9 +19,9 @@ class ProfilFormType extends AbstractType
             ->add('nom')
             ->add('telephone')
             ->add('mail')
-            >add('password')
+          /*  >add('password')
             ->add('password')
-            ->add('campus')
+            ->add('campus')  PROBLEME AVEC PASSWORD ET CAMPUS POUR AFFICHAGE CHECKER */
             ->add('sorties')
             // UPLOAD PHOTO
         ;
