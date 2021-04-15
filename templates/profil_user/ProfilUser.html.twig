@@ -15,58 +15,85 @@ input, h1, p {text-align:center;}
     <p>Bienvenue sur votre page profil:</p>
 
 
-
+<form method="post">
 <div class="wrapper">
 
+{#    <div class="formulaire">#}
+{#        <label for="inputPseudo">Identifiant</label>#}
+{#        <input type="text" value="{{ user.pseudo}}" name="pseudo" id="inputPseudo" class="form-control" required#}
+{#               autofocus>#}
+{#        <label for="inputPassword">Mot de passe</label>#}
+{#        <input type="password" value="{{ user.password}}"name="password" id="inputPassword" class="form-control" required>#}
+{#        <label for="inputPassword">Confirmation ot de passe</label>#}
+{#        <input type="password" value="{{ user.password}}"name="password" id="inputPassword" class="form-control" required>#}
+
+{#        <input type="hidden" name="_csrf_token"#}
+{#               value="{{ csrf_token('authenticate') }}">#}
+{#    </div>#}
+{#    <button class="button" type="submit">#}
+{#        Modifier#}
+{#    </button>#}
+{#</div></form>#}
+    {{ form_start(profilForm) }}
+    {{ form_row(profilForm.Pseudo)}}
+    {{ form_row(profilForm.Nom)}}
+    {{ form_row(profilForm.Prenom)}}
+    {{ form_row(profilForm.Telephone)}}
+    {{ form_row(profilForm.Mail)}}
+    {{ form_row(profilForm.password)}}
+    {{ form_row(profilForm.Campus)}}<button class="button" type="submit">
+    Modifier
+</button>
+    {{ form_end(profilForm) }}
     {# test 2ème méthode pour validation #}
 
-    {{ form_start(profilForm) }}
+{#    {{ form_start(profilForm) }}#}
 
-    {{ form_widget((profilForm)) }}
+{#    {{ form_widget((profilForm)) }}#}
 
-  {#  <label for="{{field_name(profilForm.pseudo)}}">Pseudo</label>
-    <input type="text" id="{{field_name(profilForm.pseudo)}}" value="{{ app.user.pseudo }}">
+{#    <label for="{{field_name(profilForm.pseudo)}}">Pseudo</label>#}
+{#    <input type="text" id="{{field_name(profilForm.pseudo)}}" value="{{ user.username }}">#}
 
-    <label for="{{field_name(profilForm.nom)}}">Nom</label>
-    <input type="text" id="{{field_name(profilForm.nom)}}" value="{{ app.user.nom }}">
+{#    <label for="{{field_name(profilForm.nom)}}">Nom</label>#}
+{#    <input type="text" id="{{field_name(profilForm.nom)}}" value="{{ app.user.nom }}">#}
 
-    <label for="{{field_name(profilForm.prenom)}}">Prenom</label>
-    <input type="text" id="{{field_name(profilForm.prenom)}}" value="{{ app.user.prenom }}">
+{#    <label for="{{field_name(profilForm.prenom)}}">Prenom</label>#}
+{#    <input type="text" id="{{field_name(profilForm.prenom)}}" value="{{ app.user.prenom }}">#}
 
-    <label for="{{field_name(profilForm.telephone)}}">Telphone</label>
-    <input type="text" id="{{field_name(profilForm.telephone)}}" value="{{ app.user.telephone }}">
+{#    <label for="{{field_name(profilForm.telephone)}}">Telphone</label>#}
+{#    <input type="text" id="{{field_name(profilForm.telephone)}}" value="{{ app.user.telephone }}">#}
 
-    <label for="{{field_name(profilForm.mail)}}">Mail</label>
-    <input type="text" id="{{field_name(profilForm.mail)}}" value="{{ app.user.mail }}">
+{#    <label for="{{field_name(profilForm.mail)}}">Mail</label>#}
+{#    <input type="text" id="{{field_name(profilForm.mail)}}" value="{{ app.user.mail }}">#}
 
-    <label for="{{field_name(profilForm.password)}}">Password</label>
-    <input type="text" id="{{field_name(profilForm.password)}}" value="{{ app.user.password }}">
+{#    <label for="{{field_name(profilForm.password)}}">Password</label>#}
+{#    <input type="text" id="{{field_name(profilForm.password)}}" value="{{ app.user.password }}">#}
 
-    <label for="{{field_name(profilForm.password)}}">Confirmation Password</label>
-    <input type="text" id="{{field_name(profilForm.password)}}" value="{{ app.user.password }}">
+{#    <label for="{{field_name(profilForm.password)}}">Confirmation Password</label>#}
+{#    <input type="text" id="{{field_name(profilForm.password)}}" value="{{ app.user.password }}">#}
 
-    {{ form_row(profilForm.sorties) }}
+{#    {{ form_row(profilForm.sorties) }}#}
 
 
-    <label for="profil_form_campus">Campus</label>
-    <select id="profil_form_Campus" name="profil_form[Campus]">
-        <option value="0"> {{ app.user.campus }}</option>
-        <option value="1">SAINT HERBLAIN</option>
-        <option value="2">CHARTRES DE BRETAGNE</option>
-        <option value="3">LA ROCHE SUR YON</option></select>
+{#    <label for="profil_form_campus">Campus</label>#}
+{#    <select id="profil_form_Campus" name="profil_form[Campus]">#}
+{#        <option value="0"> {{ app.user.campus }}</option>#}
+{#        <option value="1">SAINT HERBLAIN</option>#}
+{#        <option value="2">CHARTRES DE BRETAGNE</option>#}
+{#        <option value="3">LA ROCHE SUR YON</option></select>#}
 
-   {#  <label for="profil_form_sorties">Sortie</label>
-    <select id="profil_form_sorties" name="profil_form[sorties][]" multiple="multiple"></select>
+{#     <label for="profil_form_sorties">Sortie</label>#}
+{#    <select id="profil_form_sorties" name="profil_form[sorties][]" multiple="multiple"></select>#}
 
-    <label for="">Photo</label>
-    <input type="file" id="" value="">
+{#    <label for="">Photo</label>#}
+{#    <input type="file" id="" value="">#}
 
-    #}
 
-    <button type="submit" id="save" class="btn" onclick="click()">Enregistrer</button>
-    <button type="submit" class="btn">Modifier</button>
 
-    {{ form_end(profilForm) }}
+{#    <button type="submit" id="save" class="btn" onclick="click()">Enregistrer</button>#}
+{#    <button type="submit" class="btn">Modifier</button>#}
+
+{#    {{ form_end(profilForm) }}#}
 
 
 

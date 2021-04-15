@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,21 +21,24 @@ class ProfilFormType extends AbstractType
     {
         
         $builder
-            ->add('Pseudo',null, ['attr'=>array('required'=>true, 'value'=> Participant::getPseudo()),
+            ->add('Pseudo',null )
+            ->add('Prenom',null, ['attr'=>array('required'=>true),
             ])
-            ->add('Prenom',null, ['attr'=>array('required'=>true, 'value'=>'Test'),
+            ->add('Nom',null, ['attr'=>array('required'=>true),
             ])
-            ->add('Nom',null, ['attr'=>array('required'=>true, 'value'=>'Test'),
-            ])
-            ->add('mail',null, ['attr'=>array('required'=>true, 'value'=>'Test'),
-            ])
-
-            ->add('Telephone',null, ['attr'=>array('required'=>true, 'value'=>'Test'),
+            ->add('Mail',null, ['attr'=>array('required'=>true),
             ])
 
-            ->add('password', PasswordType::class, [
-                    'label' => 'Mot de passe',
-             'empty_data' => ''
+            ->add('Telephone',null, ['attr'=>array('required'=>true),
+            ])
+
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Le mot de passe et la confirmation sont différents.',
+                'options' => ['attr' => ['class' => 'password-field']],
+                'required' => true,
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmation du mot de passe'],
             ])
 
       ->add('Campus', EntityType::class, ['class' => Campus::class, 'choice_label'=>'nomCampus'])

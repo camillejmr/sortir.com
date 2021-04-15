@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Participant;
 use App\Form\ProfilFormType;
+use App\Repository\ParticipantRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,13 +16,16 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ProfilUserController extends AbstractController
 {
     /**
-     * @Route("/profil", name="profiluser_profil")
+     * @Route("/profil/{id}", name="profiluser_profil")
      */
-    public function Profil(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function Profil(int $id, Request $request,EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder, ParticipantRepository $participantRepository): Response
     {
+//        $user = $participantRepository->find($id);
+        $user = $entityManager->getRepository(Participant::class)->find($id);
+        if (!$user) {throw  $this->createNotFoundException('Cet utilisateur est inexistant');}
 
 
-        $user = new Participant();
+//        $participant = new Participant();
 
         $profilForm = $this->createForm(ProfilFormType::class, $user);
 
@@ -28,15 +33,16 @@ class ProfilUserController extends AbstractController
 
         if($profilForm->isSubmitted()  && $profilForm->isValid()) {
 
-
+    $user->setPseudo('Camilletest');
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
+
                     $profilForm->get('password')->getData()
                 )
             );
 
-            $entityManager = $this->getDoctrine()->getManager();
+//            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -44,11 +50,11 @@ class ProfilUserController extends AbstractController
 
             $this->addFlash('sucess', 'Profil modifié!');
 
-            return $this->redirectToRoute('profiluser_profil');
+            return $this->redirectToRoute('main_home');
 
 
         }
 
-        return $this->render('profil_user/ProfilUser.html.twig', ["profilForm"=> $profilForm->createView()]);
+        return $this->render('profil_user/ProfilUser.html.twig', ["profilForm"=> $profilForm->createView(),'user'=>$user]);
     }
 }
