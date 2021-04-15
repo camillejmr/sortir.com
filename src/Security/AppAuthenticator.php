@@ -96,7 +96,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-        $this->addFlash('success', 'Vous êtes connecté(e).');
+//        $this->addFlash('success', 'Vous êtes connecté(e).');
 
         return new RedirectResponse($this->urlGenerator->generate('main_home'));
     }
