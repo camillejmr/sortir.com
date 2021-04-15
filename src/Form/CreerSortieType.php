@@ -38,7 +38,7 @@ class CreerSortieType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => [
                     'placeholder' => 'dd/mm/yyyy'
-            ]]) 
+            ]])
 
             ->add('nombreInscriptionsMax', IntegerType::class, [
                 'label' => 'Nombre de places'
