@@ -4,18 +4,20 @@
 
 {% block body %}
 
-
+<style> label {text-align: center; display:block; margin-left:auto;margin-right:auto;}
+input, h1, p {text-align:center;}
+.wrapper {display:block; margin-top:-100px;}</style>
 
 
     <h1>Mon Profil</h1>
 
-    Bienvenue sur votre page profil:
+    <p>Bienvenue sur votre page profil:</p>
 
        {#  {{ form (profilForm) }} #}
 
 
-<div class="">
-
+<div class="wrapper">
+    {{ form_start(profilForm) }}
     <label for="{{field_name(profilForm.pseudo)}}">Pseudo</label>
     <input type="text" id="{{field_name(profilForm.pseudo)}}" value="Karlito">
 
@@ -31,9 +33,12 @@
     <label for="{{field_name(profilForm.mail)}}">Mail</label>
     <input type="text" id="{{field_name(profilForm.mail)}}" value="karl44@hotmail.com">
 
+    <label for="{{field_name(profilForm.sorties)}}">Sorties</label>
+    <input type="text" id="{{field_name(profilForm.mail)}}" value="Chateau des ducs de Bretagne">
+
     <button type="submit" class="btn">Enregistrer</button>
     <button type="submit" class="btn">Modifier</button>
-
+    {{ form_end(profilForm) }}
 </div>
 
 
