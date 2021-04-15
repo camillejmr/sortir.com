@@ -1,15 +1,36 @@
-<div id="left_searchForm">
-    {{ form_start(form) }}
+<p>Filtrer les sorties</p>
+<div id="rechercher_sorties">
+    <div id="left_searchForm">
+        {{ form_start(form) }}
 
-    {{ form_row(form.campus) }}
-    {{ form_row(form.champRecherche) }}
-    {{ form_row(form.dateMin) }} {{ form_row(form.dateMax) }}
+        {{ form_row(form.campus) }}
+        {{ form_row(form.champRecherche) }}
+        {{ form_row(form.dateMin) }} {{ form_row(form.dateMax) }}
+    </div>
+
+    <div id="right_searchForm">
+        <div class="chk_label">
+            {{ form_row(form.estOrganisateur) }}
+        </div>
+        <div class="chk_label">
+            {{ form_row(form.estInscrit) }}
+        </div>
+        <div class="chk_label">
+            {{ form_row(form.estNonInscrit) }}
+        </div>
+        <div class="chk_label">
+            {{ form_row(form.sortieTerminee) }}
+        </div>
+
+
+
+    </div>
+
+    <div id="btn_rechercher">
+        <button type="submit" id="rechercher">Rechercher</button>
+    </div>
+
+    {{ form_end(form) }}
 </div>
-
-
-
-
-<button type="submit" id="rechercher">Rechercher</button>
-{{ form_end(form) }}
 
 
