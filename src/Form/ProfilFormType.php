@@ -26,7 +26,7 @@ class ProfilFormType extends AbstractType
 
         /* ->add('Campus', EntityType::class, ['class' => Campus::class, 'choice_label'=>'nomCampus'])*/
 
-          /*  ->add('sorties')*/
+           ->add('sorties')
 
 
             // UPLOAD PHOTO
