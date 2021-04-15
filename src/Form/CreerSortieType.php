@@ -60,7 +60,7 @@ class CreerSortieType extends AbstractType
 
             ])
 
-            ->add('latitude', IntegerType::class, [
+            ->add('latitude', EntityType::class, ['class' =>Lieu::Class, '',
                 'label' => 'latitude'
             ])
             ->add('longitude', IntegerType::class, [
