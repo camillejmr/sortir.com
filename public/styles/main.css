@@ -40,7 +40,6 @@ header {
 #resetPassword{margin-top: 120px}
 #navbar {
     font-size:11px;
-    color :#1c3956;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -57,8 +56,8 @@ header {
 
 #navbar a {
     margin-left: 40px;
+    color :#1c3956;
     font-size: 1.6em;
-    color: midnightblue;
     text-decoration: none;
 }
 
@@ -83,7 +82,6 @@ form {
 
 label {
     margin-left: 150px;
-
 }
 
 button {
@@ -106,9 +104,29 @@ button {
     line-height: 30px;
 }
 
-#filtrer_sorties {
-    margin-top: 50px;
-
+/* TABLEAU DE RESULTATS DES SORTIES */
+table {
+    border-collapse: collapse;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+td, th /* Mettre une bordure sur les td ET les th */ {
+    border: 1px solid black;
+    line-height: 30px;
+    width: 150px;
+}
+
+th {
+    background-color: #af8f61;
+}
+
+table tr:nth-child(odd) {
+    background-color: rgba(28,57,86,0.4);
+}
+
+tr:nth-child(even) {
+    background-color: rgba(28,57,86,0.2);
+}
 

@@ -1,5 +1,4 @@
 <div id="tab_resultats">
-    {% for sortie in sorties %}
         <table>
             <tr>
                 <th>Nom de la sortie</th>
@@ -11,7 +10,7 @@
                 <th>Organisateur</th>
                 <th>Actions</th>
             </tr>
-
+            {% for sortie in sorties %}
             <tr>
                 <td>{{ sortie.nom}}</td>
                 <td>{{ sortie.dateHeureDebut | date('d/m/Y H:i')}}</td>
@@ -22,7 +21,7 @@
                 <td>créer lien</td>
                 <td>créer lien</td>
             </tr>
+            {% endfor %}
         </table>
-    {% endfor %}
 </div>
 
