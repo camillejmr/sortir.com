@@ -14,16 +14,30 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 
 class SearchForm extends AbstractType
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // TODO : campus
-            /*->add('campus', EntityType::class, [
+            ->add('campus', EntityType::class, [
                 'label' => 'Campus',
-            ])*/
+                'required' => false,
+                'class' => Campus::class,
+                'expanded' => false,
+                'choice_label' => 'nomCampus',
+                'multiple' => false,
+                'data' => $this->userCampus(), // affiche campus de l'utilisateur
+            ])
 
             ->add('champRecherche', TextType::class, [
                 'label' => 'Le nom de la sortie contient : ',
@@ -80,6 +94,13 @@ class SearchForm extends AbstractType
     public function getBlockPrefix()
     {
         return ''; // Pour une URL propre
+    }
+
+    // Récupère le campus de l'utilisateur
+    public function userCampus()
+    {
+        $user = $this->security->getUser();
+        return $user->getCampus();
     }
 
 }
