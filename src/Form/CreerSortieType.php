@@ -33,10 +33,10 @@ class CreerSortieType extends AbstractType
                 'required' => false
             ])
             ->add('lieu')
-            ->add('ville', ChoiceType::class, ['attr'=> array('required'),
-                'choices' => [ {{ville.nomVille}}
+            ->add('ville', ChoiceType::class, ['attr'=> array('required')
+                
 
-            ]])
+            ])
             ->add('latitude', IntegerType::class, [
                 'label' => 'latitude'
             ])
