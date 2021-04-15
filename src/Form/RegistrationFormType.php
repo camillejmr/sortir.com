@@ -21,10 +21,14 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Pseudo')
-            ->add('Prenom')
-            ->add('Nom')
-            ->add('mail')
+            ->add('Pseudo',null, ['attr'=>array('required'=>true),
+               ])
+            ->add('Prenom',null, ['attr'=>array('required'=>true),
+            ])
+            ->add('Nom',null, ['attr'=>array('required'=>true),
+            ])
+            ->add('mail',null, ['attr'=>array('required'=>true),
+            ])
 //            ->add('agreeTerms', CheckboxType::class, [
 //                'mapped' => false,
 //                'constraints' => [
@@ -34,8 +38,9 @@ class RegistrationFormType extends AbstractType
 //                ],
 //            ])
 
-            ->add('Telephone')
-            ->add('Actif',ChoiceType::class, ['attr'=>array('required'),
+            ->add('Telephone',null, ['attr'=>array('required'=>true),
+            ])
+            ->add('Actif',ChoiceType::class, ['attr'=>array('required'=>true),
                 'choices'  => [
                     'étudiant actuel' => true,
                     'Ancien étudiant' => false,

@@ -8,10 +8,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  * @UniqueEntity(fields={"pseudo"}, message="Ce pseudo est déjà utilisé")
+ * @UniqueEntity(fields={"mail"}, message="Cet email existe déjà")
+ * * @UniqueEntity(fields={"telephone"}, message="Ce numéro de téléphone existe déjà")
  */
 class Participant implements UserInterface
 {
@@ -23,7 +26,8 @@ class Participant implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=30, unique=true)
+     * @Assert\Length(max=30, maxMessage = "Le pseudo doit contenir au maximum {{ limit }} caractères.")
      */
     private $pseudo;
 
@@ -35,26 +39,32 @@ class Participant implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(min=8,  minMessage = "Le mot de passe doit contenir au moins {{ limit }} caractères.")
+     * @Assert\Length(max=255, maxMessage = "Le mot de passe doit contenir au maximum {{ limit }} caractères.")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\Length(max=30, maxMessage = "Le nom doit contenir au maximum {{ limit }} caractères.")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\Length(max=30, maxMessage = "Le prénom doit contenir au maximum {{ limit }} caractères.")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=15)
+     * @Assert\Length(max=15, maxMessage = "Le numéro de téléphone doit contenir au maximum {{ limit }} caractères.")
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Length(max=50, maxMessage = "L'email doit contenir au maximum {{ limit }} caractères.")
      */
     private $mail;
 
