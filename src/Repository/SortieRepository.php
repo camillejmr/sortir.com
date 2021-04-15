@@ -29,10 +29,12 @@ class SortieRepository extends ServiceEntityRepository
     public function findSearch(SearchData $search)
     {
         $queryBuilder = $this->createQueryBuilder('s'); // On récupère les sorties qu'on renomme s
+
         // Selectionne toutes les infos liées aux sorties, mais aussi aux campus, aux dates, etc
         $queryBuilder->select('s', 'p', 'c', 'l', 'e')
+
             // On fait des liaisons avec les choses qu'on recherche pour ne faire qu'une requete
-            ->leftJoin('s.participants', 'p')
+            ->leftJoin('s.participants', 'p')    // leftjoin pour retourner les sorties meme si elles n'ont pas de participants
             ->leftJoin('s.campus', 'c')
             ->leftJoin('s.lieux', 'l')
             ->leftJoin('s.etats', 'e');
@@ -73,8 +75,7 @@ class SortieRepository extends ServiceEntityRepository
 
         if (!empty($search->estInscrit)) {
             $query = $query
-                ->andWhere(':user member of s.participants')
-                ->setParameter('user', $user);
+
         }
 
         if (!empty($search->estNonInscrit)) {
