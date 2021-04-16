@@ -34,4 +34,18 @@ class MainController extends AbstractController
             'form' => $form->createView() // On envoie le formulaire à la vue
         ]);
     }
+
+    /**
+     * @Route("/inscriptionSortie/{id}", name="main_home")
+     */
+    public function inscriptionSortie(int $id, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
+    {
+
+
+        $sortie=$entityManager->getRepository(Sortie::class)->find($id);
+//
+//        return $this->render('main/inscriptionSortie.html.twig', [
+//            'sortie' => $sortie, // On envoie nos sorties à la vue
+//            'form' => $form->createView() // On envoie le formulaire à la vue
+    }
 }
