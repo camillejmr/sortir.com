@@ -5,8 +5,10 @@ namespace App\Controller;
 
 
 use App\Data\SearchData;
+use App\Entity\Sortie;
 use App\Form\SearchForm;
 use App\Repository\SortieRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,10 +18,12 @@ class MainController extends AbstractController
     /**
      * @Route("/accueil", name="main_home")
      */
-    public function home(SortieRepository $sortieRepository, Request $request)
+    public function home(SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
     {
+        $sortie = new Sortie();
         $data = new SearchData();
         $form = $this->createForm(SearchForm::class, $data);
+        $instance = $entityManager->getRepository(Sortie::class)->findall();
 
         $form->handleRequest($request);
 

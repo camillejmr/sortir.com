@@ -17,7 +17,12 @@
                 <td>{{ sortie.dateLimiteInscription |date('d/m/Y') }}</td>
                 <td>{{ sortie.participants | length}}/{{ sortie.nombreInscriptionsMax }}</td>
                 <td>{{ sortie.etats.libelle}}</td>
-                <td>créer lien</td>
+                <td> {% for participant in sortie.participants %}
+                        {% if app.user.id == participant.id %}
+                        X
+
+                        {% endif%}
+                    {% endfor %}</td>
                 <td>créer lien</td>
                 <td>créer lien</td>
             </tr>
