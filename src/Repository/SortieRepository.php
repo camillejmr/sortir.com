@@ -8,6 +8,7 @@ use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Client\Curl\User;
 
 /**
  * @method Sortie|null find($id, $lockMode = null, $lockVersion = null)
@@ -26,7 +27,7 @@ class SortieRepository extends ServiceEntityRepository
      * Récupère les sorties en lien avec une recherche
      * @return PaginationInterface
      */
-    public function findSearch(SearchData $search)
+    public function findSearch($search, $user)
     {
         $queryBuilder = $this->createQueryBuilder('s'); // On récupère les sorties qu'on renomme s
 
@@ -66,32 +67,35 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('campus', $search->campus);
         }
 
-        /*if (!empty($search->estInscrit)) {
-            $query = $queryBuilder
-                ->andWhere('s.participants' == true);
 
-            }*/
 
-        // TODO : FILTRES CHECKBOX
-        /*
+
+        // TODO : TESTER LES 3 PREMIERES CHECKBOX
+
         if (!empty($search->estOrganisateur)) {
-            $query = $query
+            $query = $queryBuilder
+                ->andWhere('s.organisateur = :user')
+                ->setParameter('user', $user);
 
         }
 
-        if (!empty($search->estInscrit) && (app.user.id == participant.id) {
-            $query = $query
-
+        if (!empty($search->estInscrit)) {
+            $query = $queryBuilder
+                ->andWhere(':user MEMBER OF s.participants')
+                ->setParameter('user', $user);
         }
 
         if (!empty($search->estNonInscrit)) {
-            $query = $query
-
+            $query = $queryBuilder
+                ->andWhere(':user NOT MEMBER OF s.participants')
+                ->setParameter('user', $user);
         }
 
-        $datetime = new DateTime();
+        // TODO : FILTRE CHECKBOX
+        /*
         if (!empty($search->sortieTerminee)) {
-            $query = $query
+            $query = $queryBuilder
+                ->andWhere('s.')
         } */
 
 
