@@ -11,7 +11,7 @@
             <li><a href="{{ path('main_home') }}" title="Accueil">Accueil</a></li>
             {# <li><a href="{{ path('profiluser_profil',{{app.user.id}}) }}" title="Mon profil">Mon profil</a></li>
             #}
-            <li><a href="#" title="Mon profil">Mon profil</a></li>
+            <li><a href="../profil/{{ app.user.id }}" title="Mon profil">Mon profil</a></li>
             <li><a href="{{ path('app_logout') }}" title="Accueil">Se déconnecter ({{ app.user.pseudo }})</a></li>
         </ul>
     </nav>
