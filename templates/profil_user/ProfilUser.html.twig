@@ -102,5 +102,13 @@ input, h1, p {text-align:center;}
 
 </div>
 
+    <script>
+        document.getElementById("test").addEventListener("click", disableMonProfil);
 
+        function disableMonProfil() { document.getElementById("test").href="../profil/{{ app.user.id }}"; }
+
+    </script>
 {% endblock %}
+
+
+
