@@ -66,6 +66,12 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('campus', $search->campus);
         }
 
+        /*if (!empty($search->estInscrit)) {
+            $query = $queryBuilder
+                ->andWhere('s.participants' == true);
+
+            }*/
+
         // TODO : FILTRES CHECKBOX
         /*
         if (!empty($search->estOrganisateur)) {
@@ -73,7 +79,7 @@ class SortieRepository extends ServiceEntityRepository
 
         }
 
-        if (!empty($search->estInscrit)) {
+        if (!empty($search->estInscrit) && (app.user.id == participant.id) {
             $query = $query
 
         }
