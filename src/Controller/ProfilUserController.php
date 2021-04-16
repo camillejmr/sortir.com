@@ -33,7 +33,7 @@ class ProfilUserController extends AbstractController
 
         if($profilForm->isSubmitted()  && $profilForm->isValid()) {
 
-    $user->setPseudo('Camilletest');
+
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
