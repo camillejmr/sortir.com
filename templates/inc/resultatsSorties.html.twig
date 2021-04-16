@@ -1,32 +1,38 @@
 <div id="tab_resultats">
-        <table>
+    <table>
+        <tr>
+            <th>Nom de la sortie</th>
+            <th>Date de la sortie</th>
+            <th>Clôture</th>
+            <th>Inscrits/places</th>
+            <th>Etat</th>
+            <th>Inscrit</th>
+            <th>Organisateur</th>
+            <th>Actions</th>
+        </tr>
+        {% for sortie in sorties %}
             <tr>
-                <th>Nom de la sortie</th>
-                <th>Date de la sortie</th>
-                <th>Clôture</th>
-                <th>Inscrits/places</th>
-                <th>Etat</th>
-                <th>Inscrit</th>
-                <th>Organisateur</th>
-                <th>Actions</th>
-            </tr>
-            {% for sortie in sorties %}
-            <tr>
-                <td>{{ sortie.nom}}</td>
-                <td>{{ sortie.dateHeureDebut | date('d/m/Y H:i')}}</td>
+                <td>{{ sortie.nom }}</td>
+                <td>{{ sortie.dateHeureDebut | date('d/m/Y H:i') }}</td>
                 <td>{{ sortie.dateLimiteInscription |date('d/m/Y') }}</td>
-                <td>{{ sortie.participants | length}}/{{ sortie.nombreInscriptionsMax }}</td>
-                <td>{{ sortie.etats.libelle}}</td>
+                <td>{{ sortie.participants | length }}/{{ sortie.nombreInscriptionsMax }}</td>
+                <td>{{ sortie.etats.libelle }}</td>
                 <td> {% for participant in sortie.participants %}
                         {% if app.user.id == participant.id %}
-                        X
+                            X
 
-                        {% endif%}
+                        {% endif %}
                     {% endfor %}</td>
-                <td>{# {{ sortie.organisateur.pseudo }} #}</td>
-                <td>créer lien</td>
+
+                {# TODO METTRE UN PATH POUR ACCEDER AU PROFIL DE L'ORGANISATEUR #}
+                <td>{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}.</td>
+                {# Fonctionnalités en fonction du statut de l'utilisateur et de la sortie #}
+                <td> {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription > "now"|date()) %}
+                        <a href="#">S'inscrire</a>
+                    {% endif %}
+                </td>
             </tr>
-            {% endfor %}
-        </table>
+        {% endfor %}
+    </table>
 </div>
 
