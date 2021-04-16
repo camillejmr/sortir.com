@@ -41,9 +41,12 @@ input, h1, p {text-align:center;}
     {{ form_row(profilForm.Telephone)}}
     {{ form_row(profilForm.Mail)}}
     {{ form_row(profilForm.password)}}
-    {{ form_row(profilForm.Campus)}}<button class="button" type="submit">
+    <p id="error" style="font-size:16px;color:#ff0000;"></p>
+    {{ form_row(profilForm.Campus)}}<button class="button" id="btn" type="submit">
     Modifier
 </button>
+
+
     {{ form_end(profilForm) }}
     {# test 2ème méthode pour validation #}
 
@@ -101,6 +104,63 @@ input, h1, p {text-align:center;}
 
 
 </div>
+<script>
+
+    document.getElementById("profil_form_password_first").addEventListener("change", verifMdp);
+    document.getElementById("profil_form_password_second").addEventListener("change", verifConfirm);
+
+
+    function verifMdp () {
+
+var pw = document.getElementById("profil_form_password_first").value;
+if(pw.length <8) {
+
+
+    var info2 = document.createElement("P");
+
+    var textInfo2 = document.createTextNode("Votre mot de passe comporte moins de 8 caracteres.");
+
+    info2.appendChild(textInfo2);
+    document.getElementById("error").appendChild(info2);
+    setTimeout(function(){   textInfo2.remove(); }, 5000);
+
+
+        document.getElementById('btn').style.display="none";
+
+
+
+
+} else {  document.getElementById('btn').style.display="unset";  }
+
+                        }
+
+
+
+
+
+
+    function verifConfirm () {
+        var pw = document.getElementById("profil_form_password_first").value;
+        var pw2 = document.getElementById("profil_form_password_second").value;
+        if(pw2!=pw) {
+
+
+            var info3 = document.createElement("P");
+
+            var textInfo3 = document.createTextNode("Votre confirmation n'est pas identique !");
+
+            info3.appendChild(textInfo3);
+            document.getElementById("error").appendChild(info3);
+            setTimeout(function(){   textInfo3.remove(); }, 5000);
+
+            document.getElementById('btn').style.display="none";
+        }else {  document.getElementById('btn').style.display="unset";  }
+
+    }
+
+
+</script>
+
 
     <script>
         document.getElementById("test").addEventListener("click", disableMonProfil);
