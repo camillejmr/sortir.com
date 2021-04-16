@@ -35,6 +35,7 @@ input, h1, p {text-align:center;}
 {#    </button>#}
 {#</div></form>#}
     {{ form_start(profilForm) }}
+    <p id="error2" style="font-size:16px;color:#ff0000;"></p>
     {{ form_row(profilForm.Pseudo)}}
     {{ form_row(profilForm.Nom)}}
     {{ form_row(profilForm.Prenom)}}
@@ -105,11 +106,75 @@ input, h1, p {text-align:center;}
 
 </div>
 <script>
-
+    document.getElementById("profil_form_Telephone").addEventListener("change", verifLength);
+    document.getElementById("profil_form_Mail").addEventListener("change", verifLength);
+    document.getElementById("profil_form_Nom").addEventListener("change", verifLength);
+    document.getElementById("profil_form_Prenom").addEventListener("change", verifLength);
+    document.getElementById("profil_form_Pseudo").addEventListener("change", verifLength);
     document.getElementById("profil_form_password_first").addEventListener("change", verifMdp);
     document.getElementById("profil_form_password_second").addEventListener("change", verifConfirm);
 
+function verifLength () {
 
+    var telephone = document.getElementById("profil_form_Telephone").value;
+    var nom = document.getElementById("profil_form_Nom").value;
+    var prenom = document.getElementById("profil_form_Prenom").value;
+    var pseudo = document.getElementById("profil_form_Pseudo").value;
+    var mail = document.getElementById("profil_form_Mail").value;
+
+    if(pseudo.length >30) {  var info4 = document.createElement("P");
+
+        var textInfo4 = document.createTextNode("Votre pseudo doit contenir max 30 caractères.");
+
+        info4.appendChild(textInfo4);
+        document.getElementById("error2").appendChild(info4);
+        setTimeout(function(){   textInfo4.remove(); }, 5000);
+
+
+        document.getElementById('btn').style.display="none";} else {   document.getElementById('btn').style.display="unset";   }
+
+    if(nom.length >30) {
+
+
+
+        var info5 = document.createElement("P");
+
+        var textInfo5 = document.createTextNode("Votre nom doit contenir max 30 caractères.");
+
+        info5.appendChild(textInfo5);
+        document.getElementById("error2").appendChild(info5);
+        setTimeout(function(){   textInfo5.remove(); }, 5000);
+
+
+        document.getElementById('btn').style.display="none";} else {     document.getElementById('btn').style.display="unset";  }
+
+
+
+
+    if(prenom.length >15) {
+
+        var info6 = document.createElement("P");
+
+        var textInfo6 = document.createTextNode("Votre prenom doit contenir max 15 caractères.");
+
+        info6.appendChild(textInfo6);
+        document.getElementById("error2").appendChild(info6);
+        setTimeout(function(){   textInfo6.remove(); }, 5000);
+
+
+        document.getElementById('btn').style.display="none";
+
+
+
+
+    } else {           document.getElementById('btn').style.display="unset";     }
+
+
+
+    if(telephone.length >30) { alert('Votre telephone ne doit pas dépasser 30 caractères.')}
+
+    if(mail.length >30) { alert('Votre mail ne doit pas dépasser 30 caractères.')}
+}
     function verifMdp () {
 
 var pw = document.getElementById("profil_form_password_first").value;
