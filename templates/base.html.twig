@@ -39,7 +39,7 @@ creme :#dfddd0
     </div>
 
 </header>
-<div>{% for label, messages in app.flashes %}
+<div id="messagesFlashes">{% for label, messages in app.flashes %}
         {% for message in messages %}
             <div class="flash-{{ label }}">
                 {{ message }}

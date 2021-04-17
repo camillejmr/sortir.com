@@ -28,8 +28,19 @@
                 <td>{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}.</td>
                 {# Fonctionnalités en fonction du statut de l'utilisateur et de la sortie #}
                 <td> {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription > "now"|date()) %}
-                        <a href="#">S'inscrire</a> <br> <a href="#" id="desister">Se désister</a>
-                    {% endif %}
+
+                        {# {% if app.user  in [sortie.participants] %}
+                        <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"> #}
+                        {# {% else %}<a href="#" id="desister">Se désister</a> #}
+                        {# {% endif %} #}
+
+                        {% for participant in sortie.participants %}
+                            {% if app.user.id == participant.id %} <a href="#" id="desister">Se désister</a>
+                            {% else %}<a
+                                href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}">
+                                    S'inscrire</a>{% endif %}
+
+                        {% endfor %} {% endif %}
                 </td>
             </tr>
         {% endfor %}
@@ -40,7 +51,7 @@
 
     function confirmCancel() {
 
-  
+
         if (confirm("Cliquer sur OK pour confirmer le désistement.") == true) {
             alert('ok was pressed');
         } else {

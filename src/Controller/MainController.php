@@ -5,7 +5,9 @@ namespace App\Controller;
 
 
 use App\Data\SearchData;
+use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Form\InscriptionSortieType;
 use App\Form\SearchForm;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,5 +37,30 @@ class MainController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/inscriptionSortie/{idSortie}/{idParticipant}", name="inscription_sortie")
+     */
+    public function inscriptionSortie(int $idSortie, int $idParticipant, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
+    {
+
+
+        $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
+        $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);
+        $form = $this->createForm(InscriptionSortieType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $sortie->addParticipant($participant);
+            $entityManager->flush();
+            $this->addFlash('success', 'Vous êtes bien inscrit(e) à la sortie '.$sortie->getNom().'.');
+
+            return $this->redirectToRoute('main_home');
+        }
+        return $this->render('main/inscriptionSortie.html.twig', [
+            'sortie' => $sortie, // On envoie notre sortie à la vue
+            'form' => $form->createView(),
+            'participant' => $participant
+
+        ]);
+    }
 
 }
