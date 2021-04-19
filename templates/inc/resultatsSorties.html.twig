@@ -11,9 +11,9 @@
             <th>Actions</th>
         </tr>
         {% for sortie in sorties %}
-            <tr>
+            <tr id="sortieTable">
                 <td>{{ sortie.nom }}</td>
-                <td>{{ sortie.dateHeureDebut | date('d/m/Y H:i') }}</td>
+                <td id="dateDebut">{{ sortie.dateHeureDebut | date('d/m/Y H:i') }}</td>
                 <td>{{ sortie.dateLimiteInscription |date('d/m/Y') }}</td>
                 <td>{{ sortie.participants | length }}/{{ sortie.nombreInscriptionsMax }}</td>
                 <td>{{ sortie.etats.libelle }}</td>
@@ -22,6 +22,8 @@
                             X
 
                         {% endif %}
+
+
                     {% endfor %}</td>
 
                 {# TODO METTRE UN PATH POUR ACCEDER AU PROFIL DE L'ORGANISATEUR #}
@@ -61,7 +63,29 @@
     </table>
 </div>
 
+<script>
 
+    var debutDate= document.getElementById('dateDebut').innerHTML;
+
+    /*var today = new Date().toLocaleString();*/
+    var today = new Date()
+
+    today.setMonth(today.getMonth()-1);
+
+    var today2=today.toLocaleString();
+
+    if (debutDate<today2) {
+
+
+        alert('hello' + debutDate)
+        document.getElementById('sortieTable').style.display="none";
+
+    }
+
+
+
+
+</script>
 
 <script>
     /*document.getElementById("desister").addEventListener("click", confirmCancel);
