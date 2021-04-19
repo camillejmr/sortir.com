@@ -33,7 +33,7 @@
 
                         {# Affichage du lien se désister, seulement si l'utilisateur connecté est inscrit à la sortie #}
                         {% if app.user  in [sortie.participants] %}
-                            <a href="#" id="desister">Se désister</a>
+                            <a href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}" id="desister">Se désister</a>
                         {% else %}
                             <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}">S'inscrire </a>
 
@@ -42,7 +42,7 @@
 
 
                         {% for participant in sortie.participants %}
-                            {% if participant.id==app.user.id %} <a href="#" id="desister">Se désister</a>
+                            {% if participant.id==app.user.id %} <a href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}" id="desister">Se désister</a>
 
                             {% endif %}
                         {% endfor %}
@@ -60,18 +60,27 @@
         {% endfor %}
     </table>
 </div>
+
+
+
 <script>
-    document.getElementById("desister").addEventListener("click", confirmCancel);
+    /*document.getElementById("desister").addEventListener("click", confirmCancel);
 
     function confirmCancel() {
 
 
         if (confirm("Cliquer sur OK pour confirmer le désistement.") == true) {
             alert('ok was pressed');
+
+            var a = document.getElementById('desister');
+            a.href = "/#"
+
+
         } else {
             alert('cancel was pressed');
         }
     }
 
-
+*/
 </script>
+
