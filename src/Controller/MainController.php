@@ -13,6 +13,7 @@ use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
@@ -22,7 +23,7 @@ class MainController extends AbstractController
      */
     public function home(SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
     {
-        $sortie = new Sortie();
+//        $sortie = new Sortie();
         $data = new SearchData();
         $form = $this->createForm(SearchForm::class, $data);
         $instance = $entityManager->getRepository(Sortie::class)->findall();
@@ -47,19 +48,47 @@ class MainController extends AbstractController
 
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
         $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);
+        return $this->render('main/inscriptionSortie.html.twig', [
+            'sortie' => $sortie, // On envoie notre sortie à la vue
+            'participant' => $participant
+
+        ]);
+    }
+    /**
+     * @Route("/validationInscription/{idSortie}/{idParticipant}", name="validation_inscription")
+     */
+    public function validationInscription(int $idSortie, int $idParticipant, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
+        $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);
+
+        $sortie->addParticipant($participant);
+        $entityManager->flush();
+        $this->addFlash('success', 'Vous êtes bien inscrit(e) à la sortie ' . $sortie->getNom() . '.');
+
+        return $this->redirectToRoute('main_home');
+
+    }
+    /**
+     * @Route("/annulationSortie/{idSortie}", name="annulation_sortie")
+     */
+    public function annulationSortie(int $idSortie,  SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
+    {
+
+        $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
         $form = $this->createForm(InscriptionSortieType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            $sortie->addParticipant($participant);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($sortie);
             $entityManager->flush();
-            $this->addFlash('success', 'Vous êtes bien inscrit(e) à la sortie '.$sortie->getNom().'.');
+            $this->addFlash('success', 'La sortie '.$sortie->getNom().' a bien été supprimée.');
 
             return $this->redirectToRoute('main_home');
         }
-        return $this->render('main/inscriptionSortie.html.twig', [
+        return $this->render('main/annulationSortie.html.twig', [
             'sortie' => $sortie, // On envoie notre sortie à la vue
             'form' => $form->createView(),
-            'participant' => $participant
 
         ]);
     }

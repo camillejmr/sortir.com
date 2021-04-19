@@ -27,20 +27,34 @@
                 {# TODO METTRE UN PATH POUR ACCEDER AU PROFIL DE L'ORGANISATEUR #}
                 <td>{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}.</td>
                 {# Fonctionnalités en fonction du statut de l'utilisateur et de la sortie #}
-                <td> {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription > "now"|date()) %}
+                <td>
+                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription > "now"|date()) %}
 
-                        {# {% if app.user  in [sortie.participants] %}
-                        <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"> #}
-                        {# {% else %}<a href="#" id="desister">Se désister</a> #}
-                        {# {% endif %} #}
+
+                        {# Affichage du lien se désister, seulement si l'utilisateur connecté est inscrit à la sortie #}
+                        {% if app.user  in [sortie.participants] %}
+                            <a href="#" id="desister">Se désister</a>
+                        {% else %}
+                            <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}">S'inscrire </a>
+
+                        {% endif %}
+
+
 
                         {% for participant in sortie.participants %}
-                            {% if app.user.id == participant.id %} <a href="#" id="desister">Se désister</a>
-                            {% else %}<a
-                                href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}">
-                                    S'inscrire</a>{% endif %}
+                            {% if participant.id==app.user.id %} <a href="#" id="desister">Se désister</a>
 
-                        {% endfor %} {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+
+                    {% endif %}
+                    {# Affichage du lien "annuler", seulement si c'est l'oraginsateur de la sortie qui est connecté #}
+                    {% if app.user.id == sortie.organisateur.id %}
+                        <a href="{{ path('annulation_sortie',{'idSortie':sortie.id}) }}">
+                            Annuler</a>
+                    {% endif %}
+
                 </td>
             </tr>
         {% endfor %}
