@@ -4,13 +4,11 @@
 
 {% block body %}
     <p id="checkmail">
-        Un lien pour réinitialiser le mot de passe vous a été envoyé. Ce lien expire dans une heure.
+        Un lien pour réinitialiser votre mot de passe vous a été envoyé par e-mail. Ce lien expire dans une heure.
         <br>
         <br>
-    Si vous n'avez pas reçu l'email, merci de consulter vos spams.
-
-        <a href="{{ path('app_forgot_password_request') }}">Cliquer ici pour recevoir un nouveau lien</a></p>
-
-<p></p>
-
+    Si vous n'avez pas reçu cet e-mail, merci de consulter vos spams.
+        <br>
+        <br>
+        <a href="{{ path('app_forgot_password_request') }}">Cliquez ici pour recevoir un nouveau lien</a></p>
 {% endblock %}
