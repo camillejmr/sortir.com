@@ -10,10 +10,9 @@ body {
 }
 
 h1 {
-    font-size: 2.5em;
+    font-size: 2rem;
     color: #af8f61;
     text-align: center;
-    margin-top: 40px
 }
 
 
@@ -38,17 +37,13 @@ a {
 header {
     display: flex;
     flex-direction: row;
-    height: 175px;
-}
-
-#logo {
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 30%;
+    height: 145px;
 }
 
 #logo_sortir {
-    width: 200px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 35%;
 }
 
 #checkmail {
@@ -95,12 +90,12 @@ header {
     border-radius: 10px;
     padding: 10px 15px;
     margin: 0 auto 20px auto;
-    font-size: 1.2em;
+    font-size: 1em;
     color: #333133;
 }
 
 form {
-    margin-top: 120px
+    margin-top: 50px
 }
 
 label {
@@ -109,12 +104,23 @@ label {
     width: 400px;
     margin: auto;
     padding-bottom: 5px;
-    font-size: 1.1em;
+    font-size: 1em;
     color: #333133;
 }
 
-#remember_me {
+#remember_me label{
     text-align: end;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    width : 400px;
+}
+
+#chk {
+    transform: scale(0.5);
+    margin-right: -120px;
+    margin-top: -8px;
+    padding: 0;
 }
 
 input[type=checkbox] {
@@ -128,10 +134,10 @@ button {
     border: 1px solid #af8f61;
     min-width: 20%;
     max-width: 90%;
-    width: 250px;
+    width: 220px;
     left: 50%;
     border-radius: 10px;
-    padding: 10px 15px;
+    padding: 10px 10px;
     margin: 0 auto 10px auto;
     font-family: 'Raleway', sans-serif;
     font-size: 1.1em;
@@ -219,7 +225,7 @@ button:hover {
 }
 
 #messagesFlashes {
-    margin-top: 100px
+    margin-top: 50px
 }
 
 /* TABLEAU DE RESULTATS DES SORTIES */
@@ -253,6 +259,14 @@ tr:nth-child(even) {
     background-color: rgba(28, 57, 86, 0.2);
 }
 #messagesFlashes {
-    margin-top: 100px
+    margin-top: 50px;
+}
+
+.wrapper {
+    padding-top : 50px;
+}
+
+p {
+    height : 10px;
 }
 
