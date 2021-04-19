@@ -16,7 +16,6 @@ class EtatsUpdater
     {
         $this->sortieRepository = $sortieRepository;
         $this->etatRepository = $etatRepository;
-
     }
 
 

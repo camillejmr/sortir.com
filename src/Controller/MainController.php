@@ -29,7 +29,7 @@ class MainController extends AbstractController
         EtatsUpdater $etatsUpdater // Service pour mettre à jour les états
     )
     {
-//        $sortie = new Sortie();
+        $sortie = new Sortie();
         $data = new SearchData();
         $form = $this->createForm(SearchForm::class, $data);
         $instance = $entityManager->getRepository(Sortie::class)->findall();
@@ -38,10 +38,15 @@ class MainController extends AbstractController
 
         //Je récupère mes sorties liées à une recherche grace à findSearch(), et lui envoie les données
         $sorties = $sortieRepository->findSearch($this->getUser(), $data);
+
+        $etatsUpdater->miseAJourEtatSortie($sortie);
+
         return $this->render('main/home.html.twig', [
             'sorties' => $sorties, // On envoie nos sorties à la vue
             'form' => $form->createView() // On envoie le formulaire à la vue
         ]);
+
+
     }
 
     /**
