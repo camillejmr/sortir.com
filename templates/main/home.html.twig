@@ -16,7 +16,7 @@
         {% include 'inc/resultatsSorties.html.twig' %}
 
     {# TODO : Faire un lien avec page Créer une sortie #}
-    <button type="onclick" id="creerSortie">Créer une sortie</button>
+    <a href="{{ path('creer_Sortie', {'idOrganisateur':app.user.id}) }}"> <button type="Onclick" id="creerSortie">Créer une sortie</button> </a>
 {% endblock %}
 
 
