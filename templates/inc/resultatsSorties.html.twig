@@ -17,7 +17,7 @@
                 <td>{{ sortie.dateLimiteInscription |date('d/m/Y') }}</td>
                 <td>{{ sortie.participants | length }}/{{ sortie.nombreInscriptionsMax }}</td>
                 <td>{{ sortie.etats.libelle }}</td>
-                <td> {% for participant in sortie.participants %}
+                <td id="inscrit"> {% for participant in sortie.participants %}
                         {% if app.user.id == participant.id %}
                             X
 
@@ -29,19 +29,23 @@
                 {# TODO METTRE UN PATH POUR ACCEDER AU PROFIL DE L'ORGANISATEUR #}
                 <td>{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}.</td>
                 {# Fonctionnalités en fonction du statut de l'utilisateur et de la sortie #}
-                <td>
-                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) %}
+                <td id="insertion">
+                    {# S'inscrire, doit apparaitre uniquement si la sortie est ouverte, que la date d'inscription n'est pas atteinte,
+                   que le nombre d'inscrit est inférieur au nombre de places et que l'élève n'est pas déjà inscrit #}
+                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) and sortie.participants | length < sortie.nombreInscriptionsMax %}
+                        <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}">S'inscrire </a>
 
                         {# Affichage du lien se désister, seulement si l'utilisateur connecté est inscrit à la sortie #}
                         {% if app.user  in [sortie.participants] %}
-                            <a href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}" id="desister">Se désister</a>
-                        {% else %}
-                            <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}">S'inscrire </a>
+                            <a href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
+                               id="desister">Se désister</a>
 
                         {% endif %}
 
                         {% for participant in sortie.participants %}
-                            {% if participant.id==app.user.id %} <a href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}" id="desister">Se désister</a>
+                            {% if participant.id==app.user.id %} <a
+                                    href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
+                                    id="desister">Se désister</a>
 
                             {% endif %}
                         {% endfor %}
@@ -56,30 +60,29 @@
 
                 </td>
             </tr>
+           
         {% endfor %}
     </table>
 </div>
 
 <script>
 
-    var debutDate= document.getElementById('dateDebut').innerHTML;
+    var debutDate = document.getElementById('dateDebut').innerHTML;
 
     /*var today = new Date().toLocaleString();*/
     var today = new Date()
 
-    today.setMonth(today.getMonth()-1);
+    today.setMonth(today.getMonth() - 1);
 
-    var today2=today.toLocaleString();
+    var today2 = today.toLocaleString();
 
-    if (debutDate<today2) {
+    if (debutDate < today2) {
 
 
         /*alert('hello' + debutDate)*/
-        document.getElementById('sortieTable').style.display="none";
+        document.getElementById('sortieTable').style.display = "none";
 
     }
-
-
 
 
 </script>
