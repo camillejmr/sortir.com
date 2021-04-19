@@ -44,6 +44,7 @@ class MainController extends AbstractController
     {
 
 
+
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
         $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);
         $form = $this->createForm(InscriptionSortieType::class);
