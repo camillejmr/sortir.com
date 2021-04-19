@@ -27,7 +27,7 @@ class SortieRepository extends ServiceEntityRepository
      * Récupère les sorties en lien avec une recherche
      * @return PaginationInterface
      */
-    public function findSearch($search, $user)
+    public function findSearch(SearchData $search, $user)
     {
         $queryBuilder = $this->createQueryBuilder('s'); // On récupère les sorties qu'on renomme s
 
@@ -75,28 +75,30 @@ class SortieRepository extends ServiceEntityRepository
         if (!empty($search->estOrganisateur)) {
             $query = $queryBuilder
                 ->andWhere('s.organisateur = :user')
-                ->setParameter('user', $user);
+                ->setParameter('user', $user->getId());
 
         }
 
         if (!empty($search->estInscrit)) {
             $query = $queryBuilder
                 ->andWhere(':user MEMBER OF s.participants')
-                ->setParameter('user', $user);
+                ->setParameter('user', $user->getId());
         }
 
         if (!empty($search->estNonInscrit)) {
             $query = $queryBuilder
                 ->andWhere(':user NOT MEMBER OF s.participants')
-                ->setParameter('user', $user);
+                ->setParameter('user', $user->getId());
         }
 
         // TODO : FILTRE CHECKBOX
-        /*
+
         if (!empty($search->sortieTerminee)) {
+
             $query = $queryBuilder
-                ->andWhere('s.')
-        } */
+                ->andWhere('s.dateHeureDebut <CURRENT_DATE()');
+
+        }
 
 
         $query = $queryBuilder->getQuery();

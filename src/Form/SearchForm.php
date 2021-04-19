@@ -87,7 +87,7 @@ class SearchForm extends AbstractType
         $resolver->setDefaults([
             'data_class' => SearchData::class,
             'method' => 'GET',  // Pour que les paramètres de recherches apparaissent dans l'URL et que l'utilisateur puisse partager sa recherche
-            'csrf_protection' => false  // Pas besoin
+            'csrf_protection' => false  // Pas besoin car formulaire de recherche
         ]);
     }
 

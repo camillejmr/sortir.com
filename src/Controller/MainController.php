@@ -32,12 +32,13 @@ class MainController extends AbstractController
         $sortie = new Sortie();
         $data = new SearchData();
         $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+//       dd($data);
+        $sorties = $sortieRepository->findSearch($data, $this->getUser());
         $instance = $entityManager->getRepository(Sortie::class)->findall();
 
-        $form->handleRequest($request);
 
         //Je récupère mes sorties liées à une recherche grace à findSearch(), et lui envoie les données
-        $sorties = $sortieRepository->findSearch($this->getUser(), $data);
 
         $etatsUpdater->miseAJourEtatSortie($sortie);
 
@@ -115,8 +116,6 @@ class MainController extends AbstractController
      */
     public function desisterInscription(int $idSortie, int $idParticipant, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
     {
-
-
 
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
         $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);

@@ -10,7 +10,7 @@
 
 
         {# FORMULAIRE DE RECHERCHE (en inclusion pour + de propreté) #}
-        {% include 'inc/rechercheSorties.html.twig' %}
+        {% include 'inc/rechercheSorties.html.twig' with {form:form} only %}
 
         {# RESULTATS RECHERCHE #}
         {% include 'inc/resultatsSorties.html.twig' %}
