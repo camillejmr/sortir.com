@@ -10,6 +10,7 @@ use App\Entity\Sortie;
 use App\Form\InscriptionSortieType;
 use App\Form\SearchForm;
 use App\Repository\SortieRepository;
+use App\Services\EtatsUpdater;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -86,7 +87,7 @@ class MainController extends AbstractController
         ]);
     }
 
-<<<<<<< HEAD
+
     /**
      * @Route("/validationAnnulationSortie/{idSortie}", name="validation_annulation_sortie")
      */
@@ -102,7 +103,7 @@ class MainController extends AbstractController
 
         return $this->redirectToRoute('main_home');
     }
-=======
+
 
     /**
      * @Route("/desisterInscription/{idSortie}/{idParticipant}", name="desister_inscription")
@@ -137,5 +138,5 @@ class MainController extends AbstractController
 
     }
 
->>>>>>> karl
+
 }
