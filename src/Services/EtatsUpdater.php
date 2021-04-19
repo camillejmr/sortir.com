@@ -24,13 +24,6 @@ class EtatsUpdater
     {
         $now = new DateTime();
 
-        $etatRepository;
-
-        $sortieCreee = $this->etatRepository->find(['id' => 3]);
-
-
-        if ($now > $sortie->getDateHeureDebut()) {
-            $sortie->setEtats($passee);
-        }
     }
+
 }
