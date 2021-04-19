@@ -21,7 +21,12 @@ class MainController extends AbstractController
     /**
      * @Route("/accueil", name="main_home")
      */
-    public function home(SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
+    public function home(
+        SortieRepository $sortieRepository,
+        EntityManagerInterface $entityManager,
+        Request $request,
+        EtatsUpdater $etatsUpdater // Service pour mettre à jour les états
+    )
     {
 //        $sortie = new Sortie();
         $data = new SearchData();
