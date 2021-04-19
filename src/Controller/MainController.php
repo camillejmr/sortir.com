@@ -121,7 +121,7 @@ class MainController extends AbstractController
 
         $sortie->removeParticipant($participant);
         $entityManager->flush();
-        $this->addFlash('success', 'Vous êtes bien déinscrit(e) à la sortie ' . $sortie->getNom() . '.');
+        $this->addFlash('success', 'Vous êtes bien désinscrit(e) à la sortie ' . $sortie->getNom() . '.');
 
         return $this->redirectToRoute('main_home');
 
