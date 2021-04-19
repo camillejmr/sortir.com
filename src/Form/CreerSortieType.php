@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -47,7 +48,8 @@ class CreerSortieType extends AbstractType
             ])
 
             ->add('duree', IntegerType::class, [
-                'label' => 'Durée'
+
+                'label' => 'Durée (Mn)'
             ])
 
             ->add('infosSortie', TextareaType::class, [
@@ -55,9 +57,18 @@ class CreerSortieType extends AbstractType
                 'required' => false
             ])
 
-            ->add('lieux', ChoiceType::class, [
-                'label' => 'lieu'
+            ->add('lieux', EntityType::class, ['class' => Lieu::class,'choice_label'=> function (Lieu $lieu){
+                return $lieu-> getNom()." / ".$lieu->getVilles()->getNomVille();
+            }
             ]);
+            /*->add('organisateur', HiddenType::class, ['class' =>Campus::class,'label' =>function (Campus $id){
+                return $id-> getId();
+            }
+            ]);*/
+
+
+
+
 
     }
 

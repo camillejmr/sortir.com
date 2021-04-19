@@ -6,11 +6,14 @@
 
 {% block body %}
     <h1>Créer une sortie</h1>
-    <div>
+    <div class="formulaire">
         {{ form_start(CreerSortieForm) }}
         {{ form_widget(CreerSortieForm) }}
+        <button type="submit" class="btn">Créer une sortie</button>
         {{ form_end(CreerSortieForm) }}
     </div>
+
+
 {% endblock %}
 
 

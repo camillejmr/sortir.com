@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 class CreerSortieController extends AbstractController
 {
     /**
-     * @Route("/creationSortie", name="creer_Sortie")
+     * @Route("/creationSortie/", name="creer_Sortie")
      */
     public function CreerSortie(Request $request, entityManagerInterface $entityManager): Response
     {
@@ -28,6 +28,7 @@ class CreerSortieController extends AbstractController
             $entityManager->persist($sortie);
             $entityManager->flush();
         }
+
         return $this->render('Sorties/CreerSortie.html.twig',  ['CreerSortieForm' => $creerSortieForm -> createView()]);
 
 }

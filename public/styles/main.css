@@ -87,7 +87,7 @@ header {
     margin-top: 200px
 }
 
-.formulaire input, select {
+.formulaire input, select, textarea {
     display: block;
     box-sizing: border-box;
     border: 1px solid #af8f61;
@@ -255,3 +255,4 @@ tr:nth-child(even) {
 #messagesFlashes {
     margin-top: 100px
 }
+
