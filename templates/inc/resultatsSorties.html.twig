@@ -30,8 +30,7 @@
                 <td>{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}.</td>
                 {# Fonctionnalités en fonction du statut de l'utilisateur et de la sortie #}
                 <td>
-                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription > "now"|date()) %}
-
+                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) %}
 
                         {# Affichage du lien se désister, seulement si l'utilisateur connecté est inscrit à la sortie #}
                         {% if app.user  in [sortie.participants] %}
@@ -40,8 +39,6 @@
                             <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}">S'inscrire </a>
 
                         {% endif %}
-
-
 
                         {% for participant in sortie.participants %}
                             {% if participant.id==app.user.id %} <a href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}" id="desister">Se désister</a>
