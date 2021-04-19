@@ -21,7 +21,7 @@ class EtatsUpdater
 
     public function miseAJourEtatSortie(Sortie $sortie)
     {
-        $now = new DateTime();
+        $now = new DateTime('now');
 
         $sorties = $this->sortieRepository->findAll();
 
@@ -43,8 +43,8 @@ class EtatsUpdater
         // Si la sortie est ouverte && le nb de participant = nb inscriptions max  => Cloturée
 //        if ($sortie->getEtats() === $sortieOuverte) {
 //            if ($sortie->getParticipants() = $sortie->getNombreInscriptionsMax()) {
- //               $sortie->setEtats($sortieCloturee);
- //           }
+//               $sortie->setEtats($sortieCloturee);
+//           }
 //            else {
 //                $sortie->setEtats($sortieOuverte);
 //            }
