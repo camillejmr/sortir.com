@@ -17,7 +17,7 @@
                 <td>{{ sortie.dateLimiteInscription |date('d/m/Y') }}</td>
                 <td>{{ sortie.participants | length }}/{{ sortie.nombreInscriptionsMax }}</td>
                 <td>{{ sortie.etats.libelle }}</td>
-                <td id="inscrit"> {% for participant in sortie.participants %}
+                <td> {% for participant in sortie.participants %}
                         {% if app.user.id == participant.id %}
                             X
 
@@ -29,7 +29,7 @@
                 {# TODO METTRE UN PATH POUR ACCEDER AU PROFIL DE L'ORGANISATEUR #}
                 <td>{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}.</td>
                 {# Fonctionnalités en fonction du statut de l'utilisateur et de la sortie #}
-                <td id="insertion">
+                <td>
                     {# S'inscrire, doit apparaitre uniquement si la sortie est ouverte, que la date d'inscription n'est pas atteinte,
                    que le nombre d'inscrit est inférieur au nombre de places et que l'élève n'est pas déjà inscrit #}
                     {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) and sortie.participants | length < sortie.nombreInscriptionsMax %}
@@ -53,7 +53,7 @@
 
                     {% endif %}
                     {# Affichage du lien "annuler", seulement si c'est l'oraginsateur de la sortie qui est connecté #}
-                    {% if app.user.id == sortie.organisateur.id %}
+                    {% if (app.user.id == sortie.organisateur.id)  and (sortie.etats.libelle == 'Ouverte')%}
                         <a href="{{ path('annulation_sortie',{'idSortie':sortie.id}) }}">
                             Annuler</a>
                     {% endif %}

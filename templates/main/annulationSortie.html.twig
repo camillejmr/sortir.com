@@ -1,17 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | S'inscirre à une sortie{% endblock %}
+{% block title %}{{ parent() }} | Annuler une sortie{% endblock %}
 
 {% block body %}
-
-        <div id="inscriptionSortie">
-            {{ app.user.prenom }}, êtes-vous sûr(e) de vouloir supprimer la sortie {{ sortie.nom }} ?
-        </div>
-
-
-        <a href="{{ path('validation_annulation_sortie',{'idSortie':sortie.id}) }}">
-            <button type="submit" id="suppressionSortie">Supprimer la sortie</button>
-        </a>
+<h2 class="title">Annuler une sortie</h2>
+{#        <div id="suppressionSortie">#}
+{#            {{ app.user.prenom }}, êtes-vous sûr(e) de vouloir supprimer la sortie {{ sortie.nom }} ?#}
+{#        </div>#}
+<div>Nom de la sortie : {{ sortie.nom }}</div>
+        <div> Date de la sortie : {{ sortie.dateHeureDebut | date('d/m/Y') }}</div>
+        <div>Campus : {{ sortie.campus }}</div>
+<div>Lieu : {{ lieuSortie.nom}} {{ lieuSortie.rue }} {{ villeSortie.codePostal }} {{ villeSortie.nomVille }}</div>
+        <div></div>
+        
+        <div>{{ form_start(form) }}
+        {{ form_widget(form) }}</div>
+{#        <a href="{{ path('validation_annulation_sortie',{'idSortie':sortie.id}) }}">#}
+            <button type="submit" id="suppressionSortie">Annuler la sortie</button>
+{#        </a>#}
+        {{ form_end(form) }}
         <a href="{{ path('main_home') }}"><button type="action" id="annuler"> Annuler</button>
         </a>
 

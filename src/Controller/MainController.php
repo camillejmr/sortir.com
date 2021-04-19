@@ -5,9 +5,12 @@ namespace App\Controller;
 
 
 use App\Data\SearchData;
+use App\Entity\Etat;
+use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
-use App\Form\InscriptionSortieType;
+use App\Entity\Ville;
+use App\Form\AnnulationSortieType;
 use App\Form\SearchForm;
 use App\Repository\SortieRepository;
 use App\Services\EtatsUpdater;
@@ -88,8 +91,24 @@ class MainController extends AbstractController
     public function annulationSortie(int $idSortie, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
     {
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
+        $lieuSortie = $entityManager->getRepository(Lieu::class)->findoneBy(['id' => $sortie->getLieux()]);
+        $villeSortie = $entityManager->getRepository(Ville::class)->findoneBy(['id' => $lieuSortie->getVilles()]);
+        $form = $this->createForm(AnnulationSortieType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $etat=$entityManager->getRepository(Etat::class)->findOneBy(['libelle'=>'Annulée']);
+            $sortie->setEtats($etat);
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+            $this->addFlash('success', 'La sortie ' . $sortie->getNom() . ' a bien été annulé.');
+
+            return $this->redirectToRoute('main_home');
+        }
         return $this->render('main/annulationSortie.html.twig', [
             'sortie' => $sortie, // On envoie notre sortie à la vue
+            'lieuSortie' => $lieuSortie,
+            'villeSortie' => $villeSortie,
+            'form' => $form->createView()
         ]);
     }
 
@@ -101,11 +120,11 @@ class MainController extends AbstractController
     {
 
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
-        $form = $this->createForm(InscriptionSortieType::class);
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($sortie);
+        $sortie->setEtats('Annulé');
+        $entityManager->persist($sortie);
         $entityManager->flush();
-        $this->addFlash('success', 'La sortie ' . $sortie->getNom() . ' a bien été supprimée.');
+        $this->addFlash('success', 'La sortie ' . $sortie->getNom() . ' a bien été annulé.');
 
         return $this->redirectToRoute('main_home');
     }
