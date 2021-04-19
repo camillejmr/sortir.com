@@ -45,7 +45,6 @@ class MainController extends AbstractController
     {
 
 
-
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
         $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);
         return $this->render('main/inscriptionSortie.html.twig', [
@@ -54,6 +53,7 @@ class MainController extends AbstractController
 
         ]);
     }
+
     /**
      * @Route("/validationInscription/{idSortie}/{idParticipant}", name="validation_inscription")
      */
@@ -69,28 +69,31 @@ class MainController extends AbstractController
         return $this->redirectToRoute('main_home');
 
     }
+
     /**
      * @Route("/annulationSortie/{idSortie}", name="annulation_sortie")
      */
-    public function annulationSortie(int $idSortie,  SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
+    public function annulationSortie(int $idSortie, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
+    {
+        $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
+        return $this->render('main/annulationSortie.html.twig', [
+            'sortie' => $sortie, // On envoie notre sortie à la vue
+        ]);
+    }
+
+    /**
+     * @Route("/validationAnnulationSortie/{idSortie}", name="validation_annulation_sortie")
+     */
+    public function validationAnnulationSortie(int $idSortie, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
     {
 
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
         $form = $this->createForm(InscriptionSortieType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($sortie);
-            $entityManager->flush();
-            $this->addFlash('success', 'La sortie '.$sortie->getNom().' a bien été supprimée.');
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($sortie);
+        $entityManager->flush();
+        $this->addFlash('success', 'La sortie ' . $sortie->getNom() . ' a bien été supprimée.');
 
-            return $this->redirectToRoute('main_home');
-        }
-        return $this->render('main/annulationSortie.html.twig', [
-            'sortie' => $sortie, // On envoie notre sortie à la vue
-            'form' => $form->createView(),
-
-        ]);
+        return $this->redirectToRoute('main_home');
     }
-
 }
