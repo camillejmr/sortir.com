@@ -9,8 +9,10 @@ use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +26,7 @@ class CreerSortieType extends AbstractType
             ->add('nom', TextType::class, [
                 'label' => 'Nom de la sortie'
             ])
-            ->add('dateHeureDebut', DateType::class, [
+            ->add('dateHeureDebut', DateTimeType::class, [
                 'label' => 'Date et heure de la sortie',
                 'required' => false,
                 'widget' => 'single_text',
@@ -32,7 +34,7 @@ class CreerSortieType extends AbstractType
                     'placeholder' => 'dd/mm/yyyy'
             ]])
 
-            ->add('dateLimiteInscription', DateType::class, [
+            ->add('dateLimiteInscription', DateTimeType::class, [
                 'label' => 'Date limite d inscription',
                 'required' => false,
                 'widget' => 'single_text',
@@ -48,32 +50,15 @@ class CreerSortieType extends AbstractType
                 'label' => 'Durée'
             ])
 
-            ->add('infosSortie', TextType::class, [
+            ->add('infosSortie', TextareaType::class, [
                 'label' => 'Description et infos',
                 'required' => false
             ])
 
-
-            ->add('id', ChoiceType::class, [
-                'label' => 'Ville'
-            ])
-
-
-            /*->add('ville', EntityType::class, ['class' => Ville::class,'choice_label'=>'Ville'
-            ])
-            */
-
             ->add('lieux', ChoiceType::class, [
                 'label' => 'lieu'
-            ])
+            ]);
 
-            /*->add('latitude', EntityType::class, ['class' =>Lieu::Class,
-                'label' => 'latitude'
-            ])
-            ->add('longitude', IntegerType::class, [
-                'label' => 'longitude'
-            ])*/
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

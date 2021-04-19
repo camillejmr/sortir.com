@@ -6,6 +6,11 @@
 
 {% block body %}
     <h1>Créer une sortie</h1>
+    <div>
+        {{ form_start(CreerSortieForm) }}
+        {{ form_widget(CreerSortieForm) }}
+        {{ form_end(CreerSortieForm) }}
+    </div>
 {% endblock %}
 
 

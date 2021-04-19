@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Form\CreerSortieType;
+use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,5 +29,15 @@ class CreerSortieController extends AbstractController
             $entityManager->flush();
         }
         return $this->render('Sorties/CreerSortie.html.twig',  ['CreerSortieForm' => $creerSortieForm -> createView()]);
-    }
+
+}
+    /*public function sortie (SortieRepository $sortieRepository): Response
+    {
+
+        return $this->render('Sorties/CreerSortie.html.twig', [
+
+        ]);*/
+
+
+
 }
