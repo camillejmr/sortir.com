@@ -93,4 +93,38 @@ class MainController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/desisterInscription/{idSortie}/{idParticipant}", name="desister_inscription")
+     */
+    public function desisterInscription(int $idSortie, int $idParticipant, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
+    {
+
+
+
+        $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
+        $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);
+        return $this->render('main/desisterSortie.html.twig', [
+            'sortie' => $sortie, // On envoie notre sortie à la vue
+            'participant' => $participant
+
+        ]);
+    }
+
+    /**
+     * @Route("/desistementInscription/{idSortie}/{idParticipant}", name="desistement_inscription")
+     */
+    public function desistementInscription(int $idSortie, int $idParticipant, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
+        $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);
+
+        $sortie->removeParticipant($participant);
+        $entityManager->flush();
+        $this->addFlash('success', 'Vous êtes bien déinscrit(e) à la sortie ' . $sortie->getNom() . '.');
+
+        return $this->redirectToRoute('main_home');
+
+    }
+
 }
