@@ -24,7 +24,7 @@ h2 {
 }
 
 h3 {
-    font-size: 2em;
+    font-size: 1.5rem;
     color: #1c3956;
     margin-top: 50px;
 }
@@ -40,10 +40,15 @@ header {
     height: 145px;
 }
 
+#logo {
+    width: 25%;
+}
+
+
 #logo_sortir {
     margin-top: auto;
     margin-bottom: auto;
-    width: 35%;
+    width: 55%;
 }
 
 #checkmail {
@@ -55,12 +60,12 @@ header {
 }
 
 #navbar {
-    font-size: 11px;
+    font-size: 10px;
     color: #1c3956;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    width: 70%;
+    width: 100%;
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -76,6 +81,13 @@ header {
     color: #1c3956;
     font-size: 1.6em;
     text-decoration: none;
+    padding : 8px 10px;
+}
+
+#navbar a:hover {
+    border-top: 2px rgba(175, 143, 97, 0.5) solid;
+    border-bottom: 2px rgba(175, 143, 97, 0.5) solid;
+    font-weight: 700;
 }
 
 #inscriptionSortie {
@@ -140,7 +152,7 @@ button {
     padding: 10px 10px;
     margin: 0 auto 10px auto;
     font-family: 'Raleway', sans-serif;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 button:hover {
@@ -160,15 +172,15 @@ button:hover {
     width: 20%;
     float: right;
     margin-top: -60px;
-    font-size: 1.2em;
+    font-size: 1em;
     line-height: 30px;
+    text-align: end;
 }
 
 /* RECHERCHE DE SORTIES */
 #rechercher_sorties {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
     margin-bottom: 20px;
     margin-top: -30px;
 }
@@ -183,6 +195,7 @@ button:hover {
     grid-row: 1;
     margin-bottom: auto;
     margin-top: 100px;
+    width: 550px;
 }
 
 #btn_rechercher {
