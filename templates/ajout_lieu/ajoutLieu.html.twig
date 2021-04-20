@@ -9,10 +9,12 @@
     <div class="formulaire">
         {{ form_start(AjoutLieuForm) }}
         {{ form_widget(AjoutLieuForm) }}
+        <a href="{{ path('creer_Sortie', {'idOrganisateur':1}) }}">
         <button type="submit" class="btn">Ajouter un lieu</button>
+        </a>
         {{ form_end(AjoutLieuForm) }}
-        <a href="{{ path('main_home') }}">
-            <button  class="twelve" type="action" id="annuler"> Annuler</button>
+        <a href="{{ path('creer_Sortie', {'idOrganisateur':1}) }}">
+            <button  class="twelve" id="annuler"> Annuler</button>
         </a>
     </div>
 
