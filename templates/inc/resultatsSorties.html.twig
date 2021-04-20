@@ -33,7 +33,7 @@
                     {# S'inscrire, doit apparaitre uniquement si la sortie est ouverte, que la date d'inscription n'est pas atteinte,
                    que le nombre d'inscrit est inférieur au nombre de places et que l'élève n'est pas déjà inscrit #}
 
-                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) and sortie.participants | length < sortie.nombreInscriptionsMax %}
+                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date> "now"|date) and sortie.participants | length < sortie.nombreInscriptionsMax %}
                         <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
                            id="{{ sortie.id }}">S'inscrire </a>  <script>
 
