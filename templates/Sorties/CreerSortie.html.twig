@@ -6,8 +6,10 @@
 
 {% block body %}
     <style>
-        #plus {position:absolute; right:32%; height:30px; width:30px; margin-top:-60px;}
-%;
+        #plus {position:absolute; right:32%; height:30px; width:30px; margin-top:-60px; min-width:30px;}
+@media only screen and (max-width: 1200px) {
+            #plus {position:absolute; right:0%; height:30px; width:30px; margin-top:-60px; min-width:30px;}
+        }
     </style>
     <h1>Créer une sortie</h1>
     <div class="formulaire">
