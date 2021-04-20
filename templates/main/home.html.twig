@@ -3,6 +3,17 @@
 {% block title %}{{ parent() }} | Accueil{% endblock %}
 
 {% block body %}
+    <style>
+
+        #logo {
+            animation: mymove 5s ;
+
+        }
+
+        @keyframes mymove {
+            50% {transform: rotatex(360deg);}
+        }
+    </style>
     <div id="infos">
         <div>Date du jour : {{ "now" | date("d/m/Y") }}</div>
         <div>Participant : {{ app.user.prenom }} {{ app.user.nom|slice(0, 1) }}.</div>
