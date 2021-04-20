@@ -107,7 +107,7 @@ header {
 }
 
 input:focus{border:solid 2px green; border-radius:8px;}
-
+textarea:focus{border:solid 2px green;}
 form {
     margin-top: 50px
 }
