@@ -38,12 +38,12 @@ class CreerSortieController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'La sortie a bien été créée');
-
             return $this->redirectToRoute('main_home');
         }
 
-        return $this->render('Sorties/CreerSortie.html.twig',  ['CreerSortieForm' => $creerSortieForm -> createView()]);
+        return $this->render('Sorties/CreerSortie.html.twig',  [
+            'CreerSortieForm' => $creerSortieForm -> createView()]);
 
-}
+    }
 
 }

@@ -61,14 +61,6 @@ class CreerSortieType extends AbstractType
                 return $lieu-> getNom()." / ".$lieu->getVilles()->getNomVille();
             }
             ]);
-            /*->add('organisateur', HiddenType::class, ['class' =>Campus::class,'label' =>function (Campus $id){
-                return $id-> getId();
-            }
-            ]);*/
-
-
-
-
 
     }
 
