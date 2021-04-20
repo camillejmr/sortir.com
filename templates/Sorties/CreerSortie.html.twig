@@ -10,8 +10,10 @@
         {{ form_start(CreerSortieForm) }}
         {{ form_widget(CreerSortieForm) }}
         <button type="submit" class="btn">Créer une sortie</button>
-        <button onclick="home_main">Annuler</button>
         {{ form_end(CreerSortieForm) }}
+        <a href="{{ path('main_home') }}">
+            <button  class="twelve" type="action" id="annuler"> Annuler</button>
+        </a>
     </div>
 
 

@@ -10,8 +10,10 @@
         {{ form_start(AjoutLieuForm) }}
         {{ form_widget(AjoutLieuForm) }}
         <button type="submit" class="btn">Ajouter un lieu</button>
-        <button onclick="home.html.twig">Annuler</button>
         {{ form_end(AjoutLieuForm) }}
+        <a href="{{ path('main_home') }}">
+            <button  class="twelve" type="action" id="annuler"> Annuler</button>
+        </a>
     </div>
 
 
