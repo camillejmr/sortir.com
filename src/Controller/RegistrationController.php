@@ -9,7 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+/**
+ * @Route("/admin", name="")
+ */
 class RegistrationController extends AbstractController
 {
     /**
@@ -37,7 +39,7 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
             $this->addFlash('success', 'L\'élève a été enregistré.');
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('main_home');
         }
 
         return $this->render('registration/register.html.twig', [
