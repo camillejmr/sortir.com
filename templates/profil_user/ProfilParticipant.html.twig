@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+
+<style> .wrapper {text-align: center; display:block; margin-left:auto;margin-right:auto; margin-top:-100px;}
+    .wrapper input {text-align: center; display:block; margin-left:auto;margin-right:auto;}
+    input, h1, p {text-align:center;}
+
+       input {
+           border: none;
+
+       }
+
+    select {
+        border:0px;
+        outline:0px;
+    }
+
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+        text-align:center;
+    }
+</style>
+
+
+<h1>Profil </h1>
+
+<br>
+
+
+<form method="post">
+    <div class="wrapper">
+
+        {#    <div class="formulaire">#}
+        {#        <label for="inputPseudo">Identifiant</label>#}
+        {#        <input type="text" value="{{ user.pseudo}}" name="pseudo" id="inputPseudo" class="form-control" required#}
+        {#               autofocus>#}
+        {#        <label for="inputPassword">Mot de passe</label>#}
+        {#        <input type="password" value="{{ user.password}}"name="password" id="inputPassword" class="form-control" required>#}
+        {#        <label for="inputPassword">Confirmation ot de passe</label>#}
+        {#        <input type="password" value="{{ user.password}}"name="password" id="inputPassword" class="form-control" required>#}
+
+        {#        <input type="hidden" name="_csrf_token"#}
+        {#               value="{{ csrf_token('authenticate') }}">#}
+        {#    </div>#}
+        {#    <button class="button" type="submit">#}
+        {#        Modifier#}
+        {#    </button>#}
+        {#</div></form>#}
+        {{ form_start(profilForm) }}
+
+        {{ form_row(profilForm.Pseudo)}}
+        {{ form_row(profilForm.Nom)}}
+        {{ form_row(profilForm.Prenom)}}
+        {{ form_row(profilForm.Telephone)}}
+        {{ form_row(profilForm.Mail)}}
+
+
+      {{ form_row(profilForm.Campus)}}
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+    <script>
+        document.getElementById("test").addEventListener("click", disableMonProfil);
+
+        function disableMonProfil() { document.getElementById("test").href="../profil/{{ app.user.id }}"; }
+
+    </script>
+    {% endblock %}
+
+
+
