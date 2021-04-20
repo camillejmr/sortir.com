@@ -26,6 +26,22 @@ creme :#dfddd0
         {# {{ encore_entry_script_tags('app') }} #}
     {% endblock %}
     <title>{% block title %}Sortir.com{% endblock %}</title>
+
+
+    <style>
+
+        #logo {
+            animation: mymove 5s ;
+
+        }
+
+        @keyframes mymove {
+            50% {transform: rotatex(360deg);}
+        }
+    </style>
+
+
+
 </head>
 
 <body>
