@@ -17,7 +17,7 @@
                 <td>{{ sortie.dateLimiteInscription |date('d/m/Y') }}</td>
                 <td>{{ sortie.participants | length }}/{{ sortie.nombreInscriptionsMax }}</td>
                 <td>{{ sortie.etats.libelle }}</td>
-                <td> {% for participant in sortie.participants %}
+                <td id="test{{ sortie.id }}"> {% for participant in sortie.participants %}
                         {% if app.user.id == participant.id %}
                             X
 
@@ -33,7 +33,7 @@
                     {# S'inscrire, doit apparaitre uniquement si la sortie est ouverte, que la date d'inscription n'est pas atteinte,
                    que le nombre d'inscrit est inférieur au nombre de places et que l'élève n'est pas déjà inscrit #}
                     {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) and sortie.participants | length < sortie.nombreInscriptionsMax %}
-                        <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}">S'inscrire </a>
+                        <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}" id="{{ sortie.id }}">S'inscrire </a>
 
                         {# Affichage du lien se désister, seulement si l'utilisateur connecté est inscrit à la sortie #}
                         {% if app.user  in [sortie.participants] %}
@@ -60,16 +60,115 @@
 
                 </td>
             </tr>
-           
+
         {% endfor %}
     </table>
 </div>
 
+
+
+<script>
+   /* for (var i = 0; i < 10; i++) {
+        if(document.getElementById('test'+i).innerHTML) {
+            document.getElementById(i).style.display ="none";
+        }
+    }
+
+*/
+</script>
+
+{# boucle FOR à Incrementer, problème avec la boucle for ci-dessus, cassée si sortie.id non linéaire #}
+<script>
+    if(document.getElementById('test'+1).innerHTML) {
+        document.getElementById('1').style.display ="none";
+    }
+
+</script>
+
 <script>
 
+    if(document.getElementById('test'+2).innerHTML) {
+        document.getElementById('2').style.display ="none";
+    }
+
+</script>
+
+
+<script>
+
+    if(document.getElementById('test'+3).innerHTML) {
+        document.getElementById('3').style.display ="none";
+    }
+
+</script>
+
+
+<script>
+
+    if(document.getElementById('test'+4).innerHTML) {
+        document.getElementById('4').style.display ="none";
+    }
+
+</script>
+
+
+<script>
+
+    if(document.getElementById('test'+5).innerHTML) {
+        document.getElementById('5').style.display ="none";
+    }
+
+</script>
+
+<script>
+
+    if(document.getElementById('test'+6).innerHTML) {
+        document.getElementById('6').style.display ="none";
+    }
+
+</script>
+
+
+<script>
+
+    if(document.getElementById('test'+7).innerHTML) {
+        document.getElementById('7').style.display ="none";
+    }
+
+</script>
+
+
+
+<script>
+
+    if(document.getElementById('test'+8).innerHTML) {
+        document.getElementById('8').style.display ="none";
+    }
+
+</script>
+
+<script>
+
+    if(document.getElementById('test'+9).innerHTML) {
+        document.getElementById('9').style.display ="none";
+    }
+
+</script>
+
+
+<script>
+
+    if(document.getElementById('test'+10).innerHTML) {
+        document.getElementById('10').style.display ="none";
+    }
+
+</script>
+
+<script>
+/*
     var debutDate = document.getElementById('dateDebut').innerHTML;
 
-    /*var today = new Date().toLocaleString();*/
+
     var today = new Date()
 
     today.setMonth(today.getMonth() - 1);
@@ -79,12 +178,12 @@
     if (debutDate < today2) {
 
 
-        /*alert('hello' + debutDate)*/
+        /*alert('hello' + debutDate)
         document.getElementById('sortieTable').style.display = "none";
 
     }
 
-
+*/
 </script>
 
 <script>
