@@ -28,12 +28,11 @@
 </style>
 
 
-<h1>Profil </h1>
+<h1 id="title"></h1>
 
 <br>
 
-
-<form method="post">
+<form method="post" id="myForm">
     <div class="wrapper">
 
         {#    <div class="formulaire">#}
@@ -54,11 +53,11 @@
         {#</div></form>#}
         {{ form_start(profilForm) }}
 
-        {{ form_row(profilForm.Pseudo)}}
-        {{ form_row(profilForm.Nom)}}
-        {{ form_row(profilForm.Prenom)}}
-        {{ form_row(profilForm.Telephone)}}
-        {{ form_row(profilForm.Mail)}}
+        {{ form_row(profilForm.Pseudo, { 'attr': {'readonly': 'readonly'} })}}
+        {{ form_row(profilForm.Nom, { 'attr': {'readonly': 'readonly'} })}}
+        {{ form_row(profilForm.Prenom, { 'attr': {'readonly': 'readonly'} })}}
+        {{ form_row(profilForm.Telephone, { 'attr': {'readonly': 'readonly'} })}}
+        {{ form_row(profilForm.Mail, { 'attr': {'readonly': 'readonly'} })}}
 
 
       {{ form_row(profilForm.Campus)}}
@@ -74,6 +73,14 @@
 
     </div>
 
+    <script>
+        var test4= document.getElementById('profil_form_Pseudo').value;
+        document.getElementById('title').innerHTML= "Profil de " + test4;
+    </script>
+    <script>
+
+        document.getElementById('profil_form_Campus').disabled=true;
+    </script>
 
 
     <script>
