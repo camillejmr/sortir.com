@@ -18,6 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
@@ -89,12 +90,15 @@ class MainController extends AbstractController
      * @Route("/annulationSortie/{idSortie}", name="annulation_sortie")
      */
     public function annulationSortie(int $idSortie, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
-    {
+    {$user=$this->getUser();
+
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
         $lieuSortie = $entityManager->getRepository(Lieu::class)->findoneBy(['id' => $sortie->getLieux()]);
         $villeSortie = $entityManager->getRepository(Ville::class)->findoneBy(['id' => $lieuSortie->getVilles()]);
         $form = $this->createForm(AnnulationSortieType::class);
         $form->handleRequest($request);
+        if($sortie->getOrganisateur()!=$user){throw new NotFoundHttpException("Vous n'êtes pas l'organisateur de cette sortie !");
+        }
         if ($form->isSubmitted()) {
             $etat=$entityManager->getRepository(Etat::class)->findOneBy(['libelle'=>'Annulée']);
             $sortie->setEtats($etat);
