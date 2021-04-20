@@ -33,28 +33,64 @@
                     {# S'inscrire, doit apparaitre uniquement si la sortie est ouverte, que la date d'inscription n'est pas atteinte,
                    que le nombre d'inscrit est inférieur au nombre de places et que l'élève n'est pas déjà inscrit #}
 
-                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date> "now"|date) and sortie.participants | length < sortie.nombreInscriptionsMax %}
-                        <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
+                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) and sortie.participants | length < sortie.nombreInscriptionsMax %}
+                        <a href="{{ path('validation_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
                            id="{{ sortie.id }}">S'inscrire </a>  <script>
 
-                            if (document.getElementById('test{{ sortie.id }}').innerText) {
-                                document.getElementById('{{ sortie.id }}').style.display = "none";
-                            } else {
-                                document.getElementById('{{ sortie.id }}').style.display = "unset";
-                            }</script>
+                        if (document.getElementById('test{{ sortie.id }}').innerText) {
+                            document.getElementById('{{ sortie.id }}').style.display = "none";
+                        } else {
+                            document.getElementById('{{ sortie.id }}').style.display = "unset";
+                        }</script>
+
+                        <script>
+                            document.getElementById('{{ sortie.id }}').addEventListener("click", on)
 
 
-{#                        #}{# Affichage du lien se désister, seulement si l'utilisateur connecté est inscrit à la sortie #}
-{#                    {% if app.user  in [sortie.participants] %}#}
-{#                        <a href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"#}
-{#                           id="desister">Se désister</a>#}
+                            function on() {
+                                if (confirm("Etes-vous sûr de vouloir vous inscire à la sortie {{ sortie.nom }}") == true) {
+                                    {#  alert('ok was pressed');#}
+                                }
 
-{#                    {% endif %}#}
+                                else { {#  alert('cancel was pressed');#}
+                                    var a = document.getElementById('{{ sortie.id }}');
+                                    a.href = "{{path('main_home')}}"
+
+                                }}
+
+
+                        </script>
+
+
+                        {#                        #}{# Affichage du lien se désister, seulement si l'utilisateur connecté est inscrit à la sortie #}
+                        {#                    {% if app.user  in [sortie.participants] %}#}
+                        {#                        <a href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"#}
+                        {#                           id="desister">Se désister</a>#}
+
+                        {#                    {% endif %}#}
 
                         {% for participant in sortie.participants %}
                     {% if participant.id==app.user.id %} <a
-                            href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
-                            id="desister">Se désister</a>
+                            href="{{ path('desistement_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
+                            id="d{{ sortie.id }}">Se désister</a>
+
+                        <script>
+                            document.getElementById('d{{ sortie.id }}').addEventListener("click", on)
+
+
+                            function on() {
+                                if (confirm("Etes-vous sûr de vouloir vous désinscire de la sortie {{ sortie.nom }}") == true) {
+                                    {#  alert('ok was pressed');#}
+                                }
+
+                                else { {#  alert('cancel was pressed');#}
+                                    var a = document.getElementById('d{{ sortie.id }}');
+                                    a.href = "{{path('main_home')}}"
+
+                                }}
+
+
+                        </script>
 
                     {% endif %}
                         {% endfor %}
@@ -73,6 +109,11 @@
         {% endfor %}
     </table>
 </div>
+
+
+
+
+
 
 {# <script> #}
 
