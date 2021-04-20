@@ -100,7 +100,7 @@ class MainController extends AbstractController
             $sortie->setEtats($etat);
             $entityManager->persist($sortie);
             $entityManager->flush();
-            $this->addFlash('success', 'La sortie ' . $sortie->getNom() . ' a bien été annulé.');
+            $this->addFlash('success', 'La sortie ' . $sortie->getNom() . ' a bien été annulée.');
 
             return $this->redirectToRoute('main_home');
         }
@@ -113,22 +113,7 @@ class MainController extends AbstractController
     }
 
 
-    /**
-     * @Route("/validationAnnulationSortie/{idSortie}", name="validation_annulation_sortie")
-     */
-    public function validationAnnulationSortie(int $idSortie, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
-    {
-
-        $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
-        $entityManager = $this->getDoctrine()->getManager();
-        $sortie->setEtats('Annulé');
-        $entityManager->persist($sortie);
-        $entityManager->flush();
-        $this->addFlash('success', 'La sortie ' . $sortie->getNom() . ' a bien été annulé.');
-
-        return $this->redirectToRoute('main_home');
-    }
-
+   
 
     /**
      * @Route("/desisterInscription/{idSortie}/{idParticipant}", name="desister_inscription")

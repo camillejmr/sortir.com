@@ -3,25 +3,32 @@
 {% block title %}{{ parent() }} | Annuler une sortie{% endblock %}
 
 {% block body %}
-<h2 class="title">Annuler une sortie</h2>
-{#        <div id="suppressionSortie">#}
-{#            {{ app.user.prenom }}, êtes-vous sûr(e) de vouloir supprimer la sortie {{ sortie.nom }} ?#}
-{#        </div>#}
-<div>Nom de la sortie : {{ sortie.nom }}</div>
-        <div> Date de la sortie : {{ sortie.dateHeureDebut | date('d/m/Y') }}</div>
-        <div>Campus : {{ sortie.campus }}</div>
-<div>Lieu : {{ lieuSortie.nom}} {{ lieuSortie.rue }} {{ villeSortie.codePostal }} {{ villeSortie.nomVille }}</div>
-        <div></div>
-        
-        <div>{{ form_start(form) }}
-        {{ form_widget(form) }}</div>
-{#        <a href="{{ path('validation_annulation_sortie',{'idSortie':sortie.id}) }}">#}
-            <button type="submit" id="suppressionSortie">Annuler la sortie</button>
-{#        </a>#}
-        {{ form_end(form) }}
-        <a href="{{ path('main_home') }}"><button type="action" id="annuler"> Annuler</button>
-        </a>
+    <h2 class="title">Annuler une sortie</h2>
+    {# <div id="suppressionSortie"> #}
+    {# {{ app.user.prenom }}, êtes-vous sûr(e) de vouloir supprimer la sortie {{ sortie.nom }} ? #}
+    {# </div> #} {{ form_start(form) }}
+    <div class="container">
 
+        <div class="one">Nom de la sortie :</div>
+        <div class="two">{{ sortie.nom }}</div>
+        <div class="three"> Date de la sortie :</div>
+        <div class="four">{{ sortie.dateHeureDebut | date('d/m/Y') }}</div>
+        <div class="five">Campus :</div>
+        <div class="six">{{ sortie.campus }}</div>
+        <div class="seven">Lieu :</div>
+        <div class="eight">{{ lieuSortie.nom }} {{ lieuSortie.rue }} {{ villeSortie.codePostal }} {{ villeSortie.nomVille }}</div>
+
+       <div class="nine"> {{ form_label(form.Motif) }}</div>
+      <div class="ten"> {{ form_widget(form.Motif) }}</div>
+
+        <button class="eleven" type="submit" id="annulationSortie">Annuler la sortie</button>
+        {# </a> #}
+
+        <a href="{{ path('main_home') }}">
+            <button  class="twelve" type="action" id="annuler"> Annuler</button>
+        </a>
+    </div>
+    {{ form_end(form) }}
 {% endblock %}
 
 

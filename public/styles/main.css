@@ -81,7 +81,7 @@ header {
     color: #1c3956;
     font-size: 1.6em;
     text-decoration: none;
-    padding : 8px 10px;
+    padding: 8px 10px;
 }
 
 #navbar a:hover {
@@ -120,12 +120,12 @@ label {
     color: #333133;
 }
 
-#remember_me label{
+#remember_me label {
     text-align: end;
     height: 50px;
     display: flex;
     justify-content: flex-end;
-    width : 400px;
+    width: 400px;
 }
 
 #chk {
@@ -271,15 +271,89 @@ table tr:nth-child(odd) {
 tr:nth-child(even) {
     background-color: rgba(28, 57, 86, 0.2);
 }
+
 #messagesFlashes {
     margin-top: 50px;
 }
 
 .wrapper {
-    padding-top : 50px;
+    padding-top: 50px;
 }
 
 p {
-    height : 10px;
+    height: 10px;
 }
 
+.container {
+    justify-items: start;
+    grid-template-columns: 250px 250px;
+    margin: 100px auto auto auto;
+    display: grid;
+    width: 550px;
+    grid-gap: 15px;
+    grid-template-areas:
+    "labelNom nomSortie"
+    "labelDate dateSortie"
+    "labelCampus nomCampus"
+    "labelLieu lieuAdresse"
+    "labelMotif textAreaMotif"
+    "boutonAnnulerSortie boutonAnnuler";
+    /*grid-auto-rows: minmax(100 px, auto);*/
+}
+
+.one {
+    grid-area: labelNom;
+}
+
+.two {
+    grid-area: nomSortie;
+}
+
+.three {
+    grid-area: labelDate;
+}
+
+.four {
+
+    grid-area: dateSortie;
+}
+
+.five {
+
+    grid-area: labelCampus;
+}
+
+.six {
+
+    grid-area: nomCampus;;
+}
+
+.seven {
+    grid-area: labelLieu;
+}
+
+.eight {
+    grid-area: lieuAdresse;
+}
+
+.nine {
+    grid-area: labelMotif;
+}
+
+.ten {
+
+    grid-area: textAreaMotif;
+}
+
+#annulation_sortie_Motif {
+    width: 250px;
+}
+
+.eleven {
+    justify-self: end;
+    grid-area: boutonAnnulerSortie;
+}
+
+.twelve {
+    grid-area:  boutonAnnuler;
+}
