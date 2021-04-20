@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Détails de la sortie{% endblock %}
+
+{% block body %}
+    <h2 class="title">Afficher une sortie</h2>
+
+    <div class="containerdetailsSortie">
+
+        <div id="one">Nom de la sortie :</div>
+        <div id="two">{{ sortie.nom }}</div>
+        <div id="three"> Date et heure de la sortie :</div>
+        <div id="four">{{ sortie.dateHeureDebut | date('d/m/Y HH:mm') }}</div>
+        <div id="five">Date limite d'inscription :</div>
+        <div id="six">{{ sortie.dateLimiteInscription | date('d/m/Y HH:mm') }}</div>
+        <div id="seven">Nombre de places :</div>
+        <div id="eight">{{ sortie.nombreInscriptionsMax }}</div>
+
+        <div id="nine">Durée :</div>
+        <div id="ten">{{ sortie.duree }} minutes</div>
+        <div id="eleven">Description et infos :</div>
+        <div id="twelve">{{ sortie.infosSortie }} </div>
+        <div id="thirteen">Campus :</div>
+        <div id="fourteen">{{ sortie.Campus }} minutes</div>
+        <div id="fiveteen">Lieu :</div>
+        <div id="sixteen">{{ lieuSortie.nom }} </div>
+        <div id="seventeen">Rue :</div>
+        <div id="eighteen">{{ lieuSortie.rue }} </div>
+        <div id="nineteen">Code postal :</div>
+        <div id="twenty">{{ villeSortie.codePostal }} </div>
+        <div id="twentyone">Ville : </div>
+        <div id="twentytwo">{{ villeSortie.nomville }} </div>
+        <div id="twentythree">Latitude / longitude:</div>
+        <div id="twentyfour">{{ lieuSortie.latitude }} / {{ lieuSortie.longitude }}</div>
+{#        <div id="twentyfive">Longitude :</div>#}
+{#        <div id="twentysix"> </div>#}
+    </div>
+        <a href="{{ path('main_home') }}">
+            <button id="boutonAnnuler" type="action" id="annuler"> Retour</button>
+        </a>
+
+    <div><h3>Listes des participants inscrits :</h3></div>
+    <div>
+        <table class="alignleft">
+            <tr>
+                <th>Pseudo</th>
+                <th>Nom</th>
+            </tr>
+            {% for participant in sortie.participants %}
+                <tr>
+                    <td><a href="{{ path('profilParticipant_profil',{'id':participant.id}) }}">{{ participant.pseudo }}</a></td>
+                    <td>{{ participant.nom | capitalize }} {{ participant.prenom | capitalize }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+
+
+

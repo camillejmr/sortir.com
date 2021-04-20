@@ -157,4 +157,23 @@ class MainController extends AbstractController
     }
 
 
+/**
+ * @Route("/detailSortie/{idSortie}", name="detailSortie")
+ */
+public function detailSortie(int $idSortie, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request): Response
+{
+
+    $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
+    $lieuSortie = $entityManager->getRepository(Lieu::class)->findoneBy(['id' => $sortie->getLieux()]);
+    $villeSortie = $entityManager->getRepository(Ville::class)->findoneBy(['id' => $lieuSortie->getVilles()]);
+
+
+
+    return $this->render('main/detailSortie.html.twig', [
+        'sortie' => $sortie, 'lieuSortie'=>$lieuSortie, 'villeSortie'=>$villeSortie]); // On envoie notre sortie à la vue
+
+
+
+}
+
 }

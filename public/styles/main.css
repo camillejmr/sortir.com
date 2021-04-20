@@ -32,7 +32,7 @@ h3 {
 a {
     text-decoration: none
 }
-
+footer{height:50px;}
 
 header {
     display: flex;
@@ -355,9 +355,141 @@ p {
 }
 
 .twelve {
-    grid-area:  boutonAnnuler;
+    grid-area: boutonAnnuler;
+}
+.alignleft{text-align:left; margin-left:0px}
+.containerdetailsSortie {
+    justify-items: start;
+    grid-template-columns: 200px 300px 200px 300px;
+    margin: 100px auto auto auto;
+    display: grid;
+    width: 900px;
+    grid-gap: 30px;
+    grid-template-areas:
+    "labelNom nomSortie labelCampus campus"
+    "labelDate dateSortie labelLieu lieu"
+    "labelDateCloture dateCloture labelRue rue"
+    "labelplaces places labelCodePostal codePostal"
+    "labelDuree duree labelVille ville"
+    "labelDescription description labelLatitude latitude";
+    grid-auto-rows: auto;
+}
+
+#one {
+    grid-area: labelNom;
+}
+
+#two {
+    grid-area: nomSortie;
+}
+
+#three {
+    grid-area: labelDate;
+}
+
+#four {
+
+    grid-area: dateSortie;
+}
+
+#five {
+
+    grid-area: labelDateCloture;
+}
+
+#six {
+
+    grid-area: dateCloture;
+}
+
+#seven {
+    grid-area: labelplaces;
+}
+
+#eight {
+    grid-area: places;
+}
+
+#nine {
+    grid-area: labelDuree;
+}
+
+#ten {
+
+    grid-area: duree;
+}
+
+
+#eleven {
+    grid-area: labelDescription;
+}
+
+#twelve {
+    grid-area: description;
+}
+
+#thirteen {
+    grid-area: labelCampus;
+}
+
+#fourteen {
+    grid-area: campus;
+}
+
+#fiveteen {
+
+    grid-area: labelLieu;
+}
+
+#sixteen {
+    grid-area: lieu;
+}
+
+#seventeen {
+    grid-area: labelRue;
+}
+
+#eighteen {
+    grid-area: rue;
+}
+
+#nineteen {
+
+    grid-area: labelCodePostal;
+}
+
+#twenty {
+    grid-area: codePostal;
+}
+
+#twentyone {
+    grid-area: labelVille;
+}
+
+#twentytwo {
+    grid-area: ville;
+}
+
+#twentythree {
+    grid-area: labelLatitude;
+}
+
+#twentyfour {
+    grid-area: latitude;
+}
+
+#twentyfive {
+    grid-area: labelLongitude;
+}
+
+#twentysix {
+    grid-area: longitude;
+}
+
+#boutonAnnuler {
+    margin-top: 4rem;
 }
 
 #plus {
-right
+    right
 }

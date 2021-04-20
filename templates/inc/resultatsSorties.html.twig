@@ -30,6 +30,7 @@
                 <td><a href="{{ path('profilParticipant_profil',{'id':sortie.organisateur.id}) }}" style="text-decoration: underline dotted;">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}.</a></td>
                 {# Fonctionnalités en fonction du statut de l'utilisateur et de la sortie #}
                 <td>
+                    <a href="{{ path('detailSortie',{'idSortie':sortie.id}) }}">Afficher </a>
                     {# S'inscrire, doit apparaitre uniquement si la sortie est ouverte, que la date d'inscription n'est pas atteinte,
                    que le nombre d'inscrit est inférieur au nombre de places et que l'élève n'est pas déjà inscrit #}
 
