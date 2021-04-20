@@ -27,7 +27,7 @@
                     {% endfor %}</td>
 
                 {# TODO METTRE UN PATH POUR ACCEDER AU PROFIL DE L'ORGANISATEUR #}
-                <td><a href="{{ path('profilParticipant_profil',{'id':sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}.</a></td>
+                <td><a href="{{ path('profilParticipant_profil',{'id':sortie.organisateur.id}) }}" style="text-decoration: underline dotted;">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}.</a></td>
                 {# Fonctionnalités en fonction du statut de l'utilisateur et de la sortie #}
                 <td>
                     {# S'inscrire, doit apparaitre uniquement si la sortie est ouverte, que la date d'inscription n'est pas atteinte,
