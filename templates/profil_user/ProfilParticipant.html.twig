@@ -26,6 +26,22 @@
         text-overflow: '';
         text-align:center;
     }
+
+    #title {
+        margin: auto;
+        border: 1px solid black;
+        width: 200px;
+        height: auto;
+        background-color: coral;
+        background:linear-gradient(#ddd, #bbb);
+        color: white;
+        animation: mymove 5s ;
+        border-radius:4px;
+    }
+
+    @keyframes mymove {
+        50% {transform: rotatex(360deg);}
+    }
 </style>
 
 
