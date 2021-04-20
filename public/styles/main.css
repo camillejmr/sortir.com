@@ -106,6 +106,8 @@ header {
     color: #333133;
 }
 
+input:focus{border:solid 2px green; border-radius:8px;}
+
 form {
     margin-top: 50px
 }
