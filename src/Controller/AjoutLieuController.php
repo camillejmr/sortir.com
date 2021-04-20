@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AjoutLieuController extends AbstractController
@@ -20,24 +21,30 @@ class AjoutLieuController extends AbstractController
      */
     public function index(Request $request, entityManagerInterface $entityManager, int $idOrganisateur, ParticipantRepository $organisateurRepository): Response
     {
+//        code de Camille : sécurité, on ne peut pas créer de sortie en mettant un autre id que celui de la personne connectée
+        $user = $this->getUser();
+        $organisateur = $organisateurRepository->findOneBy(['id' => $idOrganisateur]);
+        if ($organisateur != $user) {
+            throw new NotFoundHttpException("Vous ne pouvez pas créer de lieu avec un autre profil que le votre !");
+        }
+//        Fin du code de camille
         $Lieu = new Lieu();
         $ajoutLieuForm = $this->createForm(AjoutLieuType::class, $Lieu);
-
         $ajoutLieuForm->handleRequest($request);
         if ($ajoutLieuForm->isSubmitted() && $ajoutLieuForm->isValid()) {
-            $organisateur = $organisateurRepository -> findOneBy(['id' =>$idOrganisateur]);
+            $organisateur = $organisateurRepository->findOneBy(['id' => $idOrganisateur]);
             $this->getUser()->getId();
             $entityManager->persist($Lieu);
             $entityManager->flush();
 
             $this->addFlash('success', 'Le lieu a bien été ajouté !');
-            return $this->redirectToRoute('creer_Sortie', ['idOrganisateur' =>1]);
+            return $this->redirectToRoute('creer_Sortie', ['idOrganisateur' => 1]);
 
         }
 
-            return $this->render('ajout_lieu/ajoutLieu.html.twig', [
-                'AjoutLieuForm' => $ajoutLieuForm -> createView()
-            ]);
-        }
+        return $this->render('ajout_lieu/ajoutLieu.html.twig', [
+            'AjoutLieuForm' => $ajoutLieuForm->createView()
+        ]);
+    }
 
 }

@@ -59,10 +59,12 @@ class MainController extends AbstractController
      */
     public function inscriptionSortie(int $idSortie, int $idParticipant, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
     {
-
+        $user=$this->getUser();
 
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
         $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);
+        if($participant!=$user){throw new NotFoundHttpException("Vous ne pouvez pas inscrire un autre élève !");
+        }
         return $this->render('main/inscriptionSortie.html.twig', [
             'sortie' => $sortie, // On envoie notre sortie à la vue
             'participant' => $participant
@@ -74,10 +76,11 @@ class MainController extends AbstractController
      * @Route("/validationInscription/{idSortie}/{idParticipant}", name="validation_inscription")
      */
     public function validationInscription(int $idSortie, int $idParticipant, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request): Response
-    {
+    {$user=$this->getUser();
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
         $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);
-
+        if($participant!=$user){throw new NotFoundHttpException("Vous ne pouvez pas inscrire un autre élève !");
+        }
         $sortie->addParticipant($participant);
         $entityManager->flush();
         $this->addFlash('success', 'Vous êtes bien inscrit(e) à la sortie ' . $sortie->getNom() . '.');
@@ -117,16 +120,18 @@ class MainController extends AbstractController
     }
 
 
-   
+
 
     /**
      * @Route("/desisterInscription/{idSortie}/{idParticipant}", name="desister_inscription")
      */
     public function desisterInscription(int $idSortie, int $idParticipant, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request)
-    {
+    {$user=$this->getUser();
 
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
         $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);
+        if($participant!=$user){throw new NotFoundHttpException("Vous ne pouvez pas désinscrire un autre élève de cette sortie !");
+        }
         return $this->render('main/desisterSortie.html.twig', [
             'sortie' => $sortie, // On envoie notre sortie à la vue
             'participant' => $participant
@@ -138,10 +143,11 @@ class MainController extends AbstractController
      * @Route("/desistementInscription/{idSortie}/{idParticipant}", name="desistement_inscription")
      */
     public function desistementInscription(int $idSortie, int $idParticipant, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request): Response
-    {
+    {$user=$this->getUser();
         $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
         $participant = $entityManager->getRepository(Participant::class)->findOneBy(['id' => $idParticipant]);
-
+        if($participant!=$user){throw new NotFoundHttpException("Vous ne pouvez pas désinscrire un autre élève de cette sortie !");
+        }
         $sortie->removeParticipant($participant);
         $entityManager->flush();
         $this->addFlash('success', 'Vous êtes bien désinscrit(e) de la sortie ' . $sortie->getNom() . '.');
