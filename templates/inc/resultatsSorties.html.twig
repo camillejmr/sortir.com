@@ -32,28 +32,37 @@
                 <td>
                     {# S'inscrire, doit apparaitre uniquement si la sortie est ouverte, que la date d'inscription n'est pas atteinte,
                    que le nombre d'inscrit est inférieur au nombre de places et que l'élève n'est pas déjà inscrit #}
+
                     {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) and sortie.participants | length < sortie.nombreInscriptionsMax %}
-                        <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}" id="{{ sortie.id }}">S'inscrire </a>
+                        <a href="{{ path('inscription_sortie',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
+                           id="{{ sortie.id }}">S'inscrire </a>  <script>
 
-                        {# Affichage du lien se désister, seulement si l'utilisateur connecté est inscrit à la sortie #}
-                        {% if app.user  in [sortie.participants] %}
-                            <a href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
-                               id="desister">Se désister</a>
+                            if (document.getElementById('test{{ sortie.id }}').innerText) {
+                                document.getElementById('{{ sortie.id }}').style.display = "none";
+                            } else {
+                                document.getElementById('{{ sortie.id }}').style.display = "unset";
+                            }</script>
 
-                        {% endif %}
+
+{#                        #}{# Affichage du lien se désister, seulement si l'utilisateur connecté est inscrit à la sortie #}
+{#                    {% if app.user  in [sortie.participants] %}#}
+{#                        <a href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"#}
+{#                           id="desister">Se désister</a>#}
+
+{#                    {% endif %}#}
 
                         {% for participant in sortie.participants %}
-                            {% if participant.id==app.user.id %} <a
-                                    href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
-                                    id="desister">Se désister</a>
+                    {% if participant.id==app.user.id %} <a
+                            href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
+                            id="desister">Se désister</a>
 
-                            {% endif %}
+                    {% endif %}
                         {% endfor %}
 
 
                     {% endif %}
                     {# Affichage du lien "annuler", seulement si c'est l'oraginsateur de la sortie qui est connecté #}
-                    {% if (app.user.id == sortie.organisateur.id)  and (sortie.etats.libelle == 'Ouverte')%}
+                    {% if (app.user.id == sortie.organisateur.id)  and (sortie.etats.libelle == 'Ouverte') %}
                         <a href="{{ path('annulation_sortie',{'idSortie':sortie.id}) }}">
                             Annuler</a>
                     {% endif %}
@@ -65,135 +74,165 @@
     </table>
 </div>
 
-<script>
+{# <script> #}
 
-    if(document.getElementById('test1').innerText) {document.getElementById('1').style.display="none";} else
-    {  document.getElementById('1').style.display="unset";}
+{# if (document.getElementById('test1').innerText) { #}
+{# document.getElementById('1').style.display = "none"; #}
+{# } else { #}
+{# document.getElementById('1').style.display = "unset"; #}
+{# } #}
 
 
-</script>
+{# </script> #}
 
 
-<script>
+{# <script> #}
 
- if(document.getElementById('test2').innerText) {document.getElementById('2').style.display="none";} else
- {  document.getElementById('2').style.display="unset";}
+{# if (document.getElementById('test2').innerText) { #}
+{# document.getElementById('2').style.display = "none"; #}
+{# } else { #}
+{# document.getElementById('2').style.display = "unset"; #}
+{# } #}
 
 
-</script>
+{# </script> #}
 
 
-<script>
+{# <script> #}
 
-    if(document.getElementById('test3').innerText) {document.getElementById('3').style.display="none";} else
-    {  document.getElementById('3').style.display="unset";}
+{# if (document.getElementById('test3').innerText) { #}
+{# document.getElementById('3').style.display = "none"; #}
+{# } else { #}
+{# document.getElementById('3').style.display = "unset"; #}
+{# } #}
 
 
-</script>
+{# </script> #}
 
-<script>
+{# <script> #}
 
-    if(document.getElementById('test4').innerText) {document.getElementById('4').style.display="none";} else
-    {  document.getElementById('4').style.display="unset";}
+{# if (document.getElementById('test4').innerText) { #}
+{# document.getElementById('4').style.display = "none"; #}
+{# } else { #}
+{# document.getElementById('4').style.display = "unset"; #}
+{# } #}
 
 
-</script>
+{# </script> #}
 
-<script>
+{# <script> #}
 
-    if(document.getElementById('test5').innerText) {document.getElementById('5').style.display="none";} else
-    {  document.getElementById('5').style.display="unset";}
+{# if (document.getElementById('test5').innerText) { #}
+{# document.getElementById('5').style.display = "none"; #}
+{# } else { #}
+{# document.getElementById('5').style.display = "unset"; #}
+{# } #}
 
 
-</script>
+{# </script> #}
 
 
-<script>
+{# <script> #}
 
-    if(document.getElementById('test6').innerText) {document.getElementById('6').style.display="none";} else
-    {  document.getElementById('6').style.display="unset";}
+{# if (document.getElementById('test6').innerText) { #}
+{# document.getElementById('6').style.display = "none"; #}
+{# } else { #}
+{# document.getElementById('6').style.display = "unset"; #}
+{# } #}
 
 
-</script>
+{# </script> #}
 
 
-<script>
+{# <script> #}
 
-    if(document.getElementById('test7').innerText) {document.getElementById('7').style.display="none";} else
-    {  document.getElementById('7').style.display="unset";}
+{# if (document.getElementById('test7').innerText) { #}
+{# document.getElementById('7').style.display = "none"; #}
+{# } else { #}
+{# document.getElementById('7').style.display = "unset"; #}
+{# } #}
 
 
-</script>
+{# </script> #}
 
 
-<script>
+{# <script> #}
 
-    if(document.getElementById('test8').innerText) {document.getElementById('8').style.display="none";} else
-    {  document.getElementById('8').style.display="unset";}
+{# if (document.getElementById('test8').innerText) { #}
+{# document.getElementById('8').style.display = "none"; #}
+{# } else { #}
+{# document.getElementById('8').style.display = "unset"; #}
+{# } #}
 
 
-</script>
+{# </script> #}
 
 
-<script>
+{# <script> #}
 
-    if(document.getElementById('test9').innerText) {document.getElementById('9').style.display="none";} else
-    {  document.getElementById('9').style.display="unset";}
+{# if (document.getElementById('test9').innerText) { #}
+{# document.getElementById('9').style.display = "none"; #}
+{# } else { #}
+{# document.getElementById('9').style.display = "unset"; #}
+{# } #}
 
 
-</script>
+{# </script> #}
 
 
-<script>
+{# <script> #}
 
-    if(document.getElementById('test10').innerText) {document.getElementById('10').style.display="none";} else
-    {  document.getElementById('10').style.display="unset";}
+{# if (document.getElementById('test10').innerText) { #}
+{# document.getElementById('10').style.display = "none"; #}
+{# } else { #}
+{# document.getElementById('10').style.display = "unset"; #}
+{# } #}
 
 
-</script>
+{# </script> #}
 
-<script>
-/*
-    var debutDate = document.getElementById('dateDebut').innerHTML;
+{# <script> #}
+{# /* #}
+{# var debutDate = document.getElementById('dateDebut').innerHTML; #}
+{# #}
+{# #}
+{# var today = new Date() #}
+{# #}
+{# today.setMonth(today.getMonth() - 1); #}
+{# #}
+{# var today2 = today.toLocaleString(); #}
+{# #}
+{# if (debutDate < today2) { #}
+{# #}
+{# #}
+{# /*alert('hello' + debutDate) #}
+{# document.getElementById('sortieTable').style.display = "none"; #}
+{# #}
+{# } #}
+{# #}
+{# */ #}
 
 
-    var today = new Date()
+{# </script> #}
 
-    today.setMonth(today.getMonth() - 1);
+{# <script> #}
+{# /*document.getElementById("desister").addEventListener("click", confirmCancel); #}
 
-    var today2 = today.toLocaleString();
+{# function confirmCancel() { #}
 
-    if (debutDate < today2) {
 
+{# if (confirm("Cliquer sur OK pour confirmer le désistement.") == true) { #}
+{# alert('ok was pressed'); #}
 
-        /*alert('hello' + debutDate)
-        document.getElementById('sortieTable').style.display = "none";
+{# var a = document.getElementById('desister'); #}
+{# a.href = "/#" #}
 
-    }
 
-*/
+{# } else { #}
+{# alert('cancel was pressed'); #}
+{# } #}
+{# } #}
 
-
-</script>
-
-<script>
-    /*document.getElementById("desister").addEventListener("click", confirmCancel);
-
-    function confirmCancel() {
-
-
-        if (confirm("Cliquer sur OK pour confirmer le désistement.") == true) {
-            alert('ok was pressed');
-
-            var a = document.getElementById('desister');
-            a.href = "/#"
-
-
-        } else {
-            alert('cancel was pressed');
-        }
-    }
-
-*/
-</script>
+{# */ #}
+{# </script> #}
 
