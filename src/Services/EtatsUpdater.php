@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Entity\Sortie;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
+use DateInterval;
 use DateTime;
 
 class EtatsUpdater
@@ -22,6 +23,10 @@ class EtatsUpdater
     public function miseAJourEtatSortie(Sortie $sortie)
     {
         $now = new DateTime('now');
+        $debutSortie = $sortie->getDateHeureDebut();
+        $oneMonth = new DateTime('now');
+        $interval = new DateInterval('P1M');
+        $oneMonth->add($interval);
 
         $sorties = $this->sortieRepository->findAll();
 
@@ -32,32 +37,33 @@ class EtatsUpdater
         $sortieEnCours = $this->etatRepository->find(['id' => 4]);
         $sortiePassee = $this->etatRepository->find(['id' => 5]);
         $sortieAnnulee = $this->etatRepository->find(['id' => 6]);
-        // TODO A VOIR SI VARIABLE $sortieHistorisee; EST NECESSAIRE
 
 
-        foreach ($sorties as $sortie)
-            // Sortie créée = sortie ouverte
-            if ($sortie->getEtats() === $sortieCreee) {
+        foreach ($sorties as $sortie) {
+            // Si la sortie est ouverte && date cloture atteinte => Cloturée
+            if (($sortie->getParticipants()->count() >= $sortie->getNombreInscriptionsMax()) || ($sortie->getDateLimiteInscription() < $now)) {
+                $sortie->setEtats($sortieCloturee);
+            } //Si le nb de participant = nb inscriptions max  => Cloturée : FONCTIONNE !!
+            else if (($sortie->getParticipants()->count() < $sortie->getNombreInscriptionsMax()) && ($sortie->getDateLimiteInscription() > $now)) {
                 $sortie->setEtats($sortieOuverte);
+            } // Si l'activité se déroule maintenant et qu'il y a au minimum 1 participant => Activité en cours
+            else if ($debutSortie <= $now && $sortie->getParticipants()->count() >= 1) {
+                $sortie->setEtats($sortieEnCours);
+            } // Si la date du début de sortie est inf. à aujourd'hui => etat = passée
+            else if ($sortie->getEtats() === $sortieCloturee && $debutSortie > $now) {
+                $sortie->setEtats($sortiePassee);
+            } // Si sortie de + d'1 mois => HISTORISEE (TODO : Masquer la sortie !)
+            else if ($debutSortie >= $oneMonth) {
+                $estHistorisee = true;
             }
-        // Si la sortie est ouverte && le nb de participant = nb inscriptions max  => Cloturée
-//        if ($sortie->getEtats() === $sortieOuverte) {
-//            if ($sortie->getParticipants() = $sortie->getNombreInscriptionsMax()) {
-//               $sortie->setEtats($sortieCloturee);
-//           }
-//            else {
-//                $sortie->setEtats($sortieOuverte);
-//            }
-//        }
 
-        // Si la date du début de sortie est inf. à aujourd'hui => etat = passée
-        if ($sortie->getDateHeureDebut() < $now) {
-            $sortie->setEtats($sortiePassee);
         }
 
-        // Si
+
 
     }
 
-
 }
+
+
+
