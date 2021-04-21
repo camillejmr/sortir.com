@@ -3,6 +3,7 @@
 {% block title %}{{ parent() }} | Connexion{% endblock %}
 
 {% block body %}
+
     <h1>Connexion</h1>
     <form method="post">
         {% if error %}
@@ -25,9 +26,9 @@
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}">
         </div>
-        <div id="remember_me">
+        <div id="remember_me" >
             <label>
-                <input type="checkbox" id="chk" name="_remember_me"> Se souvenir de moi</label>
+                <input type="checkbox" id="chk333" name="_remember_me" style="width:2%; margin-top:-9px"> Se souvenir de moi</label>
         </div>
 
         <button class="button" type="submit">
