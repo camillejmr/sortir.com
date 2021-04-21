@@ -45,9 +45,20 @@ creme :#dfddd0
     </div>
 
 </header>
-<div id="messagesFlashes">{% for label, messages in app.flashes %}
+<div id="messagesFlashes">
+
+    {% for label, messages in app.flashes(['success']) %}
         {% for message in messages %}
-            <div class="flash-{{ label }}">
+            <div class="flash-{{ label }}" style="color:green;text-align:center;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}" style="color:orange;text-align:center;">
                 {{ message }}
             </div>
         {% endfor %}
