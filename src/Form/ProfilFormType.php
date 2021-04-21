@@ -46,21 +46,6 @@ class ProfilFormType extends AbstractType
 
       ->add('Campus', EntityType::class, ['class' => Campus::class, 'choice_label'=>'nomCampus'])
 
-            ->add('photo', FileType::class, [
-                'label' => 'Telechargez votre photo',
-
-                // unmapped means that this field is not associated to any entity property
-                'mapped' => false,
-
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
-                'required' => false,
-
-
-            ])
-
-
-            // UPLOAD PHOTO
 
         ;
     }

@@ -7,6 +7,10 @@
 <style> .wrapper {text-align: center; display:block; margin-left:auto;margin-right:auto; margin-top:-100px;}
     .wrapper input {text-align: center; display:block; margin-left:auto;margin-right:auto;}
 input, h1, p {text-align:center;}
+.btn22 {cursor:pointer; border: 1px solid #ccc; padding:15px 15px; width:15%;margin-left:auto;margin-right:auto; margin-bottom:40px;}
+    .btn22 a {color:black;}
+    .btn22:hover {background:#1c3956;color:white;}
+    .btn22:hover a {color:white;}
 </style>
 
 
@@ -42,11 +46,12 @@ input, h1, p {text-align:center;}
     {{ form_row(profilForm.Telephone)}}
     {{ form_row(profilForm.Mail)}}
     {{ form_row(profilForm.password)}}
-    <p id="error" style="font-size:16px;color:#ff0000;"></p>
+
     {{ form_row(profilForm.Campus)}}
-    {{ form_row(profilForm.photo) }}
+    <p id="error" style="font-size:16px;color:#ff0000;"></p>
+  <div class="btn22">  <a href="{{path('upload')}}">Cliquez ici pour télécharger votre photo de profil</a>
 
-
+  </div>
     <button class="button" id="btn" type="submit">
     Modifier
 </button>
