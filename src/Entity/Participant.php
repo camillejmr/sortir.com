@@ -89,6 +89,23 @@ class Participant implements UserInterface
      */
     private $sortiesOrganisees;
 
+    /**
+     * @ORM\Column(type="blob")
+     */
+    private $photo;
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo)
+    {
+        $this->photo = $$photo;
+
+        return $this;
+    }
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
