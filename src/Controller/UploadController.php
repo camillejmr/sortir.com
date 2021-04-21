@@ -28,8 +28,10 @@ class UploadController extends AbstractController
             $upload->setName($fileName);
 
             $this->addFlash('success', 'Fichier téléchargé!');
-            return $this->redirectToRoute('upload');
-
+            /*return $this->redirectToRoute('upload');*/
+            $user=$this->getUser();
+            $id=$user->getID();
+            return $this->redirectToRoute('profiluser_profil',['id'=>$id]);
 
         }
 
