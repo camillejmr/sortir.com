@@ -18,8 +18,8 @@
         <div id="logo_+">
             <a href="{{ path('ajout_lieu', {'idOrganisateur':app.user.id}) }}"><img src="{{ asset('img/plus.png') }}" alt="ajouter_lieu" id="plus"></a>
         </div>
-        <button type="submit" class="btn">Créer une sortie</button>
         {{ form_end(CreerSortieForm) }}
+{#        <button type="submit" class="btn">Créer une sortie</button>#}
         <a href="{{ path('main_home') }}">
             <button  class="twelve" id="annuler"> Annuler</button>
         </a>

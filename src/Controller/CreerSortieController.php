@@ -28,7 +28,8 @@ class CreerSortieController extends AbstractController
         //        code de Camille : sécurité, on ne peut pas créer de sortie en mettant un autre id que celui de la personne connectée
         $user = $this->getUser();
         $organisateur = $organisateurRepository->findOneBy(['id' => $idOrganisateur]);
-        if ($organisateur != $user) {throw new NotFoundHttpException("Vous ne pouvez pas créer de sortie avec un autre profil que le votre !");
+        if ($organisateur != $user) {
+            throw new NotFoundHttpException("Vous ne pouvez pas créer de sortie avec un autre profil que le votre !");
 
         }
 //        Fin du code de camille
@@ -37,16 +38,26 @@ class CreerSortieController extends AbstractController
 
         $creerSortieForm->handleRequest($request);
         if ($creerSortieForm->isSubmitted() && $creerSortieForm->isValid()) {
-            $etat = $etatRepository->findOneBy(['libelle' => 'Ouverte']);
-            $sortie->setEtats($etat);
             $organisateur = $organisateurRepository->findOneBy(['id' => $idOrganisateur]);
             $sortie->setCampus($organisateur->getCampus());
             $sortie->setOrganisateur($organisateur);
-            $entityManager->persist($sortie);
-            $entityManager->flush();
+            if ($creerSortieForm->get('Enregister')->isClicked()) {
+                $etat = $etatRepository->findOneBy(['libelle' => 'Créée']);
+                $sortie->setEtats($etat);
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+                $this->addFlash('success', 'La sortie a bien été créée');
+                return $this->redirectToRoute('main_home');
+            }
+            if ($creerSortieForm->get('Publier')->isClicked()) {
+                $etat = $etatRepository->findOneBy(['libelle' => 'Ouverte']);
+                $sortie->setEtats($etat);
+                $entityManager->persist($sortie);
+                $entityManager->flush();
 
-            $this->addFlash('success', 'La sortie a bien été créée');
-            return $this->redirectToRoute('main_home');
+                $this->addFlash('success', 'La sortie a bien été publiée');
+                return $this->redirectToRoute('main_home');
+            }
         }
 
         return $this->render('Sorties/CreerSortie.html.twig', [
