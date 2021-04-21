@@ -114,7 +114,7 @@ class EtatsUpdater
             $this->entityManager->flush();
         }
     }
-}
+}}
 
 
 
