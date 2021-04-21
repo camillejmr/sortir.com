@@ -196,12 +196,32 @@ button:hover {
     width: 550px;
 }
 
+.btn {
+    display: block;
+    border: 1px solid #af8f61;
+    width: 18.7%;
+    left: 50%;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin: 0 auto 10px auto;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
+    text-align: center;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: #1c3956;
+    color: white;
+}
+
 #btn_rechercher {
     grid-column: 3;
     grid-row: 1;
     margin-top: auto;
     margin-bottom: auto;
 }
+
 
 #left_searchForm label {
     margin-left: 0;
