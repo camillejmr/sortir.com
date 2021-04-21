@@ -3,20 +3,36 @@
 {% block title %}Hello UploadController!{% endblock %}
 
 {% block body %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
     .example-wrapper {text-align: center;}
     .example-wrapper input {text-align: center; margin-left:auto;margin-right:auto; margin-top:10px;}
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello !</h1>
+    <h1>Hello ! </h1>
 
- {{ form_start(form) }}
+ {{ form_start(form, { 'attr': {'id': 'test44'} }) }}
     {{ form_widget(form) }}
+
     <button type="submit">
         upload
     </button>
 
     {{ form_end(form) }}
 </div>
+
+    <script>
+      /*  document.getElementById('test44').addEventListener('submit', myFunction);
+
+        function myFunction() {
+
+
+            swal("Votre fichier a bien été téléchargé !");
+
+        }
+*/
+
+
+    </script>
 {% endblock %}

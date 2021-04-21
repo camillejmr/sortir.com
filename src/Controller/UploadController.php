@@ -26,6 +26,8 @@ class UploadController extends AbstractController
             $file->move($this->getParameter('upload_directory'), $fileName);
             //modif base de données
             $upload->setName($fileName);
+
+            $this->addFlash('success', 'Fichier téléchargé!');
             return $this->redirectToRoute('upload');
 
 

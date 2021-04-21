@@ -108,7 +108,7 @@ class ProfilUserController extends AbstractController
 
             // do something else here
 
-            $this->addFlash('sucess', 'Profil modifié!');
+            $this->addFlash('success', 'Profil modifié!');
 
             return $this->redirectToRoute('main_home');
 
