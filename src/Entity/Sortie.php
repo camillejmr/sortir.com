@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
  */
@@ -22,11 +23,13 @@ class Sortie
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\Length(max=30, maxMessage = "Le nom doit contenir au maximum {{ limit }} caractères.")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\GreaterThan(propertyPath="dateLimiteInscription")
      */
     private $dateHeureDebut;
 
@@ -38,6 +41,7 @@ class Sortie
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\LessThan(propertyPath="dateHeureDebut")
      */
     private $dateLimiteInscription;
 

@@ -21,11 +21,13 @@ class Lieu
 
     /**
      * @ORM\Column(type="string", length=30)
+     * (max=30, maxMessage = "Le nom doit contenir au maximum {{ limit }} caractères.")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
+     * (max=30, maxMessage = "Le nom doit contenir au maximum {{ limit }} caractères.")
      */
     private $rue;
 
