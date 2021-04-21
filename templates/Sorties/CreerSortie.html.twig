@@ -16,7 +16,7 @@
         {{ form_start(CreerSortieForm) }}
         {{ form_widget(CreerSortieForm) }}
         <div id="logo_+">
-            <a href="{{ path('ajout_lieu', {'idOrganisateur':1}) }}"><img src="{{ asset('img/plus.png') }}" alt="ajouter_lieu" id="plus"></a>
+            <a href="{{ path('ajout_lieu', {'idOrganisateur':app.user.id}) }}"><img src="{{ asset('img/plus.png') }}" alt="ajouter_lieu" id="plus"></a>
         </div>
         <button type="submit" class="btn">Créer une sortie</button>
         {{ form_end(CreerSortieForm) }}

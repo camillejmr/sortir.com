@@ -33,12 +33,11 @@ class AjoutLieuController extends AbstractController
         $ajoutLieuForm->handleRequest($request);
         if ($ajoutLieuForm->isSubmitted() && $ajoutLieuForm->isValid()) {
             $organisateur = $organisateurRepository->findOneBy(['id' => $idOrganisateur]);
-            $this->getUser()->getId();
             $entityManager->persist($Lieu);
             $entityManager->flush();
 
             $this->addFlash('success', 'Le lieu a bien été ajouté !');
-            return $this->redirectToRoute('creer_Sortie', ['idOrganisateur' => 1]);
+            return $this->redirectToRoute('creer_Sortie', ['idOrganisateur' => $this->getUser()->getId()]);
 
         }
 
