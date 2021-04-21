@@ -36,7 +36,7 @@
 
                     {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) and sortie.participants | length < sortie.nombreInscriptionsMax %}
                         <a href="{{ path('validation_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
-                           id="{{ sortie.id }}">S'inscrire </a>  <script>
+                           id="{{ sortie.id }}"> - S'inscrire </a>  <script>
 
                         if (document.getElementById('test{{ sortie.id }}').innerText) {
                             document.getElementById('{{ sortie.id }}').style.display = "none";
@@ -49,7 +49,7 @@
 
 
                             function on() {
-                                if (confirm("Etes-vous sûr de vouloir vous inscire à la sortie {{ sortie.nom }}") == true) {
+                                if (confirm("Etes-vous sûr de vouloir vous inscrire à la sortie {{ sortie.nom }}") == true) {
                                     {#  alert('ok was pressed');#}
                                 }
 
@@ -63,17 +63,11 @@
                         </script>
 
 
-                        {#                        #}{# Affichage du lien se désister, seulement si l'utilisateur connecté est inscrit à la sortie #}
-                        {#                    {% if app.user  in [sortie.participants] %}#}
-                        {#                        <a href="{{ path('desister_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"#}
-                        {#                           id="desister">Se désister</a>#}
 
-                        {#                    {% endif %}#}
-
-                        {% for participant in sortie.participants %}
-                    {% if participant.id==app.user.id %} <a
-                            href="{{ path('desistement_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
-                            id="d{{ sortie.id }}">Se désister</a>
+{#                        {% for participant in sortie.participants %}#}
+{#                    {% if participant.id==app.user.id %} <a#}
+{#                            href="{{ path('desistement_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"#}
+{#                            id="d{{ sortie.id }}">Se désister</a>#}
 
                         <script>
                             document.getElementById('d{{ sortie.id }}').addEventListener("click", on)
@@ -93,17 +87,23 @@
 
                         </script>
 
-                    {% endif %}
-                        {% endfor %}
+{#                    {% endif %}#}
+{#                        {% endfor %}#}
 
 
                     {% endif %}
                     {# Affichage du lien "annuler", seulement si c'est l'organisateur de la sortie qui est connecté #}
                     {% if (app.user.id == sortie.organisateur.id)  and (sortie.etats.libelle == 'Ouverte') %}
                         <a href="{{ path('annulation_sortie',{'idSortie':sortie.id}) }}">
-                            Annuler</a>
+                             - Annuler</a>
                     {% endif %}
-
+                    {% for participant in sortie.participants %}
+                        {% if (participant.id==app.user.id) %}
+                            {%  if (sortie.etats.libelle == 'Clôturée') or (sortie.etats.libelle == 'Ouverte') %} <a
+                                href="{{ path('desistement_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
+                                id="d{{ sortie.id }}"> - Se désister</a>
+                        {% endif %}{% endif %}
+                    {% endfor %}
                 </td>
             </tr>
 
