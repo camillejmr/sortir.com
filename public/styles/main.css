@@ -130,12 +130,7 @@ label {
     width: 400px;
 }
 
-#chk {
-    transform: scale(0.5);
-    margin-right: -120px;
-    margin-top: -8px;
-    padding: 0;
-}
+
 
 input[type=checkbox] {
 
@@ -143,6 +138,7 @@ input[type=checkbox] {
     margin-top: 30px;
 }
 
+#wrapper33{margin-top:-60px;}
 button {
     display: block;
     border: 1px solid #af8f61;
