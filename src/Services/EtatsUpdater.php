@@ -40,15 +40,7 @@ class EtatsUpdater
         $interval2 = date_diff($finSortie, $now);
         $calcul2 = $interval2->format('%i');
 
-
-        // A voir si besoin
-        $oneDayAdded = new DateTime('now');
-        $intervalD = new DateInterval('P1D');
-        $oneDayAdded->add($intervalD);
-
-        $oneMonth = new DateTime('now');
-        $intervalM = new DateInterval('P1M');
-        $oneMonth->add($intervalM);
+        $finSortiePlusUnMois = $finSortie->add(new DateInterval('P1M'));
 
         $sorties = $this->sortieRepository->findAll();
 
@@ -84,6 +76,11 @@ class EtatsUpdater
                 }
             }
 
+            // Test pour passer la sortie à "Historisée"
+            if ($sortie->getEtats() === $sortiePassee) {
+                if ($finSortie <= $finSortiePlusUnMois) {
+                    $estHistorisee = true;
+            }
 
 //            switch ($sortie->getEtats()) {
 //                case $sortieOuverte:
