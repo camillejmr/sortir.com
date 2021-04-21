@@ -104,6 +104,23 @@
                                 id="d{{ sortie.id }}"> - Se désister</a>
                         {% endif %}{% endif %}
                     {% endfor %}
+                    <script>
+                        document.getElementById('d{{ sortie.id }}').addEventListener("click", on)
+
+
+                        function on() {
+                            if (confirm("Etes-vous sûr de vouloir vous désinscrire de la sortie {{ sortie.nom }} ?") == true) {
+                                {#  alert('ok was pressed');#}
+                            }
+
+                            else { {#  alert('cancel was pressed');#}
+                                var a = document.getElementById('d{{ sortie.id }}');
+                                a.href = "{{path('main_home')}}"
+
+                            }}
+
+
+                    </script>
                 </td>
             </tr>
 
