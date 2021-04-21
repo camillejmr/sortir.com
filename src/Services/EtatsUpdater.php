@@ -28,19 +28,15 @@ class EtatsUpdater
         $now = new DateTime('now');
         $now->format("D/M/Y H:i:s");
         $debutSortie = new DateTime($sortie->getDateHeureDebut());
-
-        $interval = date_diff($debutSortie, $now);
-        $calcul = $interval->format('%i');
-
-
         $duree = (integer)$sortie->getDuree();
         $dureeSortie = new DateInterval('PT' . ((integer)$duree . 'M'));
         $finSortie = $debutSortie->add($dureeSortie);
+        $finSortiePlusUnMois = $finSortie->add(new DateInterval('P1M'));
 
-        $interval2 = date_diff($finSortie, $now);
-        $calcul2 = $interval2->format('%i');
-
-        $finSortiePlusUnMois = $finSortie->add(new DateInterval('P30D'));
+//        $interval = date_diff($debutSortie, $now);
+//        $calcul = $interval->format('%i');
+//        $interval2 = date_diff($finSortie, $now);
+//        $calcul2 = $interval2->format('%i');
 
         $sorties = $this->sortieRepository->findAll();
 
@@ -53,26 +49,28 @@ class EtatsUpdater
         $sortieHistorisee = $this->etatRepository->find(['id' => 7]);
 
         foreach ($sorties as $sortie) {
+
             if ($sortie->getEtats() === $sortieOuverte) {
+                // OK
                 if (($sortie->getParticipants()->count() == $sortie->getNombreInscriptionsMax()) || ($sortie->getDateLimiteInscription() < $now)) {
                     $sortie->setEtats($sortieCloturee);
-                    $this->entityManager->persist($sortie);
                 }
             }
 
             if ($sortie->getEtats() === $sortieCloturee) {
+                // OK
                 if (($sortie->getParticipants()->count() < $sortie->getNombreInscriptionsMax()) && ($sortie->getDateLimiteInscription() > $now)) {
                     $sortie->setEtats($sortieOuverte);
-                    $this->entityManager->persist($sortie);
                 }
-                if ($finSortie > $now && $debutSortie < $now) {
+                // NE MARCHE PAS
+                if ($now < $finSortie && $now >= $sortie->getDateHeureDebut()) {
                     $sortie->setEtats($sortieEnCours);
-                    $this->entityManager->persist($sortie);
                 }
             }
 
+            // Ne marche pas !!
             if ($sortie->getEtats() === $sortieEnCours) {
-                if ($finSortie <= $now) {
+                if ($finSortie < $now) {
                     $sortie->setEtats($sortiePassee);
                 }
             }
@@ -85,6 +83,7 @@ class EtatsUpdater
             }
 
             // Enregistrement infos dans la BDD
+            $this->entityManager->persist($sortie);
             $this->entityManager->flush();
 
         }
