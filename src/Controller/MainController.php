@@ -46,6 +46,7 @@ class MainController extends AbstractController
 
         $etatsUpdater->miseAJourEtatSortie($sortie);
 
+
         return $this->render('main/home.html.twig', [
             'sorties' => $sorties, // On envoie nos sorties à la vue
             'form' => $form->createView() // On envoie le formulaire à la vue

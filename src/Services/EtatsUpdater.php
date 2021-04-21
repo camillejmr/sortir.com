@@ -50,6 +50,7 @@ class EtatsUpdater
         $sortieEnCours = $this->etatRepository->find(['id' => 4]);
         $sortiePassee = $this->etatRepository->find(['id' => 5]);
         $sortieAnnulee = $this->etatRepository->find(['id' => 6]);
+        $sortieHistorisee = $this->etatRepository->find(['id' => 7]);
 
         foreach ($sorties as $sortie) {
             if ($sortie->getEtats() === $sortieOuverte) {
@@ -79,42 +80,16 @@ class EtatsUpdater
             // Test pour passer la sortie à "Historisée"
             if ($sortie->getEtats() === $sortiePassee) {
                 if ($finSortie <= $finSortiePlusUnMois) {
-                    $estHistorisee = true;
+                    $sortie->setEtats($sortieHistorisee);
+                }
             }
 
-//            switch ($sortie->getEtats()) {
-//                case $sortieOuverte:
-//                    if (($sortie->getParticipants()->count() == $sortie->getNombreInscriptionsMax()) || ($sortie->getDateLimiteInscription() < $now)) {
-//                        $sortie->setEtats($sortieCloturee);
-//                        $this->entityManager->persist($sortie);
-//                    }
-//                    break;
-//                case $sortieCloturee:
-//                    if (($sortie->getParticipants()->count() < $sortie->getNombreInscriptionsMax()) && ($sortie->getDateLimiteInscription() > $now)) {
-//                        $sortie->setEtats($sortieOuverte);
-//                        $this->entityManager->persist($sortie);
-//                    }
-//                    if ($finSortie > $now && $calcul <= 0) {
-//                        $sortie->setEtats($sortieEnCours);
-//                        $this->entityManager->persist($sortie);
-//                    }
-//                    break;
-//                case $sortieEnCours:
-//                    if ($calcul2 >= 0) {
-//                        $sortie->setEtats($sortiePassee);
-//                        $this->entityManager->persist($sortie);
-//                    }
-//
-//                /*// Si sortie de + d'1 mois => HISTORISEE (TODO : Masquer la sortie !)
-//                else if ($debutSortie >= $oneMonth) {
-//                    $estHistorisee = true;
-//                }*/
-//            }
             // Enregistrement infos dans la BDD
             $this->entityManager->flush();
+
         }
     }
-}}
+}
 
 
 
