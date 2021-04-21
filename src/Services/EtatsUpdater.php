@@ -40,7 +40,7 @@ class EtatsUpdater
         $interval2 = date_diff($finSortie, $now);
         $calcul2 = $interval2->format('%i');
 
-        $finSortiePlusUnMois = $finSortie->add(new DateInterval('P1M'));
+        $finSortiePlusUnMois = $finSortie->add(new DateInterval('P30D'));
 
         $sorties = $this->sortieRepository->findAll();
 
