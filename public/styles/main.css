@@ -557,7 +557,20 @@ p {
     .dropdown {
         display: block;
     }
+    #infos {
+        display: none;
+    }
+    .sortieTable {
+        display: none;
+    }
+    #wrapper33 {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    #btn_rechercher{
+        grid-column: 1;
+        grid-row: 3;
+    }
+
 }
-
-
-

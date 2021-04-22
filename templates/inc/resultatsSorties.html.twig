@@ -5,9 +5,9 @@
             <th>Date de la sortie</th>
             <th>Clôture</th>
             <th>Inscrits/places</th>
-            <th>Etat</th>
-            <th>Inscrit</th>
-            <th>Organisateur</th>
+            <th class="sortieTable">Etat</th>
+            <th class="sortieTable">Inscrit</th>
+            <th class="sortieTable">Organisateur</th>
             <th>Actions</th>
         </tr>
         {% for sortie in sorties %}
@@ -15,13 +15,13 @@
             {# TODO : MASQUER LES SORTIES DONT L ETAT EST A ARCHIVE #}
             {# {% if Services.EtatsUpdater.estHistorisee == false %} #}
 
-            <tr id="sortieTable">
+            <tr class="tableauAccueil">
                 <td>{{ sortie.nom }}</td>
-                <td id="dateDebut">{{ sortie.dateHeureDebut | date('d/m/Y H:i') }}</td>
+                <td class="dateDebut">{{ sortie.dateHeureDebut | date('d/m/Y H:i') }}</td>
                 <td>{{ sortie.dateLimiteInscription |date('d/m/Y') }}</td>
                 <td>{{ sortie.participants | length }}/{{ sortie.nombreInscriptionsMax }}</td>
-                <td>{{ sortie.etats.libelle }}</td>
-                <td id="test{{ sortie.id }}"> {% for participant in sortie.participants %}
+                <td class="sortieTable">{{ sortie.etats.libelle }}</td>
+                <td class="sortieTable"> {% for participant in sortie.participants %}
                         {% if app.user.id == participant.id %}
                             X
 
@@ -31,7 +31,7 @@
                     {% endfor %}</td>
 
                 {# TODO METTRE UN PATH POUR ACCEDER AU PROFIL DE L'ORGANISATEUR #}
-                <td><a href="{{ path('profilParticipant_profil',{'id':sortie.organisateur.id}) }}"
+                <td class="sortieTable"><a href="{{ path('profilParticipant_profil',{'id':sortie.organisateur.id}) }}"
                        style="text-decoration: underline dotted;">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}
                         .</a></td>
                 {# Fonctionnalités en fonction du statut de l'utilisateur et de la sortie #}
