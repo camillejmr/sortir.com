@@ -22,6 +22,13 @@ class Upload
      */
     private $Name;
 
+
+
+    /**
+     * @ORM\OneToOne(targetEntity=Participant::class, mappedBy="uploadId", cascade={"persist", "remove"})
+     */
+    private $participant;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +42,25 @@ class Upload
     public function setName($Name)
     {
         $this->Name = $Name;
+
+        return $this;
+    }
+
+
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(Participant $participant): self
+    {
+        // set the owning side of the relation if necessary
+        if ($participant->getUploadId() !== $this) {
+            $participant->setUploadId($this);
+        }
+
+        $this->participant = $participant;
 
         return $this;
     }

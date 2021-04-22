@@ -89,22 +89,15 @@ class Participant implements UserInterface
      */
     private $sortiesOrganisees;
 
+
+
     /**
-     * @ORM\Column(type="blob", nullable=true)
+     * @ORM\OneToOne(targetEntity=Upload::class, inversedBy="participant", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $photo;
+    private $upload;
 
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
 
-    public function setPhoto($photo)
-    {
-        $this->photo = $$photo;
-
-        return $this;
-    }
 
     public function __construct()
     {
@@ -317,6 +310,18 @@ class Participant implements UserInterface
                 $sortiesOrganisee->setOrganisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUpload(): ?Upload
+    {
+        return $this->upload;
+    }
+
+    public function setUpload(Upload $upload): self
+    {
+        $this->upload = $upload;
 
         return $this;
     }
