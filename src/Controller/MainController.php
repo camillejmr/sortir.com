@@ -13,8 +13,10 @@ use App\Entity\Ville;
 use App\Form\AnnulationSortieType;
 use App\Form\ModifierSortieType;
 use App\Form\SearchForm;
+use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Services\EtatsUpdater;
+use DateInterval;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +30,7 @@ class MainController extends AbstractController
      * @Route("/accueil", name="main_home")
      */
     public function home(
+        EtatRepository $etatRepository,
         SortieRepository $sortieRepository,
         EntityManagerInterface $entityManager,
         Request $request,
@@ -40,14 +43,11 @@ class MainController extends AbstractController
         $form->handleRequest($request);
 //       dd($data);
         $sorties = $sortieRepository->findSearch($data, $this->getUser());
-        $instance = $entityManager->getRepository(Sortie::class)->findall();
 
+//        $etatsUpdater->miseAJourEtatSortie($idSortie)
+        ;
 
-        //Je récupère mes sorties liées à une recherche grace à findSearch(), et lui envoie les données
-
-        $etatsUpdater->miseAJourEtatSortie($sortie);
-
-
+        $sorties = $sortieRepository->findSearch($data, $this->getUser());
         return $this->render('main/home.html.twig', [
             'sorties' => $sorties, // On envoie nos sorties à la vue
             'form' => $form->createView() // On envoie le formulaire à la vue
@@ -236,4 +236,4 @@ class MainController extends AbstractController
 
 
     }
-    }
+}

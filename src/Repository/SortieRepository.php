@@ -112,4 +112,22 @@ class SortieRepository extends ServiceEntityRepository
 
 
     }
+
+public function updateSortieOuverte($idSortie, EtatRepository $etatRepository){
+
+            $sortieOuverte = $etatRepository->find(['id' => 2]);
+            $sortieCloturee = $etatRepository->find(['id' => 3]);
+            $sortieEnCours = $etatRepository->find(['id' => 4]);
+            $sortiePassee = $etatRepository->find(['id' => 5]);
+            $sortieAnnulee = $etatRepository->find(['id' => 6]);
+            $sortieHistorisee = $etatRepository->find(['id' => 7]);
+
+$queryUpdateBuilder =$this->createQueryBuilder('s');
+    $queryUpdateBuilder->update(Sortie::class, 's')
+
+        ->set('s.etats',':sortieCloturee')->setParameter('sortieCloturee', $sortieCloturee)
+        ->where('s.id= :idSortie')->setParameter('idSortie', $idSortie);
+       $query=$queryUpdateBuilder->getQuery();
+    $query->execute();
+    }
 }

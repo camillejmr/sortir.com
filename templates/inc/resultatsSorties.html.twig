@@ -29,10 +29,12 @@
 
 
                     {% endfor %}</td>
-
                 {# TODO METTRE UN PATH POUR ACCEDER AU PROFIL DE L'ORGANISATEUR #}
+
+
+
                 <td class="sortieTable"><a href="{{ path('profilParticipant_profil',{'id':sortie.organisateur.id}) }}"
-                       style="text-decoration: underline dotted;">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}
+                  style="text-decoration: underline dotted;">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}
                         .</a></td>
                 {# Fonctionnalités en fonction du statut de l'utilisateur et de la sortie #}
                 <td>
@@ -45,8 +47,9 @@
                            id="{{ sortie.id }}"> - Modifier </a>
                     {% endif %}
 
-
-                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) and sortie.participants | length < sortie.nombreInscriptionsMax %}
+{# and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm"))#}
+{#                    pour la ligne du dessous#}
+                    {% if(sortie.etats.libelle == 'Ouverte') and sortie.participants | length < sortie.nombreInscriptionsMax %}
                         <a href="{{ path('validation_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
                            id="{{ sortie.id }}"> - S'inscrire </a>
                         <script>
