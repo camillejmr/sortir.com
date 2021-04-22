@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Upload;
 use App\Form\UploadType;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +16,7 @@ class UploadController extends AbstractController
     /**
      * @Route("/upload", name="upload")
      */
-    public function index(Request $request): Response
+    public function index(Request $request,EntityManagerInterface $entityManager): Response
     { $upload = new Upload();
         $form = $this->createForm(UploadType::class, $upload);
 
@@ -26,6 +28,9 @@ class UploadController extends AbstractController
             $file->move($this->getParameter('upload_directory'), $fileName);
             //modif base de données
             $upload->setName($fileName);
+
+            $entityManager->persist($upload);
+            $entityManager->flush();
 
             $this->addFlash('success', 'Fichier téléchargé!');
             /*return $this->redirectToRoute('upload');*/
