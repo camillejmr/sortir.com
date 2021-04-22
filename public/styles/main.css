@@ -510,8 +510,9 @@ p {
 }
 
 
-#plus {
-    right: auto;
+#logoPlus {
+    position:absolute; right:35%; height:30px;
+    width:25px; margin-top:-175px; min-width:30px;
 }
 
 .dropdown {
@@ -550,7 +551,7 @@ p {
 }
 
 @media screen and (max-width:768px) {
-    #logo{display: none}
+    #logo{display: block}
     nav li {
         display: none;
     }
@@ -572,5 +573,18 @@ p {
         grid-column: 1;
         grid-row: 3;
     }
+    .wrapper{
+        text-align: center;
+    }
+    #logoPlus {
+        position:absolute; right:32%; height:30px;
+        width:30px; margin-top:-60px; min-width:30px;}
+
+
+
+
+    /*@media only screen and (max-width: 1200px) {
+        #logoPlus {position:absolute; right:0%; height:30px; width:30px; margin-top:-60px; min-width:30px;}
+    }*/
 
 }

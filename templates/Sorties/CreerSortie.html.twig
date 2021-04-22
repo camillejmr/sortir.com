@@ -5,18 +5,12 @@
 {% endblock %}
 
 {% block body %}
-    <style>
-        #plus {position:absolute; right:32%; height:30px; width:30px; margin-top:-60px; min-width:30px;}
-@media only screen and (max-width: 1200px) {
-            #plus {position:absolute; right:0%; height:30px; width:30px; margin-top:-60px; min-width:30px;}
-        }
-    </style>
     <h1>Créer une sortie</h1>
     <div class="formulaire">
         {{ form_start(CreerSortieForm) }}
         {{ form_widget(CreerSortieForm) }}
-        <div id="logo_+">
-            <a href="{{ path('ajout_lieu', {'idOrganisateur':app.user.id}) }}"><img src="{{ asset('img/plus.png') }}" alt="ajouter_lieu" id="plus"></a>
+        <div id="logoPlus">
+            <a href="{{ path('ajout_lieu', {'idOrganisateur':app.user.id}) }}"><img src="{{ asset('img/plus.png') }}" alt="ajouter_lieu"></a>
         </div>
         {{ form_end(CreerSortieForm) }}
 {#        <button type="submit" class="btn">Créer une sortie</button>#}
