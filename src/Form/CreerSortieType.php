@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -60,8 +61,9 @@ class CreerSortieType extends AbstractType
             ->add('lieux', EntityType::class, ['class' => Lieu::class,'choice_label'=> function (Lieu $lieu){
                 return $lieu-> getNom()." / ".$lieu->getVilles()->getNomVille();
             }
-            ]);
-
+            ])
+        ->add('Enregister', SubmitType::class, ['label' => 'Créer la sortie'])
+        ->add('Publier', SubmitType::class, ['label' => 'Publier la sortie']);
     }
 
     public function configureOptions(OptionsResolver $resolver)

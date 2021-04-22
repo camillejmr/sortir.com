@@ -28,19 +28,15 @@ class EtatsUpdater
         $now = new DateTime('now');
         $now->format("D/M/Y H:i:s");
         $debutSortie = new DateTime($sortie->getDateHeureDebut());
-
-        $interval = date_diff($debutSortie, $now);
-        $calcul = $interval->format('%i');
-
-
         $duree = (integer)$sortie->getDuree();
         $dureeSortie = new DateInterval('PT' . ((integer)$duree . 'M'));
         $finSortie = $debutSortie->add($dureeSortie);
-
-        $interval2 = date_diff($finSortie, $now);
-        $calcul2 = $interval2->format('%i');
-
         $finSortiePlusUnMois = $finSortie->add(new DateInterval('P1M'));
+
+//        $interval = date_diff($debutSortie, $now);
+//        $calcul = $interval->format('%i');
+//        $interval2 = date_diff($finSortie, $now);
+//        $calcul2 = $interval2->format('%i');
 
         $sorties = $this->sortieRepository->findAll();
 
@@ -50,28 +46,31 @@ class EtatsUpdater
         $sortieEnCours = $this->etatRepository->find(['id' => 4]);
         $sortiePassee = $this->etatRepository->find(['id' => 5]);
         $sortieAnnulee = $this->etatRepository->find(['id' => 6]);
+        $sortieHistorisee = $this->etatRepository->find(['id' => 7]);
 
         foreach ($sorties as $sortie) {
+
             if ($sortie->getEtats() === $sortieOuverte) {
+                // OK
                 if (($sortie->getParticipants()->count() == $sortie->getNombreInscriptionsMax()) || ($sortie->getDateLimiteInscription() < $now)) {
                     $sortie->setEtats($sortieCloturee);
-                    $this->entityManager->persist($sortie);
                 }
             }
 
             if ($sortie->getEtats() === $sortieCloturee) {
+                // OK
                 if (($sortie->getParticipants()->count() < $sortie->getNombreInscriptionsMax()) && ($sortie->getDateLimiteInscription() > $now)) {
                     $sortie->setEtats($sortieOuverte);
-                    $this->entityManager->persist($sortie);
                 }
-                if ($finSortie > $now && $debutSortie < $now) {
+                // NE MARCHE PAS
+                if ($now < $finSortie && $now >= $sortie->getDateHeureDebut()) {
                     $sortie->setEtats($sortieEnCours);
-                    $this->entityManager->persist($sortie);
                 }
             }
 
+            // Ne marche pas !!
             if ($sortie->getEtats() === $sortieEnCours) {
-                if ($finSortie <= $now) {
+                if ($finSortie < $now) {
                     $sortie->setEtats($sortiePassee);
                 }
             }
@@ -79,42 +78,17 @@ class EtatsUpdater
             // Test pour passer la sortie à "Historisée"
             if ($sortie->getEtats() === $sortiePassee) {
                 if ($finSortie <= $finSortiePlusUnMois) {
-                    $estHistorisee = true;
+                    $sortie->setEtats($sortieHistorisee);
+                }
             }
 
-//            switch ($sortie->getEtats()) {
-//                case $sortieOuverte:
-//                    if (($sortie->getParticipants()->count() == $sortie->getNombreInscriptionsMax()) || ($sortie->getDateLimiteInscription() < $now)) {
-//                        $sortie->setEtats($sortieCloturee);
-//                        $this->entityManager->persist($sortie);
-//                    }
-//                    break;
-//                case $sortieCloturee:
-//                    if (($sortie->getParticipants()->count() < $sortie->getNombreInscriptionsMax()) && ($sortie->getDateLimiteInscription() > $now)) {
-//                        $sortie->setEtats($sortieOuverte);
-//                        $this->entityManager->persist($sortie);
-//                    }
-//                    if ($finSortie > $now && $calcul <= 0) {
-//                        $sortie->setEtats($sortieEnCours);
-//                        $this->entityManager->persist($sortie);
-//                    }
-//                    break;
-//                case $sortieEnCours:
-//                    if ($calcul2 >= 0) {
-//                        $sortie->setEtats($sortiePassee);
-//                        $this->entityManager->persist($sortie);
-//                    }
-//
-//                /*// Si sortie de + d'1 mois => HISTORISEE (TODO : Masquer la sortie !)
-//                else if ($debutSortie >= $oneMonth) {
-//                    $estHistorisee = true;
-//                }*/
-//            }
             // Enregistrement infos dans la BDD
+            $this->entityManager->persist($sortie);
             $this->entityManager->flush();
+
         }
     }
-}}
+}
 
 
 
