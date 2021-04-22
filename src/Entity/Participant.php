@@ -90,7 +90,7 @@ class Participant implements UserInterface
     private $sortiesOrganisees;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="blob", nullable=true)
      */
     private $photo;
 
