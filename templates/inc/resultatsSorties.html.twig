@@ -13,15 +13,21 @@
         {% for sortie in sorties %}
 
             {# TODO : MASQUER LES SORTIES DONT L ETAT EST A ARCHIVE #}
-            {# {% if Services.EtatsUpdater.estHistorisee == false %} #}
-
+           
             <tr class="tableauAccueil">
-                <td>{{ sortie.nom }}</td>
-                <td class="dateDebut">{{ sortie.dateHeureDebut | date('d/m/Y H:i') }}</td>
-                <td>{{ sortie.dateLimiteInscription |date('d/m/Y') }}</td>
-                <td>{{ sortie.participants | length }}/{{ sortie.nombreInscriptionsMax }}</td>
-                <td class="sortieTable">{{ sortie.etats.libelle }}</td>
-                <td class="sortieTable"> {% for participant in sortie.participants %}
+                <td{% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
+                    hidden {% endif %}
+                        >{{ sortie.nom }}</td>
+                <td {% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
+                    hidden {% endif %} class="dateDebut">{{ sortie.dateHeureDebut | date('d/m/Y H:i') }}</td>
+                <td {% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
+                hidden {% endif %}>{{ sortie.dateLimiteInscription |date('d/m/Y') }}</td>
+                <td {% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
+                hidden {% endif %}>{{ sortie.participants | length }}/{{ sortie.nombreInscriptionsMax }}</td>
+                <td {% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
+                        hidden {% endif %} class="sortieTable">{{ sortie.etats.libelle }}</td>
+                <td {% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
+                        hidden {% endif %} class="sortieTable"> {% for participant in sortie.participants %}
                         {% if app.user.id == participant.id %}
                             X
 
@@ -29,15 +35,14 @@
 
 
                     {% endfor %}</td>
-                {# TODO METTRE UN PATH POUR ACCEDER AU PROFIL DE L'ORGANISATEUR #}
 
-
-
-                <td class="sortieTable"><a href="{{ path('profilParticipant_profil',{'id':sortie.organisateur.id}) }}"
+                <td {% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
+                        hidden {% endif %} class="sortieTable"><a href="{{ path('profilParticipant_profil',{'id':sortie.organisateur.id}) }}"
                   style="text-decoration: underline dotted;">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|slice(0,1) }}
                         .</a></td>
                 {# Fonctionnalités en fonction du statut de l'utilisateur et de la sortie #}
-                <td>
+                <td {% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
+                hidden {% endif %}>
                     <a href="{{ path('detailSortie',{'idSortie':sortie.id}) }}">Afficher </a>
                     {# S'inscrire, doit apparaitre uniquement si la sortie est ouverte, que la date d'inscription n'est pas atteinte,
                    que le nombre d'inscrit est inférieur au nombre de places et que l'élève n'est pas déjà inscrit #}
@@ -47,9 +52,8 @@
                            id="{{ sortie.id }}"> - Modifier </a>
                     {% endif %}
 
-{# and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm"))#}
-{#                    pour la ligne du dessous#}
-                    {% if(sortie.etats.libelle == 'Ouverte') and sortie.participants | length < sortie.nombreInscriptionsMax %}
+
+                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) and sortie.participants | length < sortie.nombreInscriptionsMax %}
                         <a href="{{ path('validation_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
                            id="{{ sortie.id }}"> - S'inscrire </a>
                         <script>
