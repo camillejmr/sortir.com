@@ -42,7 +42,7 @@ class ModifierSortieType extends AbstractType
             ->add('lieux', EntityType::class, ['class' => Lieu::class, 'label' => ' ', 'choice_label' => function (Lieu $lieu) {
                 return $lieu->getNom() . ' - ' . $lieu->getRue() . ' ' . $lieu->getVilles()->getCodePostal() . ' ' . $lieu->getVilles()->getNomVille();
             }])
-            ->add('Enregister', SubmitType::class, ['label' => 'Enregister'])
+            ->add('Enregistrer', SubmitType::class, ['label' => 'Enregister'])
             ->add('Publier', SubmitType::class, ['label' => 'Publier la sortie'])
             ->add('Supprimer', SubmitType::class, ['label' => 'Supprimer la sortie']);;
     }
