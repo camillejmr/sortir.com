@@ -57,3 +57,4 @@ security:
         - { path: ^/desistementInscription, roles: ROLE_USER }
         - { path: ^/desistementInscription, roles: ROLE_USER }
         - { path: ^/desistementInscription, roles: ROLE_USER }
+        - { path: ^/upload, roles: ROLE_USER }

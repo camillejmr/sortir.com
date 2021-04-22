@@ -7,6 +7,7 @@ use App\Form\UploadType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UploadController extends AbstractController
@@ -30,13 +31,12 @@ class UploadController extends AbstractController
             $this->addFlash('success', 'Fichier téléchargé!');
             /*return $this->redirectToRoute('upload');*/
             $user=$this->getUser();
+            if (!$user) {
+                throw new NotFoundHttpException("Vous ne pouvez pas uploader une photo si vous n'êtes pas connecté !");
+            }
             $id=$user->getID();
             return $this->redirectToRoute('profiluser_profil',['id'=>$id]);
-
         }
-
-
-
 
         return $this->render('upload/upload.html.twig', [
             'form' => $form->createView(),
