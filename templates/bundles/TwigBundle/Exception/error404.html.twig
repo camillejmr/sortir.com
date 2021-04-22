@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Erreur 404{% endblock %}
+
+{% block body %}
+    <h2>Page introuvable !</h2>
+    <br>
+    <h3>La page demandée est introuvable</h3>
+    <br>
+    <img src="{{ asset('img/404.png') }}" alt="erreur 404" title="Page introuvable" id="robot404">
+{% endblock %}
+
