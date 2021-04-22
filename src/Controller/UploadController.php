@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
 use App\Entity\Upload;
 use App\Form\UploadType;
 use Doctrine\ORM\EntityManager;
@@ -27,21 +28,29 @@ class UploadController extends AbstractController
             $file = $upload->getName();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move($this->getParameter('upload_directory'), $fileName);
-            //modif base de données
-            $upload->setName($fileName);
-            
 
+            //modif base de données
+
+            $upload->setName($fileName);
+            $user=$this->getUser();
+            $id=$user->getID();
+
+            $participant= $entityManager->getRepository(Participant::class)->findOneBy(['id' => $id]);
 
             $entityManager->persist($upload);
             $entityManager->flush();
 
+           /* $numUpload= $entityManager->getRepository(Upload::class)->find*/
+            $participant->setUpload($upload);
+            $entityManager->persist($participant);
+            $entityManager->flush();
             $this->addFlash('success', 'Fichier téléchargé!');
             /*return $this->redirectToRoute('upload');*/
-            $user=$this->getUser();
+
             if (!$user) {
                 throw new NotFoundHttpException("Vous ne pouvez pas uploader une photo si vous n'êtes pas connecté !");
             }
-            $id=$user->getID();
+
             return $this->redirectToRoute('profiluser_profil',['id'=>$id]);
         }
 
