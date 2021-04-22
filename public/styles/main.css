@@ -514,14 +514,50 @@ p {
     right: auto;
 }
 
-@media screen and (max-width:768px) {
-    #logo{display: none}
-    #navbar{  overflow: hidden;
-        background-color: #333;
-        position: relative;
-        }
+.dropdown {
+    position: relative;
+    display: none;
+    font-size: 16px;
 }
 
-@media screen and (max-width:480px) {
-    #logo{display: none}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    font-size: 10px;
+
 }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+
+
+}
+
+.dropdown-content a{
+    float: left;
+
+    padding-left: -10px;
+}
+
+.dropdown-content a :hover{
+    color: white;
+    background-color: #1c3956;
+}
+
+@media screen and (max-width:768px) {
+    #logo{display: none}
+    nav li {
+        display: none;
+    }
+    .dropdown {
+        display: block;
+    }
+}
+
+
+

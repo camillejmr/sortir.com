@@ -13,6 +13,33 @@
 
             {# <li><a href="../public/profil/{{ app.user.id }}" id="test" title="Mon profil">Mon profil</a></li> #}
             <li><a href="{{ path('app_logout') }}" title="Accueil">Se déconnecter ({{ app.user.pseudo }})</a></li>
+
+
+            <div class="dropdown">
+
+
+                <div class="dropdown-content">
+
+                        {# Liens "villes" et "campus" accessibles uniquement par un Admin #}
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <a href="{{ '#' }}" title="Villes">Villes</a>
+                            <a href="{{ '#' }}" title="Campus">Campus</a>
+                            <a href="{{ path('app_register') }}" title="Inscription">Inscrire un élève</a>
+                        {% endif %}
+                        <a href="{{ path('main_home') }}" title="Accueil">Accueil</a>
+                        <a href="{{ path('profiluser_profil',{'id':app.user.id}) }}" id="test" title="Mon profil">Mon profil</a>
+
+                        {# <li><a href="../public/profil/{{ app.user.id }}" id="test" title="Mon profil">Mon profil</a></li> #}
+                        <a href="{{ path('app_logout') }}" title="Accueil">Se déconnecter ({{ app.user.pseudo }})</a>
+
+                </div>
+
+
+
+
+                <div>  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i></a> </div>
         </ul>
     </nav>
+
 {% endif %}
