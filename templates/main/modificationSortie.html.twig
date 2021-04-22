@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Modifier unesortie{% endblock %}
+
+{% block body %}
+    <h2 class="title">Modifier une sortie</h2>
+
+    <div class="containerdetailsSortie">
+{{ form_start(form) }}
+        <div id="one">Nom de la sortie :</div>
+        <div id="two" >{{ form_row(form.nom)}}</div>
+        <div id="three"> Date et heure de la sortie :</div>
+        <div id="four">{{ form_row(form.dateHeureDebut)}} </div>
+        <div id="five">Date limite d'inscription :</div>
+        <div id="six">{{ form_row(form.dateLimiteInscription)}}</div>
+        <div id="seven">Nombre de places :</div>
+        <div id="eight">{{ form_row(form.nombreInscriptionsMax)}}</div>
+
+        <div id="nine">Durée (en minutes) :</div>
+        <div id="ten">{{ form_row(form.duree)}}</div>
+        <div id="eleven">Description et infos :</div>
+        <div id="twelve">{{ form_row(form.infosSortie)}}</div>
+        <div id="thirteen">Campus :</div>
+        <div id="fourteen"><input type="text" readonly value="{{ sortie.Campus }}"/></div>
+        <div id="fiveteen">Lieu :</div>
+        <div id="sixteen">{{ form_row(form.lieux)}} </div>
+{#        <div id="seventeen">Rue :</div>#}
+{#        <div id="eighteen"><input type="text" value="{{ lieuSortie.rue }}"/> </div>#}
+{#        <div id="nineteen">Code postal :</div>#}
+{#        <div id="twenty"><input type="text" value="{{ villeSortie.codePostal }}"/> </div>#}
+{#        <div id="twentyone">Ville : </div>#}
+{#        <div id="twentytwo"><input type="text" value="{{ villeSortie.nomville }}"/> </div>#}
+{#        <div id="twentythree">Latitude / longitude:</div>#}
+{#        <div id="twentyfour"><input type="text" value="{{ lieuSortie.latitude }}"/> / {{ lieuSortie.longitude }}</div>#}
+{#        <div id="twentyfive">Longitude :</div>#}
+{#        <div id="twentysix"> </div>#}
+
+    </div>{{ form_end(form) }}
+        <a href="{{ path('main_home') }}">
+            <button id="boutonAnnuler" type="action" id="annuler"> Retour</button>
+        </a>
+
+{% endblock %}
+
+
+

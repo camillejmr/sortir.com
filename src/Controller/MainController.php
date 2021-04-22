@@ -11,6 +11,7 @@ use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Form\AnnulationSortieType;
+use App\Form\ModifierSortieType;
 use App\Form\SearchForm;
 use App\Repository\SortieRepository;
 use App\Services\EtatsUpdater;
@@ -175,6 +176,36 @@ public function detailSortie(int $idSortie, SortieRepository $sortieRepository, 
 
 
 
-}
+}/**
+ * @Route("/modifierSortie/{idSortie}", name="modifierSortie")
+ */
+    public function modifierSortie(int $idSortie, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request): Response
+    {
+//        Sécurité modification
+        $user=$this->getUser();
+        $sortie = $entityManager->getRepository(Sortie::class)->find($idSortie);
+        if($sortie->getOrganisateur()!=$user){throw new NotFoundHttpException("Vous n'êtes pas l'organisateur de cette sortie !");
+        }
+//        fin du code sécurité
+        $lieuSortie = $entityManager->getRepository(Lieu::class)->findoneBy(['id' => $sortie->getLieux()]);
+        $villeSortie = $entityManager->getRepository(Ville::class)->findoneBy(['id' => $lieuSortie->getVilles()]);
+        $form = $this->createForm(ModifierSortieType::class,$sortie);
+        $form->handleRequest($request);
+//        if ($form->isSubmitted()&&$form->isValid()) {
+//            $etat=$entityManager->getRepository(Etat::class)->findOneBy(['libelle'=>'Annulée']);
+//            $sortie->setEtats($etat);
+//            $entityManager->persist($sortie);
+//            $entityManager->flush();
+//            $this->addFlash('success', 'La sortie ' . $sortie->getNom() . ' a bien été annulée.');
+//
+//            return $this->redirectToRoute('main_home');
+//        }
 
+        return $this->render('main/modificationSortie.html.twig', [
+            'sortie' => $sortie, 'lieuSortie'=>$lieuSortie,
+            'villesSortie'=>$villeSortie,'form' => $form->createView()]); // On envoie notre sortie à la vue
+
+
+
+    }
 }
