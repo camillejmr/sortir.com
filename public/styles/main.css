@@ -3,11 +3,13 @@ html {
     font-family: 'Raleway', sans-serif;
 }
 
+
 /* Pour laisser une marge de base de chaque côté de nos pages */
 body {
     margin-left: 100px;
     margin-right: 100px;
 }
+
 
 h1 {
     font-size: 2rem;
@@ -27,6 +29,13 @@ h3 {
     font-size: 1.5rem;
     color: #1c3956;
     margin-top: 50px;
+}
+
+h4 {
+    font-size: 1.5rem;
+    color: #1c3956;
+    margin-top: 50px;
+    text-align: center;
 }
 
 a {
@@ -550,6 +559,25 @@ p {
     background-color: #1c3956;
 }
 
+.imgErreur {
+    width : 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imgErreur2 {
+    width : 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#err403 {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 @media screen and (max-width:768px) {
     #logo{display: none}
     nav li {
@@ -579,8 +607,6 @@ p {
     #logoPlus {
         position:absolute; right:32%; height:30px;
         width:30px; margin-top:-60px; min-width:30px;}
-
-
 
 
     /*@media only screen and (max-width: 1200px) {

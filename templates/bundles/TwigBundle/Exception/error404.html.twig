@@ -4,9 +4,11 @@
 
 {% block body %}
     <h2>Page introuvable !</h2>
+    <h4>La page demandée est introuvable</h4>
     <br>
-    <h3>La page demandée est introuvable</h3>
-    <br>
-    <img src="{{ asset('img/404.png') }}" alt="erreur 404" title="Page introuvable" id="robot404">
+    <div class="imgErreur">
+        <img src="{{ asset('img/404.png') }}" alt="erreur404" title="Page introuvable" id="robot404">
+    </div>
+
 {% endblock %}
 

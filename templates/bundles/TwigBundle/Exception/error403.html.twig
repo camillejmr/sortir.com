@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Erreur 404{% endblock %}
+
+{% block body %}
+    <h2>Accès refusé !</h2>
+    <h4>Vous n'avez pas les droits nécessaires pour accéder à cette page.</h4>
+    <br>
+    <div class="imgErreur2">
+        <img src="{{ asset('img/403.png') }}" alt="erreur403" title="Accès refusé" id="err403">
+    </div>
+
+{% endblock %}
+
