@@ -521,6 +521,7 @@ p {
     font-size: 16px;
 }
 
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -535,7 +536,6 @@ p {
 
 .dropdown:hover .dropdown-content {
     display: block;
-
 
 }
 
