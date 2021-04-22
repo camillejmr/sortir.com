@@ -551,7 +551,7 @@ p {
 }
 
 @media screen and (max-width:768px) {
-    #logo{display: block}
+    #logo{display: none}
     nav li {
         display: none;
     }
