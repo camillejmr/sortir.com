@@ -26,7 +26,7 @@
                 hidden {% endif %}>{{ sortie.participants | length }}/{{ sortie.nombreInscriptionsMax }}</td>
                 <td {% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
                         hidden {% endif %} class="sortieTable">{{ sortie.etats.libelle }}</td>
-                <td {% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
+                <td  id="test{{ sortie.id }}" {% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
                         hidden {% endif %} class="sortieTable"> {% for participant in sortie.participants %}
                         {% if app.user.id == participant.id %}
                             X
@@ -44,16 +44,16 @@
                 <td {% if (sortie.dateHeureDebut |date_modify("+1 month")|date("m/d/y hh:mm"))<= "now"|date("m/d/y hh:mm")  %}
                 hidden {% endif %}>
                     <a href="{{ path('detailSortie',{'idSortie':sortie.id}) }}">Afficher </a>
-                    {# S'inscrire, doit apparaitre uniquement si la sortie est ouverte, que la date d'inscription n'est pas atteinte,
-                   que le nombre d'inscrit est inférieur au nombre de places et que l'élève n'est pas déjà inscrit #}
-                    {# Modifer la sortie apparaît seulement si l'organisteur est connecté #}
                     {% if ((app.user==sortie.organisateur) and (sortie.etats.libelle == 'Créée')) %}
+
                         <a href="{{ path('modifierSortie',{'idSortie':sortie.id}) }}"
                            id="{{ sortie.id }}"> - Modifier </a>
                     {% endif %}
 
-
-                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) and sortie.participants | length < sortie.nombreInscriptionsMax %}
+                    {# S'inscrire, doit apparaitre uniquement si la sortie est ouverte, que la date d'inscription n'est pas atteinte,
+                   que le nombre d'inscrit est inférieur au nombre de places et que l'élève n'est pas déjà inscrit #}
+                    {# Modifer la sortie apparaît seulement si l'organisteur est connecté #}
+                    {% if(sortie.etats.libelle == 'Ouverte') and (sortie.dateLimiteInscription | date("m/d/YY hh:mm")> "now"|date("m/d/y hh:mm")) and (sortie.participants | length) < sortie.nombreInscriptionsMax %}
                         <a href="{{ path('validation_inscription',{'idSortie':sortie.id,'idParticipant':app.user.id}) }}"
                            id="{{ sortie.id }}"> - S'inscrire </a>
                         <script>
